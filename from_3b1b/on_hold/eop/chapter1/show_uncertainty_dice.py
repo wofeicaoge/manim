@@ -1,3 +1,7 @@
+#
+# Verified
+# 
+
 from manimlib.imports import *
 from from_3b1b.on_hold.eop.reusable_imports import *
 

@@ -1,3 +1,6 @@
+#
+# Verified
+# 
 
 from manimlib.imports import *
 from from_3b1b.old.eoc.chapter8 import *

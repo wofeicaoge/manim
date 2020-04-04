@@ -1,3 +1,6 @@
+#
+# Verified
+# 
 
 from manimlib.imports import *
 from from_3b1b.on_hold.eop.reusable_imports import *
@@ -21,9 +24,7 @@ class GenericMorphBrickRowIntoHistogram(Scene):
         self.add(self.row)
 
         if self.show_tallies:
-
             tallies = VMobject()
-
             for (i,brick) in enumerate(self.row.rects):
                 tally = TallyStack(self.level - i, i)
                 tally.move_to(brick)
@@ -42,10 +43,15 @@ class GenericMorphBrickRowIntoHistogram(Scene):
             rect.set_stroke(color = WHITE, width = 3)
 
         self.wait()
-        self.play(
-            self.row.rects.space_out_submobjects, {"factor" : 1.3},
-            FadeOut(tallies)
-        )
+        if self.show_tallies:
+            self.play(
+                self.row.rects.space_out_submobjects, {"factor" : 1.3},
+                FadeOut(tallies)
+            )
+        else:
+             self.play(
+                self.row.rects.space_out_submobjects, {"factor" : 1.3}
+             )
         self.wait()
         anims = []
         for brick in self.row.rects:
