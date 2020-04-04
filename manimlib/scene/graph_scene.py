@@ -474,11 +474,14 @@ class GraphScene(Scene):
     def get_animation_integral_bounds_change(
         self,
         graph,
+        curr_t_min,
+        curr_t_max,
         new_t_min,
         new_t_max,
         fade_close_to_origin=True,
         run_time=1.0
     ):
+        self.area = self.get_area(graph, curr_t_min, curr_t_max)
         curr_t_min = self.x_axis.point_to_number(self.area.get_left())
         curr_t_max = self.x_axis.point_to_number(self.area.get_right())
         if new_t_min is None:
@@ -517,9 +520,9 @@ class GraphScene(Scene):
                 if len(right_T_label) > 0:
                     right_T_label[0].set_fill(opacity=min(1, np.abs(t_max)))
 
-            Transform(area, new_area).update(1)
-            Transform(left_v_line, new_left_v_line).update(1)
-            Transform(right_v_line, new_right_v_line).update(1)
+            area.become(new_area)
+            left_v_line.become(new_left_v_line)
+            right_v_line.become(new_right_v_line)
             return group
 
         return UpdateFromAlphaFunc(group, update_group, run_time=run_time)

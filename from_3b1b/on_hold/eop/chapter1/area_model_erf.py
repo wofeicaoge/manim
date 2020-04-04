@@ -22,8 +22,8 @@ class IllustrateAreaModelErf(GraphScene):
     def construct(self):
 
         # integral bounds
-        x_min_1 = -0.0001
-        x_max_1 = 0.0001
+        x_min_1 = -0.001
+        x_max_1 = 0.001
 
         x_min_2 = self.x_min
         x_max_2 = self.x_max
@@ -47,7 +47,6 @@ class IllustrateAreaModelErf(GraphScene):
         self.play(Write(cdf_formula))
         
         self.wait()
-
 
         self.play(ShowCreation(self.x_axis))
         self.play(ShowCreation(graph))
@@ -74,7 +73,7 @@ class IllustrateAreaModelErf(GraphScene):
             self.right_T_label_group[0],
         )
 
-        def integral_update_func(t):
+        def integral_update_func():
             return scipy.special.erf(
                 self.point_to_coords(self.right_v_line.get_center())[0]
             )
@@ -86,22 +85,24 @@ class IllustrateAreaModelErf(GraphScene):
 
         cdf_value = DecimalNumber(0, color = graph.color, num_decimal_places = 3)
         cdf_value.next_to(equals_sign)
-        self.play(
-            FadeIn(equals_sign),
-            FadeIn(cdf_value)
-        )
-        self.add_foreground_mobject(cdf_value)
-
-        cdf_percentage = DecimalNumber(0, unit = "\\%")
+        cdf_percentage = DecimalNumber(cdf_value.get_value(), unit = "\\%", color = graph.color, num_decimal_places = 3)
         cdf_percentage.move_to(self.coords_to_point(0,0.2))
-        self.add_foreground_mobject(cdf_percentage)
-
         cdf_value.add_updater(
             lambda m: m.set_value(integral_update_func())
         )
 
+        cdf_percentage.add_updater(
+            lambda m: m.set_value(cdf_value.get_value(), uint = "\\%")
+        )
+     
+        self.play(
+            FadeIn(equals_sign),
+            FadeIn(cdf_value),
+            FadeIn(cdf_percentage)
+        )
+
         anim = self.get_animation_integral_bounds_change(
-            graph, x_min_2, x_max_2,
+            graph, x_min_1, x_max_1, x_min_2, x_max_2,
             run_time = 3)
 
 
