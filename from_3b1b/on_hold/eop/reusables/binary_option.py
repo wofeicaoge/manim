@@ -1,5 +1,5 @@
-from mobject.types.vectorized_mobject import *
-from mobject.svg.tex_mobject import *
+from manimlib.mobject.types.vectorized_mobject import *
+from manimlib.mobject.svg.tex_mobject import *
 
 class BinaryOption(VMobject):
     CONFIG = {

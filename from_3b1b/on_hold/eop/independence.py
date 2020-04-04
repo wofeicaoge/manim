@@ -1,6 +1,6 @@
 from manimlib.imports import *
 
-from scene.scene import ProgressDisplay
+from manimlib.scene.scene import ProgressDisplay
 import scipy
 
 #revert_to_original_skipping_status

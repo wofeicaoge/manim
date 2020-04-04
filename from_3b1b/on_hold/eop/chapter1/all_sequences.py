@@ -1,6 +1,8 @@
 
 from manimlib.imports import *
-from active_projects.eop.reusable_imports import *
+from from_3b1b.on_hold.eop.reusable_imports import *
+
+PRODUCTION_QUALITY_FRAME_DURATION = 0.03
 
 class ShuffleThroughAllSequences(Scene):
     CONFIG = {
@@ -11,6 +13,29 @@ class ShuffleThroughAllSequences(Scene):
         "coin_spacing" : 0.65
     }
 
+    @Scene.handle_play_like_call
+    def anim(self, nb_relevant_coins, idle_part, left_idle_part, last_coin_seq):
+            for i in range(2**nb_relevant_coins):
+                binary_seq = binary(i)
+                # pad to the left with 0s
+                nb_leading_zeroes = nb_relevant_coins - len(binary_seq)
+                for j in range(nb_leading_zeroes):
+                    binary_seq.insert(0, 0)
+                seq2 = ["H" if x == 0 else "T" for x in binary_seq]
+                coin_seq = CoinSequence(seq2,
+                    radius = self.coin_size * 0.5,
+                    spacing = self.coin_spacing)
+                coin_seq.next_to(idle_part, LEFT, buff = self.coin_spacing - self.coin_size)
+                left_idle_part.next_to(coin_seq, LEFT, buff = self.coin_spacing - self.coin_size)
+                all_coins = VGroup(left_idle_part, coin_seq) #, idle_part)
+                all_coins.center()
+                self.remove(last_coin_seq)
+                self.add(coin_seq)
+                #self.wait(1.0/self.fps)
+                self.update_frame()
+                self.add_frames(self.get_frame())
+                last_coin_seq = coin_seq
+                print(float(i)/2**nb_relevant_coins)
 
     def construct(self):
 
@@ -36,29 +61,7 @@ class ShuffleThroughAllSequences(Scene):
         self.add(left_idle_part)
         last_coin_seq = VGroup()
 
-        for i in range(2**nb_relevant_coins):
-            binary_seq = binary(i)
-            # pad to the left with 0s
-            nb_leading_zeroes = nb_relevant_coins - len(binary_seq)
-            for j in range(nb_leading_zeroes):
-                binary_seq.insert(0, 0)
-            seq2 = ["H" if x == 0 else "T" for x in binary_seq]
-            coin_seq = CoinSequence(seq2,
-                radius = self.coin_size * 0.5,
-                spacing = self.coin_spacing)
-            coin_seq.next_to(idle_part, LEFT, buff = self.coin_spacing - self.coin_size)
-            left_idle_part.next_to(coin_seq, LEFT, buff = self.coin_spacing - self.coin_size)
-            all_coins = VGroup(left_idle_part, coin_seq) #, idle_part)
-            all_coins.center()
-            self.remove(last_coin_seq)
-            self.add(coin_seq)
-            #self.wait(1.0/self.fps)
-            self.update_frame()
-            self.add_frames(self.get_frame())
-            last_coin_seq = coin_seq
-            print(float(i)/2**nb_relevant_coins)
-
-
+        self.anim(nb_relevant_coins, idle_part, left_idle_part, last_coin_seq)
 
 
 

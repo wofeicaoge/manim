@@ -5038,7 +5038,7 @@ class ShowManyExchanges(Scene):
             exchange.animation = Exchange(exchange)
 
         times = np.arange(0, self.run_time, self.frame_duration)
-        from scene.scene import ProgressDisplay
+        from manimlib.scene.scene import ProgressDisplay
         for t in ProgressDisplay(times):
             for exchange in exchanges:
                 sub_t = t - exchange.start_time

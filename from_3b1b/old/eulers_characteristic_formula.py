@@ -7,13 +7,13 @@ from copy import deepcopy
 import sys
 
 
-from animation import *
-from mobject import *
-from constants import *
-from mobject.region import  *
+from manimlib.animation import *
+from manimlib.mobject import *
+from manimlib.constants import *
+from manimlib.mobject.region import  *
 import displayer as disp
-from scene.scene import Scene, GraphScene
-from scene.graphs import *
+from manimlib.scene.scene import Scene, GraphScene
+from manimlib.scene.graphs import *
 from .moser_main import EulersFormula
 from script_wrapper import command_line_create_scene
 

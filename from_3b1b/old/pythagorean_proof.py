@@ -3,11 +3,11 @@ import itertools as it
 from copy import deepcopy
 import sys
 
-from constants import *
+from manimlib.constants import *
 
-from scene.scene import Scene
+from manimlib.scene.scene import Scene
 from geometry import Polygon
-from mobject.region import  region_from_polygon_vertices, region_from_line_boundary
+from manimlib.mobject.region import  region_from_polygon_vertices, region_from_line_boundary
 
 A_COLOR = BLUE
 B_COLOR = MAROON_D

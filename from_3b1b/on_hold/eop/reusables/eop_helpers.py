@@ -1,5 +1,5 @@
-from utils.color import *
-from active_projects.eop.reusables.eop_constants import *
+from manimlib.utils.color import *
+from from_3b1b.on_hold.eop.reusables.eop_constants import *
 
 def binary(i):
     # returns an array of 0s and 1s

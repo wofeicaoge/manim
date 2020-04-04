@@ -1,9 +1,9 @@
 import numpy as np
 import itertools as it
 
-from mobject.mobject import Mobject, Mobject1D, Mobject2D, Mobject
+from manimlib.mobject.mobject import Mobject, Mobject1D, Mobject2D, Mobject
 from geometry import Line
-from constants import *
+from manimlib.constants import *
 
 class Stars(Mobject1D):
     CONFIG = {

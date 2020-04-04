@@ -1,8 +1,8 @@
 from manimlib.imports import *
-from active_projects.eop.reusable_imports import *
-from active_projects.eop.independence import *
+from from_3b1b.on_hold.eop.reusable_imports import *
+from from_3b1b.on_hold.eop.independence import *
 
-from for_3b1b_videos.pi_class import PiCreatureClass
+from manimlib.for_3b1b_videos.pi_class import PiCreatureClass
 
 class QuizResult(PiCreatureScene):
     CONFIG = {

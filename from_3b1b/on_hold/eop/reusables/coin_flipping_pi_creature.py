@@ -1,12 +1,12 @@
-from mobject.types.vectorized_mobject import *
-from animation.animation import *
-from animation.composition import *
-from mobject.geometry import Rectangle, Line
-from utils.rate_functions import *
-from for_3b1b_videos.pi_creature_scene import *
-from active_projects.eop.reusables.eop_helpers import *
-from active_projects.eop.reusables.eop_constants import *
-from active_projects.eop.reusables.coin_flipping_pi_creature import *
+from manimlib.mobject.types.vectorized_mobject import *
+from manimlib.animation.animation import *
+from manimlib.animation.composition import *
+from manimlib.mobject.geometry import Rectangle, Line
+from manimlib.utils.rate_functions import *
+from manimlib.for_3b1b_videos.pi_creature_scene import *
+from from_3b1b.on_hold.eop.reusables.eop_helpers import *
+from from_3b1b.on_hold.eop.reusables.eop_constants import *
+from from_3b1b.on_hold.eop.reusables.coin_flipping_pi_creature import *
 
 
 class PiCreatureCoin(VMobject):

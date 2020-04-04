@@ -1,6 +1,6 @@
 
-from for_3b1b_videos.pi_creature import *
-from active_projects.eop.reusables.eop_constants import *
+from manimlib.for_3b1b_videos.pi_creature import *
+from from_3b1b.on_hold.eop.reusables.eop_constants import *
 
 
 class SicklyPiCreature(PiCreature):

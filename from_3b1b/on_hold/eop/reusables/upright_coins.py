@@ -1,10 +1,10 @@
 
-from mobject.geometry import *
-from mobject.svg.tex_mobject import *
-from utils.color import *
+from manimlib.mobject.geometry import *
+from manimlib.mobject.svg.tex_mobject import *
+from manimlib.utils.color import *
 
-from active_projects.eop.reusables.eop_helpers import *
-from active_projects.eop.reusables.eop_constants import *
+from from_3b1b.on_hold.eop.reusables.eop_helpers import *
+from from_3b1b.on_hold.eop.reusables.eop_constants import *
 
 class UprightCoin(Circle):
 # For use in coin sequences

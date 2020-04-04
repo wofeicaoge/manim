@@ -1,7 +1,7 @@
 from manimlib.imports import *
-from active_projects.eop.reusable_imports import *
-from active_projects.eop.combinations import *
-from active_projects.eop.independence import *
+from from_3b1b.on_hold.eop.reusable_imports import *
+from from_3b1b.on_hold.eop.combinations import *
+from from_3b1b.on_hold.eop.independence import *
 
 import itertools as it
 

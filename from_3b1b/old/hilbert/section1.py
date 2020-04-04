@@ -7,7 +7,7 @@ from hilbert.curves import \
     SnakeCurve
 
 
-from constants import *
+from manimlib.constants import *
 
 
 

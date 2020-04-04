@@ -1,5 +1,5 @@
 
-from constants import *
+from manimlib.constants import *
 
 COIN_RADIUS = 0.18
 COIN_THICKNESS = 0.4 * COIN_RADIUS

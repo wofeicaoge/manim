@@ -7,11 +7,11 @@ from copy import deepcopy
 import sys
 
 
-from animation import *
-from mobject import *
-from constants import *
-from mobject.region import  *
-from scene.scene import Scene, SceneFromVideo
+from manimlib.animation import *
+from manimlib.mobject import *
+from manimlib.constants import *
+from manimlib.mobject.region import  *
+from manimlib.scene.scene import Scene, SceneFromVideo
 from script_wrapper import command_line_create_scene
 from functools import reduce
 
