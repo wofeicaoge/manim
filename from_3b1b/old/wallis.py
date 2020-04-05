@@ -2,11 +2,11 @@
 
 
 from manimlib.imports import *
-from once_useful_constructs.light import AmbientLight
-from once_useful_constructs.light import Lighthouse
-from once_useful_constructs.light import SwitchOn
+from manimlib.once_useful_constructs.light import AmbientLight
+from manimlib.once_useful_constructs.light import Lighthouse
+from manimlib.once_useful_constructs.light import SwitchOn
 from functools import reduce
-# from once_useful_constructs.light import LightSource
+# from manimlib.once_useful_constructs.light import LightSource
 
 PRODUCT_COLOR = BLUE
 DEFAULT_OPACITY_FUNCTION = inverse_power_law(1, 1.5, 1, 4)

@@ -1,5 +1,5 @@
 from manimlib.imports import *
-from once_useful_constructs import *
+from manimlib.once_useful_constructs import *
 
 EXAMPLE_TRANFORM = [[0, 1], [-1, 1]]
 TRANFORMED_VECTOR = [[1], [2]]

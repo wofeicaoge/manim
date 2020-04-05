@@ -1,3 +1,6 @@
+#
+#Verified
+#
 from manimlib.imports import *
 
 
@@ -45,7 +48,7 @@ class AmicableNumbers(Scene):
             rect.first_col.set_stroke(WHITE, 3)
         rects.set_height(FRAME_HEIGHT - 1)
 
-        self.add(rects)
+        self.play(FadeIn(rects))
 
     def show_n1_factors(self):
         pass

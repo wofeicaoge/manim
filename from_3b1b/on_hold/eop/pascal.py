@@ -1,6 +1,9 @@
-
+#
+# Verified
+#
 from manimlib.imports import *
-from once_useful_constructs.combinatorics import *
+from manimlib.once_useful_constructs.combinatorics import *
+from from_3b1b.on_hold.eop.reusables.eop_helpers import *
 
 nb_levels = 5
 

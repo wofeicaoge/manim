@@ -1,3 +1,6 @@
+#
+# Verified
+#
 from manimlib.imports import *
 
 def print_permutation(index_list):
@@ -41,8 +44,6 @@ class PermutationGrid(Scene):
 
 
     def construct(self):
-
-
         N = 5
 
         index_list = []
@@ -80,7 +81,7 @@ class PermutationGrid(Scene):
             index_list.pop()
 
         perm5_box.move_to(ORIGIN)
-        self.add(perm5_box)
+        self.play(FadeIn(perm5_box))
 
 
 

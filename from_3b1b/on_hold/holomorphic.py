@@ -1,3 +1,6 @@
+#
+#Verified
+#
 from manimlib.imports import *
 
 
@@ -28,8 +31,8 @@ class AnalyzeZSquared(ComplexTransformationScene, ZoomedScene):
     def construct(self):
         self.edit_background_plane()
         self.add_title()
-        # self.add_transforming_planes()
-        # self.preview_some_numbers()
+        self.add_transforming_planes()
+        self.preview_some_numbers()
         self.zoom_in_to_one_plus_half_i()
         self.write_derivative()
 
@@ -41,8 +44,8 @@ class AnalyzeZSquared(ComplexTransformationScene, ZoomedScene):
         self.add_foreground_mobject(title)
 
     def edit_background_plane(self):
-        self.backgrounds.set_stroke(GREY, 2)
-        self.background.secondary_lines.set_stroke(DARK_GREY, 1)
+        self.background.set_stroke(GREY, 2)
+        self.background.background_lines.set_stroke(DARK_GREY, 1)
         self.add_foreground_mobject(self.background.coordinate_labels)
 
     def add_transforming_planes(self):

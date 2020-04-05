@@ -1,3 +1,6 @@
+#
+#Verified
+#
 from manimlib.imports import *
 
 from manimlib.scene.scene import ProgressDisplay
@@ -1320,7 +1323,7 @@ class AccurateProductRule(SampleSpaceScene, ThreeDScene):
         self.show_second_division()
         self.move_to_third_dimension()
         self.show_final_probability()
-        self.show_confusion()
+        # self.show_confusion()
 
     def setup_terms(self):
         filler_tex = "Filler"
@@ -1375,7 +1378,7 @@ class AccurateProductRule(SampleSpaceScene, ThreeDScene):
         bottom_label = top_label.copy()
         slot_group = get_slot_group([False], buff = SMALL_BUFF, include_qs = False)
         slot_group.replace(bottom_label[1])
-        Transform(bottom_label[1], slot_group).update(1)
+        bottom_label[1].become(slot_group)
         braces_and_labels = space.get_side_braces_and_labels(
             [top_label, bottom_label]
         )
