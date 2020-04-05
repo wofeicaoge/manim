@@ -1,3 +1,7 @@
+#
+# Fix some scenes
+#
+
 #!/usr/bin/env python
 
 
@@ -87,12 +91,12 @@ H = np.append(H2, 0.)
 
 
 
-class AngleUpdater(ContinualAnimation):
+class AngleUpdater(Animation):
     def __init__(self, angle_arc, spotlight, **kwargs):
         self.angle_arc = angle_arc
 
         self.spotlight = spotlight
-        ContinualAnimation.__init__(self, self.angle_arc, **kwargs)
+        Animation.__init__(self, self.angle_arc, **kwargs)
 
     def update_mobject(self, dt):
         new_arc = self.angle_arc.copy().set_bound_angles(
@@ -176,7 +180,7 @@ class UpdateLightIndicator(AnimationGroup):
         self.mobject = indicator
 
 
-class ContinualLightIndicatorUpdate(ContinualAnimation):
+class ContinualLightIndicatorUpdate(Animation):
 
     def update_mobject(self,dt):
         self.mobject.update_mobjects()
@@ -372,7 +376,7 @@ class IntroScene(PiCreatureScene):
         series_terms = np.cumsum(terms)
         lines = VGroup()
         self.rects = VGroup()
-        slab_colors = [YELLOW, BLUE] * (max_n2 / 2)
+        slab_colors = [YELLOW, BLUE] * (max_n2 // 2)
 
         for t1, t2, color in zip(series_terms, series_terms[1:], slab_colors):
             line = Line(*list(map(self.number_line.number_to_point, [t1, t2])))
@@ -452,7 +456,7 @@ class IntroScene(PiCreatureScene):
         self.pi_answer = TexMobject("{\\pi^2 \\over 6}").set_color(YELLOW)
         self.pi_answer.move_to(self.partial_sum_decimal)
         self.pi_answer.next_to(self.euler_sum[-1], RIGHT, buff = 1,
-            submobject_to_align = self.pi_answer[-2])
+            submobject_to_align = self.pi_answer[-1])
         self.play(ReplacementTransform(self.q_marks, self.pi_answer))
 
         self.wait()
@@ -510,7 +514,7 @@ class IntroScene(PiCreatureScene):
         )
 
         # focus on pi squared
-        pi_squared = self.euler_sum.get_part_by_tex("\\pi")[-3]
+        pi_squared = self.euler_sum.get_part_by_tex("\\pi")[-1]
         self.play(
             WiggleOutThenIn(pi_squared,
                 scale_value = 4,

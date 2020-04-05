@@ -15,11 +15,11 @@ from manimlib.utils.config_ops import digest_config
 from manimlib.utils.space_ops import get_norm
 from manimlib.utils.space_ops import normalize
 
-pi_creature_dir_maybe = os.path.join(MEDIA_DIR, "assets", "PiCreature")
+pi_creature_dir_maybe = os.path.join(MEDIA_DIR, ASSETS_DIR, "PiCreature")
 if os.path.exists(pi_creature_dir_maybe):
     PI_CREATURE_DIR = pi_creature_dir_maybe
 else:
-    PI_CREATURE_DIR = os.path.join("assets")
+    PI_CREATURE_DIR = os.path.join(ASSETS_DIR)
 
 PI_CREATURE_SCALE_FACTOR = 0.5
 
@@ -65,7 +65,7 @@ class PiCreature(SVGMobject):
                           (self.file_name_prefix, mode))
             # TODO, this needs to change to a different, better directory
             svg_file = os.path.join(
-                FILE_DIR,
+                ASSETS_DIR,
                 "PiCreatures_plain.svg",
             )
             SVGMobject.__init__(self, mode="plain", file_name=svg_file, **kwargs)

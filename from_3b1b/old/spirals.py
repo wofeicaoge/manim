@@ -50,7 +50,7 @@ def read_in_primes(max_N=None):
     else:
         file = "primes_1e7.json"
 
-    with open(os.path.join("assets", file)) as fp:
+    with open(os.path.join(ASSETS_DIR, file)) as fp:
         primes = np.array(json.load(fp))
     return primes[primes <= max_N]
 

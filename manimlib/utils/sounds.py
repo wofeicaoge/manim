@@ -34,6 +34,6 @@ def play_finish_sound():
 def get_full_sound_file_path(sound_file_name):
     return seek_full_path_from_defaults(
         sound_file_name,
-        default_dir=os.path.join("assets", "sounds"),
+        default_dir=os.path.join(ASSETS_DIR, "sounds"),
         extensions=[".wav", ".mp3"]
     )

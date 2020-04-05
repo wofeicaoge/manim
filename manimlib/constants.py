@@ -6,7 +6,7 @@ VIDEO_DIR = ""
 VIDEO_OUTPUT_DIR = ""
 TEX_DIR = ""
 TEXT_DIR = ""
-
+ASSETS_DIR= os.path.join("./media", "assets")
 
 def initialize_directories(config):
     global MEDIA_DIR
