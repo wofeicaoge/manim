@@ -845,11 +845,11 @@ class HowMuchCanYouChangeThisPrior(ShowRestrictedSpace, PiCreatureScene):
         subgroups.generate_target()
         width_factor = FRAME_WIDTH/subgroups.get_width()
         height_factor = FRAME_HEIGHT/subgroups.get_height()
-        subgroups.target.stretch_in_place(width_factor, 0)
-        subgroups.target.stretch_in_place(height_factor, 1)
+        subgroups.target.stretch(width_factor, 0)
+        subgroups.target.stretch(height_factor, 1)
         for subgroup in subgroups.target:
-            subgroup.stretch_in_place(1./width_factor, 0)
-            subgroup.stretch_in_place(1./height_factor, 1)
+            subgroup.stretch(1./width_factor, 0)
+            subgroup.stretch(1./height_factor, 1)
 
         self.wait()
         self.play(MoveToTarget(subgroups))

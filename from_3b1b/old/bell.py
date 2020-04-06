@@ -943,7 +943,7 @@ class ForgetPreviousActions(ShowVariousFilterPairs):
         rect1 = SurroundingRectangle(group)
         rect1.rotate_in_place(np.pi/2, RIGHT)
         rect1.rescale_to_fit(group.get_depth()+MED_SMALL_BUFF, 2, True)
-        rect1.stretch_in_place(1.2, 0)
+        rect1.stretch(1.2, 0)
         prob_words = TextMobject(
             "Probabilities depend only\\\\",
             "on this angle difference"
@@ -963,7 +963,7 @@ class ForgetPreviousActions(ShowVariousFilterPairs):
         rect2 = SurroundingRectangle(front_filter, color = RED)
         rect2.rotate_in_place(np.pi/2, RIGHT)
         rect2.rescale_to_fit(front_filter.get_depth()+MED_SMALL_BUFF, 2, True)
-        rect2.stretch_in_place(1.5, 0)
+        rect2.stretch(1.5, 0)
         ignore_words = TextMobject("Photon \\\\", "``forgets'' this")
         ignore_words.add_background_rectangle()
         ignore_words.rotate(np.pi/2, RIGHT)

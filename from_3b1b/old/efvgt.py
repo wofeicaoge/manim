@@ -2012,9 +2012,9 @@ class MultiplicativeGroupOfReals(AdditiveGroupOfReals):
         target.stretch_about_point(factor, 0, self.zero_point)
         total_factor = (target.number_to_point(1)-self.zero_point)[0]
         for number in target.numbers:
-            number.stretch_in_place(1./factor, dim = 0)
+            number.stretch(1./factor, dim = 0)
             if total_factor < 0.7:
-                number.stretch_in_place(total_factor, dim = 0)
+                number.stretch(total_factor, dim = 0)
         self.play(
             Transform(self.number_line, target, **kwargs),
             *kwargs.get("added_anims", [])
@@ -2729,7 +2729,7 @@ class ExponentsAsHomomorphism(Scene):
             x, 0, self.bottom_line_center,
         )
         for number in target.numbers:
-            number.stretch_in_place(1./x, dim = 0)
+            number.stretch(1./x, dim = 0)
         return Transform(bottom_line, target)
 
 class DihedralCubeHomomorphism(GroupOfCubeSymmetries, SymmetriesOfSquare):

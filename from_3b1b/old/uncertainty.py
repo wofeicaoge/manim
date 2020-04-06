@@ -4401,7 +4401,7 @@ class Promotion(PiCreatureScene):
             stretch = True
         )
 
-        url_rect.stretch_in_place(1.1, dim = 1)
+        url_rect.stretch(1.1, dim = 1)
 
         rect = Rectangle(height = 9, width = 16)
         rect.set_height(4.5)

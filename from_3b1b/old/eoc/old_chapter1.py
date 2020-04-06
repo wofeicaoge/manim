@@ -1789,7 +1789,7 @@ class IntroduceConcentricRings(CircleScene):
         self.unwrap_ring(special_ring, to_edge = RIGHT)
 
         brace = Brace(special_ring, UP)
-        brace.stretch_in_place(0.9, 0)
+        brace.stretch(0.9, 0)
         two_pi_r = brace.get_text("$2\\pi r$")
         left_brace = TexMobject("\\{")
         left_brace.stretch_to_fit_height(1.5*self.dR)
@@ -2339,7 +2339,7 @@ class FundamentalTheorem(CircleScene):
         ring_copy.save_state()
         self.unwrap_ring(ring_copy, to_edge = LEFT)
         brace = Brace(ring_copy, UP)
-        brace.stretch_in_place(0.95, 0)
+        brace.stretch(0.95, 0)
         deriv = brace.get_text("$\\dfrac{dA}{dR}$")
         VGroup(*deriv[:2]).set_color(self.outer_ring.get_color())
         VGroup(*deriv[-2:]).set_color(self.dR_color)

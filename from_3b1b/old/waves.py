@@ -438,7 +438,7 @@ class DirectionOfPolarizationScene(FilterScene):
             2*self.em_wave.amplitude*abs(np.cos(target_angle)),
             epsilon
         )
-        r2.stretch_in_place(target_depth/curr_depth, 2)
+        r2.stretch(target_depth/curr_depth, 2)
 
 ################
 
@@ -1422,14 +1422,14 @@ class ShowVectorEquation(Scene):
         self.wait()
         factor = 0.5
         self.play(
-            v_brace.stretch_in_place, factor, 1,
+            v_brace.stretch, factor, 1,
             v_brace.move_to, v_brace.copy(), DOWN,
             MaintainPositionRelativeTo(v_brace.A, v_brace),
-            h_brace.stretch_in_place, factor, 0,
+            h_brace.stretch, factor, 0,
             h_brace.move_to, h_brace.copy(), LEFT,
             MaintainPositionRelativeTo(h_brace.A, h_brace),
             UpdateFromFunc(self.vector, update_vect),
-            graph.stretch_in_place, factor, 1,
+            graph.stretch, factor, 1,
         )
         self.wait(4)
 
@@ -2475,7 +2475,7 @@ class DescribePhoton(ThreeDScene):
         words.next_to(rect, DOWN)
         for part in words:
             bg_rect = BackgroundRectangle(part)
-            bg_rect.stretch_in_place(2, 1)
+            bg_rect.stretch(2, 1)
             part.add_to_back(bg_rect)
         equation.rect = rect
         equation.words = words
@@ -2554,7 +2554,7 @@ class DescribePhoton(ThreeDScene):
             )
             part.rotate(np.pi/2, DOWN)
             bg_rect = BackgroundRectangle(part)
-            bg_rect.stretch_in_place(1.3, 0)
+            bg_rect.stretch(1.3, 0)
             part.add_to_back(bg_rect)
             part.rotate(np.pi/2, UP)
             self.add(part)
@@ -2761,7 +2761,7 @@ class DescribePhoton(ThreeDScene):
         ])
         for part in parts:
             bg_rect = BackgroundRectangle(part)
-            bg_rect.stretch_in_place(1.5, 1)
+            bg_rect.stretch(1.5, 1)
             part.add_to_back(bg_rect)
 
         parts.to_corner(UP+LEFT, buff = MED_SMALL_BUFF)

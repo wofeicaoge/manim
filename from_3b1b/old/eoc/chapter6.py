@@ -2350,7 +2350,7 @@ class DerivativeOfNaturalLog(ZoomedScene):
         VGroup(*equation[2][-2:]).set_color(GREEN)
         for part in equation:
             rect = BackgroundRectangle(part)
-            rect.stretch_in_place(1.2, 0)
+            rect.stretch(1.2, 0)
             part.add_to_back(rect)
         equation.scale(0.8)
         equation.next_to(ORIGIN, RIGHT)
@@ -2516,7 +2516,7 @@ class DerivativeOfNaturalLog(ZoomedScene):
             new_eq, one_over, x_copy
         ).copy()
         rect = BackgroundRectangle(equals_one_over_x)
-        rect.stretch_in_place(1.1, dim = 0)
+        rect.stretch(1.1, dim = 0)
         equals_one_over_x.add_to_back(rect)
 
         self.play(

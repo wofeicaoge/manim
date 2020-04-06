@@ -69,7 +69,7 @@ class FlatCoin(UprightCoin):
     def __init__(self, **kwargs):
         UprightCoin.__init__(self, **kwargs)
         self.symbol_mob.rotate(TAU/8)
-        self.stretch_in_place(self.foreshortening, 1)
+        self.stretch(self.foreshortening, 1)
         
         # draw the edge
         control_points1 = self.points[12:25].tolist()

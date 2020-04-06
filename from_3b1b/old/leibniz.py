@@ -3978,7 +3978,7 @@ class ExpandCountWith45(SummarizeCountingRule):
         expansion.set_width(FRAME_WIDTH - LARGE_BUFF)
         expansion.next_to(ORIGIN, UP)
         rect = BackgroundRectangle(expansion)
-        rect.stretch_in_place(1.5, 1)
+        rect.stretch(1.5, 1)
 
         self.play(
             FadeIn(rect),

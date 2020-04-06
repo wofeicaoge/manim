@@ -828,7 +828,7 @@ class AnalyzeExponentRatio(PiCreatureScene):
         stretcher = VGroup(lp, ratio[7], rp)
         self.play(
             shifter.next_to, ratio[7], UP,
-            stretcher.stretch_in_place, 0.9, 0
+            stretcher.stretch, 0.9, 0
         )
         self.wait(2)
 

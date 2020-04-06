@@ -430,7 +430,7 @@ class AddingPureFrequencies(PiCreatureScene):
         for group in squish_group.target:
             label = group[-1]
             bottom = label.get_bottom()
-            label.stretch_in_place(0.5, 0)
+            label.stretch(0.5, 0)
             label.move_to(bottom, DOWN)
 
         self.play(

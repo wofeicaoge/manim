@@ -1317,7 +1317,7 @@ class Antiderivative(AverageOfSineStart):
             integral, frac_lines, rhs, pi_minus_zeros
         )
         background_rect = BackgroundRectangle(full_equation, fill_opacity = 1)
-        background_rect.stretch_in_place(1.2, dim = 1)
+        background_rect.stretch(1.2, dim = 1)
         full_equation.add_to_back(background_rect)
         self.play(
             full_equation.shift, 

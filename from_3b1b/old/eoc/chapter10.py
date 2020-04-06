@@ -2620,8 +2620,8 @@ class ShowSecondTerm(TeacherStudentsScene):
         second_term = VGroup(*polynomial[-2:])
         box = Rectangle(color = colors[2])
         box.replace(second_term, stretch = True)
-        box.stretch_in_place(1.1, 0)
-        box.stretch_in_place(1.2, 1)
+        box.stretch(1.1, 0)
+        box.stretch(1.2, 1)
         words = TextMobject("Geometric view")
         words.next_to(box, UP)
 
@@ -3122,7 +3122,7 @@ class ConvergenceExample(Scene):
         ]
         last_brace = braces[-1]
         braces += [
-            braces[-1].copy().stretch_in_place(
+            braces[-1].copy().stretch(
                 1 + 0.1 + 0.02*(n+1), dim = 0,
             ).move_to(last_brace, LEFT)
             for n in range(len(partial_sums) - len(braces))

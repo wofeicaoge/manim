@@ -456,10 +456,6 @@ class Mobject(Container):
     def stretch_about_point(self, factor, dim, point):
         return self.stretch(factor, dim, about_point=point)
 
-    def stretch_in_place(self, factor, dim):
-        # Now redundant with stretch
-        return self.stretch(factor, dim)
-
     def rescale_to_fit(self, length, dim, stretch=False, **kwargs):
         old_length = self.length_over_dim(dim)
         if old_length == 0:
@@ -551,8 +547,6 @@ class Mobject(Container):
 
     # Background rectangle
     def add_background_rectangle(self, color=BLACK, opacity=0.75, **kwargs):
-        # TODO, this does not behave well when the mobject has points,
-        # since it gets displayed on top
         from manimlib.mobject.shape_matchers import BackgroundRectangle
         self.background_rectangle = BackgroundRectangle(
             self, color=color,
@@ -956,16 +950,6 @@ class Mobject(Container):
             for submob in self.submobjects:
                 submob.shuffle(recursive=True)
         random.shuffle(self.submobjects)
-
-    # Just here to keep from breaking old scenes.
-    def arrange_submobjects(self, *args, **kwargs):
-        return self.arrange(*args, **kwargs)
-
-    def sort_submobjects(self, *args, **kwargs):
-        return self.sort(*args, **kwargs)
-
-    def shuffle_submobjects(self, *args, **kwargs):
-        return self.shuffle(*args, **kwargs)
 
     # Alignment
     def align_data(self, mobject):

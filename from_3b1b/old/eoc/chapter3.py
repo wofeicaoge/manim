@@ -848,7 +848,7 @@ class NudgeSideLengthOfCube(Scene):
         dx_brace = Brace(
             dv_pieces[1], LEFT, buff = SMALL_BUFF,
         )
-        dx_brace.stretch_in_place(1.5, 1)
+        dx_brace.stretch(1.5, 1)
         for brace, tex in (x_brace, "x"), (dx_brace, "dx"):
             brace.scale_in_place(0.95)
             brace.rotate_in_place(-np.pi/96)

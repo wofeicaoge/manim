@@ -1828,13 +1828,13 @@ class IntroducePolynomialSpace(Scene):
             ).replace(
                 VGroup(*matrix.get_mob_matrix()[i,:]),
                 stretch = True
-            ).stretch_in_place(1.1, 0).stretch_in_place(1.3, 1)
+            ).stretch(1.1, 0).stretch(1.3, 1)
             for i in range(3)
         ]
         vert_rect = Rectangle(color = YELLOW)
         vert_rect.replace(array.get_entries(), stretch = True)
-        vert_rect.stretch_in_place(1.1, 1)
-        vert_rect.stretch_in_place(1.5, 0)
+        vert_rect.stretch(1.1, 1)
+        vert_rect.stretch(1.5, 0)
         tuples = list(zip(
             relevant_entries,
             diag_entries,
