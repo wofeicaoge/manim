@@ -40,12 +40,12 @@ class LoopTheLoop(ParametricFunction):
 
 class SlideWordDownCycloid(Animation):
     CONFIG = { 
-        "rate_func" : None,
+        "rate_func" : smooth,
         "run_time"  : 8
     }
     def __init__(self, word, **kwargs):
         self.path = Cycloid(end_theta = np.pi)        
-        word_mob = TextMobject(list(word))
+        word_mob = TextMobject(*list(word))
         end_word = word_mob.copy()
         end_word.shift(-end_word.get_bottom())
         end_word.shift(self.path.get_corner(DOWN+RIGHT))
@@ -72,7 +72,7 @@ class SlideWordDownCycloid(Animation):
             time = min(time, 1)
             if time < cut_offs[0]:
                 brightness = time/cut_offs[0]
-                letter.rgbas = brightness*np.ones(letter.rgbas.shape)
+                # letter.rgbas = brightness*np.ones(letter.rgbas.shape)
                 position = self.path.points[0]
                 angle = 0
             elif time < cut_offs[1]:
@@ -146,7 +146,7 @@ class PathSlidingScene(Scene):
             self.add(self.slider)
             if self.show_time:
                 self.write_time(curr_t)
-            self.wait(self.frame_duration)
+            self.wait(1 / self.camera.frame_rate)
             self.remove(self.slider)
             curr_t += self.delta_t
             last_index = curr_index
@@ -191,13 +191,13 @@ class PathSlidingScene(Scene):
 
     def write_time(self, time):
         if hasattr(self, "time_mob"):
-            self.remove(self.time_mob)
-        digits = list(map(TexMobject, "%.2f"%time))
-        digits[0].next_to(self.t_equals, buff = 0.1)
-        for left, right in zip(digits, digits[1:]):
+            for obj in self.time_mob:
+                self.remove(obj)
+        self.time_mob = list(map(TexMobject, "%.2f"%time))
+        self.time_mob[0].next_to(self.t_equals, buff = 0.1)
+        for left, right in zip(self.time_mob, self.time_mob[1:]):
             right.next_to(left, buff = 0.1, aligned_edge = DOWN)
-        self.time_mob = Mobject(*digits)
-        self.add(self.time_mob)
+        self.add(*self.time_mob)
 
     def roll(self, mobject, arc_length):
         radius = mobject.get_width()/2
@@ -368,19 +368,12 @@ class TransitionAwayFromSlide(PathSlidingScene):
         ))
         
 
-class MinimalPotentialEnergy(Scene):
+class MinimalPotentialEnergy(GraphScene):
     def construct(self):
         horiz_radius = 5
         vert_radius = 3
 
-        vert_axis = NumberLine(numerical_radius = vert_radius)
-        vert_axis.rotate(np.pi/2)
-        vert_axis.shift(horiz_radius*LEFT)
-        horiz_axis = NumberLine(
-            numerical_radius = 5,
-            numbers_with_elongated_ticks = []
-        )
-        axes = Mobject(horiz_axis, vert_axis)
+        self.x_axis.shift(horiz_radius*LEFT)
         graph = FunctionGraph(
             lambda x : 0.4*(x-2)*(x+2)+3,
             x_min = -2,
@@ -586,7 +579,8 @@ class ThetaTInsteadOfXY(Scene):
         vect = cycloid.points[index+1]-point
         vect /= get_norm(vect)
         vect *= 3
-        vect_mob = Vector(point, vect)
+        vect_mob = Vector(vect)
+        # vect_mob.put_start_and_end_on(cycloid.points[index], cycloid.points[index+1])
         dot = Dot(point)
         xy = TexMobject("\\big( x(t), y(t) \\big)")
         xy.next_to(dot, UP+RIGHT, buff = 0.1)
@@ -618,11 +612,12 @@ class ThetaTInsteadOfXY(Scene):
 class DefineCurveWithKnob(PathSlidingScene):
     def construct(self):
         self.knob = Circle(color = BLUE_D)
-        self.knob.add_line(UP, DOWN)
+        self.knob.add_line_to(UP)
+        self.knob.add_line_to(DOWN)
         self.knob.to_corner(UP+RIGHT)
         self.knob.shift(0.5*DOWN)
         self.last_angle = np.pi/2
-        arrow = Vector(ORIGIN, RIGHT)
+        arrow = Vector(RIGHT)
         arrow.next_to(self.knob, LEFT)
         words = TextMobject("Turn this knob over time to define the curve")
         words.next_to(arrow, LEFT)
@@ -635,7 +630,7 @@ class DefineCurveWithKnob(PathSlidingScene):
         randy.scale(RANDY_SCALE_FACTOR)
         randy.shift(-randy.get_bottom())
 
-        self.play(ShimmerIn(words))
+        self.play(FadeIn(words))
         self.play(ShowCreation(arrow))
         self.play(ShowCreation(self.knob))
         self.wait()
