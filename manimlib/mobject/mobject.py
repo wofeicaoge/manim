@@ -521,8 +521,12 @@ class Mobject(Container):
         return self
 
     def replace(self, mobject, dim_to_match=0, stretch=False):
+        # raise Warning("It's better to use fit_into instead of replace")
+        return self.fit_into(mobject, dim_to_match, stretch)
+
+    def fit_into(self, mobject, dim_to_match=0, stretch=False):
         if not mobject.get_num_points() and not mobject.submobjects:
-            raise Warning("Attempting to replace mobject with no points")
+            raise Warning("Attempting to fit into mobject with no points")
             return self
         if stretch:
             self.stretch_to_fit_width(mobject.get_width())
@@ -540,27 +544,9 @@ class Mobject(Container):
                  dim_to_match=0,
                  stretch=False,
                  buff=MED_SMALL_BUFF):
-        self.replace(mobject, dim_to_match, stretch)
+        self.fit_into(mobject, dim_to_match, stretch)
         length = mobject.length_over_dim(dim_to_match)
         self.scale_in_place((length + buff) / length)
-        return self
-
-    def put_start_and_end_on(self, start, end):
-        curr_start, curr_end = self.get_start_and_end()
-        curr_vect = curr_end - curr_start
-        if np.all(curr_vect == 0):
-            raise Exception("Cannot position endpoints of closed loop")
-        target_vect = end - start
-        self.scale(
-            get_norm(target_vect) / get_norm(curr_vect),
-            about_point=curr_start,
-        )
-        self.rotate(
-            angle_of_vector(target_vect) -
-            angle_of_vector(curr_vect),
-            about_point=curr_start
-        )
-        self.shift(start - curr_start)
         return self
 
     # Background rectangle
