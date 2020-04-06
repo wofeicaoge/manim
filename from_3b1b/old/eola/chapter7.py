@@ -872,7 +872,7 @@ class AdditivityProperty(TwoDToOneDScene):
 
         L, sum_tex, r_paren = symbols = self.get_symbols()
         symbols.shift(4*RIGHT+2*UP)
-        self.add_foreground_mobject(sum_tex)
+        self.add(sum_tex)
         self.play(ShowCreation(v))
         self.play(ShowCreation(w))
         if self.sum_before:
@@ -1016,7 +1016,7 @@ class NonLinearFailsDotTest(TwoDTo1DTransformWithDots):
         for part in equation:
             part.add_to_back(BackgroundRectangle(part))
         equation.to_corner(UP+LEFT)
-        self.add_foreground_mobject(equation)
+        self.add(equation)
 
         self.play(Write(dots))
         self.apply_nonlinear_transformation(
@@ -1113,7 +1113,7 @@ class FollowVectorViaCoordinates(TwoDToOneDScene):
             Write(array),
             Write(v_label)
         )
-        self.add_foreground_mobject(v_label, array)
+        self.add(v_label, array)
         self.add_vector(v, animate = False)
         self.wait()
         to_fade = basis_labels

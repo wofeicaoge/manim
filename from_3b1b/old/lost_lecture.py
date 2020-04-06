@@ -387,7 +387,7 @@ class FeynmanAndOrbitingPlannetOnEllipseDiagram(ShowEmergingEllipse):
 
         self.add(group)
         self.add(Orbiting(comet, e_dot, ellipse))
-        self.add_foreground_mobjects(comet)
+        self.add(comet)
         self.wait()
         self.play(
             feynman.restore,
@@ -624,17 +624,17 @@ class TheMotionOfPlanets(Scene):
         self.add(ellipses, planets)
         self.add(self.title)
         self.add(*orbits)
-        self.add_foreground_mobjects(planets)
+        self.add(planets)
         self.wait(10)
         self.play(
             VGroup(ellipses, sun).shift, 3 * RIGHT,
             FadeInFromDown(archivist_words),
             Animation(self.title)
         )
-        self.add_foreground_mobjects(archivist_words)
+        self.add(archivist_words)
         self.wait(3)
         self.play(FadeInFromDown(alt_name))
-        self.add_foreground_mobjects(alt_name)
+        self.add(alt_name)
         self.wait()
         self.play(FadeInFromDown(book))
         self.wait(15)
@@ -732,11 +732,11 @@ class AskAboutEllipses(TheMotionOfPlanets):
         if self.animate_sun:
             sun_animation = SunAnimation(sun)
             self.add(sun_animation)
-            self.add_foreground_mobjects(
+            self.add(
                 sun_animation.mobject
             )
         else:
-            self.add_foreground_mobjects(sun)
+            self.add(sun)
 
     def add_orbit(self):
         sun = self.sun
@@ -1028,7 +1028,7 @@ class FeynmanElementaryQuote(Scene):
 
         for word in quote:
             if word is very:
-                self.add_foreground_mobjects(nothing)
+                self.add(nothing)
                 self.play(ShowWord(nothing))
                 self.wait(0.2)
                 nothing.sort(lambda p: -p[0])
@@ -1038,7 +1038,7 @@ class FeynmanElementaryQuote(Scene):
                 ))
                 self.remove_foreground_mobject(nothing)
             back_word = word.copy().set_stroke(BLACK, 5)
-            self.add_foreground_mobjects(back_word, word)
+            self.add(back_word, word)
             self.play(
                 ShowWord(back_word),
                 ShowWord(word),
@@ -1235,7 +1235,7 @@ class ShowEllipseDefiningProperty(Scene):
             self.get_foci, dot
         )
 
-        self.add_foreground_mobjects(push_pins, dot)
+        self.add(push_pins, dot)
         self.add(dot_update)
         self.play(LaggedStartMap(
             FadeInFrom, push_pins,
@@ -1275,7 +1275,7 @@ class ShowEllipseDefiningProperty(Scene):
         self.add(distance_labels_animation)
         self.add(*number_updates)
         self.add(sum_expression)
-        self.add_foreground_mobjects(sum_expression_fading_rect)
+        self.add(sum_expression_fading_rect)
         self.play(
             VFadeIn(distance_labels),
             FadeOut(sum_expression_fading_rect),
@@ -1328,7 +1328,7 @@ class ShowEllipseDefiningProperty(Scene):
         self.play(*list(map(ShowCreation, connecting_lines)))
         for word in list(focus_words) + [foci_word]:
             word.add_background_rectangle()
-            self.add_foreground_mobjects(word)
+            self.add(word)
         self.wait(4)
         self.play(Write(translation))
         self.wait(2)
@@ -1607,7 +1607,7 @@ class ProveEllipse(ShowEmergingEllipse, ShowEllipseDefiningProperty):
         ))
         self.wait()
         self.play(ReplacementTransform(circle.copy(), center_dot))
-        self.add_foreground_mobjects(dots)
+        self.add(dots)
         self.play(
             FadeInFromDown(labels[0]),
             GrowArrow(arrows[0]),
@@ -1730,7 +1730,7 @@ class ProveEllipse(ShowEmergingEllipse, ShowEllipseDefiningProperty):
         P_label = TexMobject("P")
         P_label.next_to(P_dot, UP, SMALL_BUFF)
 
-        self.add_foreground_mobjects(self.ellipse)
+        self.add(self.ellipse)
         self.play(LaggedStartMap(Restore, lines))
         self.play(
             FadeOut(to_fade),
@@ -1952,7 +1952,7 @@ class ProveEllipse(ShowEmergingEllipse, ShowEllipseDefiningProperty):
             GrowFromCenter(Q_dot)
         )
         self.wait()
-        self.add_foreground_mobjects(Q_dot)
+        self.add(Q_dot)
         self.add(Q_label_animation)
         self.play(
             Q_dot.move_to, line.point_from_proportion(0.05),
@@ -2098,7 +2098,7 @@ class ProveEllipse(ShowEmergingEllipse, ShowEllipseDefiningProperty):
 
         self.add(orbit)
         self.add(lines_update_animation)
-        self.add_foreground_mobjects(planet)
+        self.add(planet)
         self.wait(12)
 
 
@@ -2158,7 +2158,7 @@ class KeplersSecondLaw(AskAboutEllipses):
         self.add_title()
         self.add_sun()
         self.add_orbit()
-        self.add_foreground_mobjects(self.comet)
+        self.add(self.comet)
 
         self.show_several_sweeps()
         self.contrast_close_to_far()
@@ -2380,7 +2380,7 @@ class NonEllipticalKeplersLaw(KeplersSecondLaw):
             )
         )
         self.add(arrow_update, alt_arrow_update)
-        self.add_foreground_mobjects(comet, arrow)
+        self.add(comet, arrow)
 
         self.ellipse = orbit_shape
 
@@ -2453,7 +2453,7 @@ class AngularMomentumArgument(KeplersSecondLaw):
         small = small_time_label.get_part_by_tex("Small")
         small_rect = SurroundingRectangle(small)
 
-        self.add_foreground_mobjects(comet)
+        self.add(comet)
         self.play(
             ShowCreation(
                 triangle,
@@ -2691,9 +2691,9 @@ class KeplersSecondLawImage(KeplersSecondLaw):
 
     def construct(self):
         self.add_sun()
-        self.add_foreground_mobjects(self.sun)
+        self.add(self.sun)
         self.add_orbit()
-        self.add_foreground_mobjects(self.comet)
+        self.add(self.comet)
         self.show_several_sweeps()
 
 
@@ -2799,7 +2799,7 @@ class IntroduceShapeOfVelocities(AskAboutEllipses, MovingCameraScene):
     def setup_orbit(self):
         self.add_sun()
         self.add_orbit()
-        self.add_foreground_mobjects(self.comet)
+        self.add(self.comet)
 
     def warp_orbit(self):
         def func(z, c=3.5):
@@ -3345,7 +3345,7 @@ class ShowEqualAngleSlices(IntroduceShapeOfVelocities):
             GrowArrow(force_vector)
         )
         self.add(force_vector_update)
-        self.add_foreground_mobjects(comet)
+        self.add(comet)
         # Slightly hacky orbit treatment here...
         orbit.proportion = 0.5
         moving_vector_animation.update(0)
@@ -3359,7 +3359,7 @@ class ShowEqualAngleSlices(IntroduceShapeOfVelocities):
         while orbit.proportion < next_line.prop:
             self.wait(self.frame_duration)
         self.remove(orbit)
-        self.add_foreground_mobjects(comet)
+        self.add(comet)
         self.wait(2)
         self.play(
             randy.change, "pondering", force_expression,
@@ -3498,7 +3498,7 @@ class ShowEqualAngleSlices(IntroduceShapeOfVelocities):
             LaggedStartMap(ShowCreation, external_angle_arcs),
             Animation(difference_vectors),
         )
-        self.add_foreground_mobjects(difference_vectors)
+        self.add(difference_vectors)
         self.wait(2)
         self.play(FadeIn(polygon))
         self.wait(5)
@@ -3694,7 +3694,7 @@ class UseVelocityDiagramToDeduceCurve(ShowEqualAngleSlices):
             GrowFromCenter(root_dot),
             FadeInFromDown(velocities_word),
         )
-        self.add_foreground_mobjects(root_dot)
+        self.add(root_dot)
         self.play(
             ShowCreation(circle),
             Animation(vectors),
@@ -4101,7 +4101,7 @@ class UseVelocityDiagramToDeduceCurve(ShowEqualAngleSlices):
         for x in range(2):
             self.play(indicate(perp_line))
         self.play(Restore(tangency_point_dot))
-        self.add_foreground_mobjects(tangency_point_dot)
+        self.add(tangency_point_dot)
         self.wait(2)
         self.play(
             arc_copy.scale, 0.15, {"about_point": center},

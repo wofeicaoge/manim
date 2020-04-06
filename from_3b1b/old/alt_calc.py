@@ -1155,7 +1155,7 @@ class StandardDerivativeVisual(GraphScene):
             ShowCreation(v_line),
             GrowFromCenter(graph_dot),
         )
-        self.add_foreground_mobject(graph_dot)
+        self.add(graph_dot)
         self.play(
             ShowCreation(h_line),
             Write(output_label),
@@ -1524,7 +1524,7 @@ class TalkThroughXSquaredExample(IntroduceTransformationView):
         numbers.next_to(self.input_line, UP, SMALL_BUFF)
         self.titles[0].next_to(numbers, UP, MED_SMALL_BUFF, LEFT)
         # map(TexMobject.add_background_rectangle, numbers)
-        # self.add_foreground_mobject(numbers)
+        # self.add(numbers)
 
         for dot, dot_ghost, arrow in zip(int_dots, int_dot_ghosts, int_arrows):
             arrow.match_color(dot)
@@ -1674,7 +1674,7 @@ class ZoomInOnXSquaredNearOne(TalkThroughXSquaredExample):
 
         # Transform new zoomed view
         stretch_by_two_words = self.get_stretch_words(2)
-        self.add_foreground_mobject(stretch_by_two_words)
+        self.add(stretch_by_two_words)
         sample_dot_ghost_copies = self.sample_dot_ghosts.copy()
         self.apply_function(
             self.func,
@@ -1721,7 +1721,7 @@ class ZoomInOnXSquaredNearThree(ZoomInOnXSquaredNearOne):
         )
         self.play(Write(zoom_words, run_time=1))
         self.wait()
-        self.add_foreground_mobject(stretch_words)
+        self.add(stretch_words)
         self.apply_function(
             self.func,
             apply_function_to_number_line=False,
@@ -1785,7 +1785,7 @@ class ZoomInOnXSquaredNearOneFourth(ZoomInOnXSquaredNearOne):
         )
         self.play(Write(zoom_words, run_time=1))
         self.wait()
-        self.add_foreground_mobject(stretch_words)
+        self.add(stretch_words)
         self.apply_function(
             self.func,
             apply_function_to_number_line=False,
@@ -1837,7 +1837,7 @@ class ZoomInOnXSquaredNearZero(ZoomInOnXSquaredNearOne):
         )
         self.play(Write(zoom_words, run_time=1))
         self.wait()
-        self.add_foreground_mobject(stretch_words)
+        self.add(stretch_words)
         self.apply_function(
             self.func,
             apply_function_to_number_line=False,
@@ -1988,7 +1988,7 @@ class XSquaredForNegativeInput(TalkThroughXSquaredExample):
         )
         self.wait()
         self.play(Write(deriv_equation))
-        self.add_foreground_mobject(scale_words)
+        self.add(scale_words)
         self.play(Write(scale_words))
         self.apply_function(
             self.func,
@@ -3255,7 +3255,7 @@ class StabilityAndInstability(AnalyzeFunctionWithTransformations):
             arrow_groups.add(arrows)
         phi_arrows, phi_bro_arrows = arrow_groups
 
-        self.add_foreground_mobjects(self.phi_arrow, self.phi_bro_arrow)
+        self.add(self.phi_arrow, self.phi_bro_arrow)
         self.play(
             Write(stable_label),
             phi_arrows.anim,
@@ -3487,7 +3487,7 @@ class ShowJacobianZoomedIn(LinearTransformationScene, ZoomedScene):
             fill_opacity=1,
             buff=MED_SMALL_BUFF,
         )
-        self.add_foreground_mobject(zd_rect)
+        self.add(zd_rect)
         zd_rect.anim = UpdateFromFunc(
             zd_rect,
             lambda rect: rect.replace(zoomed_display).scale(1.1)
@@ -3520,7 +3520,7 @@ class ShowJacobianZoomedIn(LinearTransformationScene, ZoomedScene):
             run_time=2
         )
         self.add_transformable_mobject(tiny_grid)
-        self.add_foreground_mobject(jacobian_words)
+        self.add(jacobian_words)
         self.wait()
         self.apply_nonlinear_transformation(
             example_function,

@@ -462,7 +462,7 @@ class CertainRegularityInPrimes(LatticePointScene):
         formula.set_color_by_tex("pi", YELLOW)
         formula.add_background_rectangle()
         formula.to_corner(UP+LEFT, buff = MED_SMALL_BUFF)
-        self.add_foreground_mobject(formula)
+        self.add(formula)
 
     def walk_through_primes(self):
         primes = self.primes
@@ -792,7 +792,7 @@ class CountLatticePoints(LatticePointScene):
             rate_func = smooth,
         )
         self.play(FadeIn(brace))
-        self.add_foreground_mobject(brace)
+        self.add(brace)
         self.draw_lattice_points()
         self.wait()
         self.play(*list(map(FadeOut, [brace, radius])))
@@ -943,7 +943,7 @@ class CountThroughRings(LatticePointScene):
         ])
         circles.set_stroke(width = 2)
     
-        self.add_foreground_mobject(self.lattice_points)
+        self.add(self.lattice_points)
         self.play(FadeIn(circles))
         self.play(LaggedStartMap(
             ApplyMethod,
@@ -1746,7 +1746,7 @@ class NameGaussianIntegers(LatticePointScene):
             Arrow(integers.get_top(), mob, tip_length = 0.15)
             for mob in (a, b)
         ])
-        self.add_foreground_mobjects(label, integers, arrows)
+        self.add(label, integers, arrows)
 
         self.a_plus_bi = label
         self.integers_label = VGroup(integers, arrows)
@@ -1765,7 +1765,7 @@ class NameGaussianIntegers(LatticePointScene):
         gaussian_integers.add_background_rectangle()
 
         self.play(FadeIn(gaussian_integers))
-        self.add_foreground_mobject(gaussian_integers)
+        self.add(gaussian_integers)
         self.play(FadeIn(
             gauss_name,
             run_time = 2,
@@ -2775,7 +2775,7 @@ class ThreeOutputsAsLatticePoints(LatticePointScene):
         circle = self.get_circle(radius)
         radial_line, root_label = self.get_radial_line_with_label(radius)
         self.add(radial_line, root_label, circle)
-        self.add_foreground_mobject(root_label)
+        self.add(root_label)
 
     def add_dots_and_labels(self):
         dots = VGroup(*[
@@ -2962,7 +2962,7 @@ class Show125Circle(ThreeOutputsAsLatticePointsContinued):
             Write(root_label),
             ShowCreation(radial_line)
         )
-        self.add_foreground_mobject(root_label)
+        self.add(root_label)
         self.play(
             Rotating(
                 radial_line, 
@@ -3037,7 +3037,7 @@ class Show375Circle(LatticePointScene):
             ShowCreation(radial_line),
             Write(root_label, run_time = 1)
         )
-        self.add_foreground_mobject(root_label)
+        self.add(root_label)
         self.play(
             Rotating(
                 radial_line,
@@ -3103,7 +3103,7 @@ class Show125CircleSimple(LatticePointScene):
             ShowCreation(radial_line),
             Write(root_label, run_time = 1)
         )
-        self.add_foreground_mobject(root_label)
+        self.add(root_label)
         self.play(
             Rotating(
                 radial_line,
@@ -4099,7 +4099,7 @@ class CountLatticePointsInBigCircle(LatticePointScene):
         pi_R_squared_group = VGroup(pi_R_squared_rect, pi_R_squared)
 
         self.play(*list(map(FadeIn, [circle, radius, R_group])))
-        self.add_foreground_mobject(R_group)
+        self.add(R_group)
         self.draw_lattice_points()
         self.wait()
         self.play(
@@ -4112,7 +4112,7 @@ class CountLatticePointsInBigCircle(LatticePointScene):
             ]))
         )
         self.remove(R_group)
-        self.add_foreground_mobject(pi_R_squared_group)
+        self.add(pi_R_squared_group)
         self.wait()
 
         self.circle = circle
@@ -4138,7 +4138,7 @@ class CountLatticePointsInBigCircle(LatticePointScene):
             LaggedStartMap(FadeIn, radicals),
             run_time = 3
         )
-        self.add_foreground_mobject(radicals)
+        self.add(radicals)
         self.play(
             LaggedStartMap(
                 ApplyMethod,

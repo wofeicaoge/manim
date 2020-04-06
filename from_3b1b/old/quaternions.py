@@ -1355,7 +1355,7 @@ class ShowComplexMultiplicationExamples(Scene):
             title.to_corner(UL, buff=MED_LARGE_BUFF)
             title.shift(SMALL_BUFF * UR)
             self.title = title
-            self.add_foreground_mobjects(title)
+            self.add(title)
 
     def show_multiplication(self, z, z_tex, label_vect):
         z_color = WHITE
@@ -2060,7 +2060,7 @@ class ShowUnitCircleActions(ShowComplexMultiplicationExamples):
 
         self.add(circle)
         self.add(pin, one_dot)
-        self.add_foreground_mobjects(hand)
+        self.add(hand)
 
         title = TextMobject(
             "Numbers on the unit circle",
@@ -2069,7 +2069,7 @@ class ShowUnitCircleActions(ShowComplexMultiplicationExamples):
         title.set_width(FRAME_WIDTH - 1)
         title.to_edge(UP, buff=MED_SMALL_BUFF)
         title.add_background_rectangle(buff=SMALL_BUFF)
-        self.add_foreground_mobjects(title)
+        self.add(title)
         self.background_plane.coordinate_labels.submobjects.pop(-1)
 
         n_angles = 12

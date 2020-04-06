@@ -672,7 +672,7 @@ class IntroduceElectricField(PiCreatureScene):
             LaggedStartMap(FadeIn, VGroup(*particles[1:]))
         )
         self.moving_particles = particles
-        self.add_foreground_mobjects(self.moving_particles, self.pi_creature)
+        self.add(self.moving_particles, self.pi_creature)
         self.always_update_mobjects = True
         self.wait(10)
 
@@ -833,7 +833,7 @@ class IntroduceMagneticField(IntroduceElectricField, ThreeDScene):
             charges.add(charge)
 
         self.revert_to_original_skipping_status()
-        self.add_foreground_mobjects(*charges)
+        self.add(*charges)
         self.moving_particles = charges
         self.wait(5)
 
@@ -1650,7 +1650,7 @@ class ShowTipToTailSum(ShowVectorEquation):
         self.d_oscillating_vector.update(0)
 
         self.add(self.v_oscillating_vector)
-        self.add_foreground_mobject(self.v_vector)
+        self.add(self.v_vector)
 
     def add_kets(self):
         h_ket, v_ket = kets = VGroup(*[
@@ -1670,7 +1670,7 @@ class ShowTipToTailSum(ShowVectorEquation):
 
         h_ket.next_to(2*RIGHT, UP, SMALL_BUFF)
         v_ket.next_to(2*UP, UP, SMALL_BUFF)
-        self.add_foreground_mobject(kets)
+        self.add(kets)
 
         self.kets = kets
 
@@ -1826,7 +1826,7 @@ class ShowTipToTailSum(ShowVectorEquation):
         new_h_A_mob = v_A_mob.copy()
         new_h_A_mob.move_to(h_A_mob, RIGHT)
 
-        self.add_foreground_mobject(plus_phi)
+        self.add(plus_phi)
         self.play(
             MoveToTarget(v_ket),
             Write(plus_phi),
@@ -3182,7 +3182,7 @@ class ThreeFilters(ShootPhotonThroughFilter):
             pf.arrow_label.rotate(np.pi/2, LEFT)
             pf.arrow_label.add_background_rectangle()
             pf.arrow_label.rotate(np.pi/2, RIGHT)
-            self.add_foreground_mobject(pf.arrow_label)
+            self.add(pf.arrow_label)
 
     def setup_lines(self):
         lines_group = VGroup(*[

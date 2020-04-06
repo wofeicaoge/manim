@@ -27,30 +27,30 @@ class ComplexTransformationScene(Scene):
     }
 
     def setup(self):
-        self.foreground_mobjects = []
+        self.mobjects = []
         self.transformable_mobjects = []
         self.add_background_plane()
         if self.include_coordinate_labels:
             self.add_coordinate_labels()
 
-    def add_foreground_mobject(self, mobject):
-        self.add_foreground_mobjects(mobject)
+    def add(self, mobject):
+        self.add(mobject)
 
     def add_transformable_mobjects(self, *mobjects):
         self.transformable_mobjects += list(mobjects)
         self.add(*mobjects)
 
-    def add_foreground_mobjects(self, *mobjects):
-        self.foreground_mobjects += list(mobjects)
+    def add(self, *mobjects):
+        self.mobjects += list(mobjects)
         Scene.add(self, *mobjects)
 
     def add(self, *mobjects):
-        Scene.add(self, *list(mobjects) + self.foreground_mobjects)
+        Scene.add(self, *list(mobjects) + self.mobjects)
 
     def play(self, *animations, **kwargs):
         Scene.play(
             self,
-            *list(animations) + list(map(Animation, self.foreground_mobjects)),
+            *list(animations) + list(map(Animation, self.mobjects)),
             **kwargs
         )
 

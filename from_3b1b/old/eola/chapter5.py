@@ -160,7 +160,7 @@ class DiagonalExample(LinearTransformationScene):
         self.play(ShowCreation(matrix_background), Write(matrix))
         if self.show_square:
             self.add_unit_square(animate = True)
-        self.add_foreground_mobject(matrix_background, matrix)
+        self.add(matrix_background, matrix)
         self.wait()
         self.apply_transposed_matrix([self.transposed_matrix[0], [0, 1]])
         self.apply_transposed_matrix([[1, 0], self.transposed_matrix[1]])
@@ -237,7 +237,7 @@ class ThisSquareTellsEverything(LinearTransformationScene):
 
         self.play(Write(words, run_time = 2))
         self.play(ShowCreation(arrow))
-        self.add_foreground_mobject(words, arrow)
+        self.add(words, arrow)
         self.wait()
         self.apply_transposed_matrix([[1.5, -0.5], [1, 1.5]])
         self.wait()
@@ -333,7 +333,7 @@ class NameDeterminant(LinearTransformationScene):
         self.title.split()[1].split()[1].set_color(YELLOW)
 
         matrix_background, matrix, det_text = self.get_matrix()
-        self.add_foreground_mobject(matrix_background, matrix)
+        self.add(matrix_background, matrix)
 
         A = TexMobject("A")
         area_label = VMobject(A.copy(), A.copy(), A)
@@ -617,7 +617,7 @@ class WriteNegativeDeterminant(NegativeDeterminantTransformation):
             Write(matrix),
             Write(det_text),
         )
-        self.add_foreground_mobject(matrix_background, matrix, det_text)
+        self.add(matrix_background, matrix, det_text)
         self.wait()
         self.apply_transposed_matrix(self.t_matrix)
 

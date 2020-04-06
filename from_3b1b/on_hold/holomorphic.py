@@ -41,12 +41,12 @@ class AnalyzeZSquared(ComplexTransformationScene, ZoomedScene):
         title.add_background_rectangle()
         title.scale(1.5)
         title.to_corner(UL, buff=MED_SMALL_BUFF)
-        self.add_foreground_mobject(title)
+        self.add(title)
 
     def edit_background_plane(self):
         self.background.set_stroke(GREY, 2)
         self.background.background_lines.set_stroke(DARK_GREY, 1)
-        self.add_foreground_mobject(self.background.coordinate_labels)
+        self.add(self.background.coordinate_labels)
 
     def add_transforming_planes(self):
         self.plane = self.get_plane()
@@ -155,7 +155,7 @@ class AnalyzeZSquared(ComplexTransformationScene, ZoomedScene):
         self.play(ShowCreation(tiny_plane))
         self.wait()
         self.add_transformable_mobjects(plane, tiny_plane, point_mob)
-        self.add_foreground_mobjects(words, arrow)
+        self.add(words, arrow)
         self.apply_complex_homotopy(
             self.complex_homotopy,
             added_anims=[

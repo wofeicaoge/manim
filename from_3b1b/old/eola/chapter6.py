@@ -526,7 +526,7 @@ class LinearSystemTransformationScene(LinearTransformationScene):
         equation.scale(1.5)
         equation.next_to(ORIGIN, LEFT).to_edge(UP)
         equation.add_background_rectangle()
-        self.add_foreground_mobject(equation)
+        self.add(equation)
         self.equation = equation
         self.A, self.x, eq, self.v = equation.split()[1].split()
         self.x.set_color(PINK)
@@ -542,7 +542,7 @@ class MentionThatItsATransformation(LinearSystemTransformationScene):
         words = brace.get_text("Transformation")
         words.add_background_rectangle()
         self.play(GrowFromCenter(brace), Write(words, run_time = 1))
-        self.add_foreground_mobject(words, brace)
+        self.add(words, brace)
         self.apply_transposed_matrix(self.t_matrix)
         self.wait()
 
@@ -564,7 +564,7 @@ class LookForX(MentionThatItsATransformation):
             ShowCreation(v),
             Write(v_label)
         )
-        self.add_foreground_mobject(v_label)
+        self.add(v_label)
         x = self.add_vector(x, animate = False)
         self.play(
             ShowCreation(x),
@@ -672,13 +672,13 @@ class ShowBijectivity(LinearTransformationScene):
         for title in titles:
             title.to_edge(UP)
         background = BackgroundRectangle(VMobject(*titles))
-        self.add_foreground_mobject(background, titles[0])
+        self.add(background, titles[0])
 
         kwargs = {
             "lag_ratio" : 0.5,
             "run_time" : 2
         }
-        anims = list(map(Animation, self.foreground_mobjects))
+        anims = list(map(Animation, self.mobjects))
         self.play(ShowCreation(vectors, **kwargs), *anims)
         self.play(Transform(vectors, dots, **kwargs), *anims)
         self.wait()
@@ -704,7 +704,7 @@ class LabeledExample(LinearSystemTransformationScene):
         title.next_to(self.equation, DOWN, buff = 1)
         title.add_background_rectangle()
         title.shift_onto_screen()
-        self.add_foreground_mobject(title)        
+        self.add(title)        
         self.title = title
         if self.show_square:
             self.add_unit_square()
@@ -817,7 +817,7 @@ class DescribeInverse(LinearTransformationScene):
         matrix.set_color(PINK)
         inv_matrix.set_color(YELLOW)
 
-        self.add_foreground_mobject(title)
+        self.add(title)
         self.apply_transposed_matrix(self.t_matrix)
         self.wait()
         self.play(Transform(title, new_title))
@@ -868,10 +868,10 @@ class MultiplyToIdentity(LinearTransformationScene):
             mob.text.shift_onto_screen()
             mob.text.add_background_rectangle()
 
-        self.add_foreground_mobject(A, A_inv)
+        self.add(A, A_inv)
         brace, text = A.brace, A.text
         self.play(GrowFromCenter(brace), Write(text), run_time = 1)
-        self.add_foreground_mobject(brace, text)
+        self.add(brace, text)
         self.apply_transposed_matrix(self.t_matrix)
         self.play(
             Transform(brace, A_inv.brace),
@@ -993,7 +993,7 @@ class PlayInReverseWithSolution(PlayInReverse):
         ])
         equation.to_edge(UP)
         equation.add_background_rectangle()
-        self.add_foreground_mobject(equation)
+        self.add(equation)
         self.equation = equation
         self.x, eq, self.inv, self.v = equation.split()[1].split()
         self.x.set_color(PINK)
@@ -1077,7 +1077,7 @@ class InvertNonInvertable(LinearTransformationScene):
         det_text.scale(1.5)
         det_text.to_corner(UP+LEFT)
         det_text.add_background_rectangle()
-        self.add_foreground_mobject(det_text)
+        self.add(det_text)
 
     def construct(self):
         no_func = TextMobject("No function does this")
@@ -1089,10 +1089,10 @@ class InvertNonInvertable(LinearTransformationScene):
         self.apply_transposed_matrix(self.t_matrix, path_arc = 0)
         self.wait()
         self.play(Write(no_func, run_time = 1))
-        self.add_foreground_mobject(no_func)
+        self.add(no_func)
         self.play(
             grid.restore,
-            *list(map(Animation, self.foreground_mobjects)),
+            *list(map(Animation, self.mobjects)),
             run_time = 3
         )
         self.wait()
@@ -1122,7 +1122,7 @@ class OneInputMultipleOutputs(InvertNonInvertable):
             *[
                 Transform(output_vector.copy(), input_vector)
                 for input_vector in input_vectors.split()
-            ] + list(map(Animation, self.foreground_mobjects)),
+            ] + list(map(Animation, self.mobjects)),
             run_time = 3
         )
         multiple_outputs = TextMobject(
@@ -1282,7 +1282,7 @@ class TowDColumnsDontSpan(LinearTransformationScene):
         matrix = Matrix(self.t_matrix.T)
         matrix.set_column_colors(X_COLOR, Y_COLOR)
         matrix.add_to_back(BackgroundRectangle(matrix))
-        self.add_foreground_mobject(matrix)
+        self.add(matrix)
         brace = Brace(matrix)
         words = VMobject(
             TextMobject("Span", "of columns"),
@@ -1599,7 +1599,7 @@ class OriginIsAlwaysInColumnSpace(LinearTransformationScene):
         self.play(Write(vector), Write(words))
         self.play(ShowCreation(arrow))
         self.play(ShowCreation(dot, run_time = 0.5))
-        self.add_foreground_mobject(vector, words, arrow, dot)
+        self.add(vector, words, arrow, dot)
         self.wait()
         self.apply_transposed_matrix(self.t_matrix)
         self.wait()
@@ -1638,7 +1638,7 @@ class FullRankCase(LinearTransformationScene):
                 self.play(Write(title))
                 self.play(ShowCreation(arrow))
                 self.play(ShowCreation(dot, run_time = 0.5))
-                self.add_foreground_mobject(title, arrow, dot)
+                self.add(title, arrow, dot)
                 words_on = True
             self.apply_inverse_transpose(t_matrix)
             self.wait()
@@ -1674,7 +1674,7 @@ class NameNullSpace(LinearTransformationScene):
         self.play(
             vectors.restore, 
             self.plane.restore, 
-            *list(map(Animation, self.foreground_mobjects)),
+            *list(map(Animation, self.mobjects)),
             run_time = 2
         )
         self.play(Transform(
@@ -1734,7 +1734,7 @@ class NullSpaceSolveForVEqualsZero(NameNullSpace):
             Transform(v, zero_vector)
         )
         self.wait()
-        self.add_foreground_mobject(zero_vector_rect, equation)
+        self.add(zero_vector_rect, equation)
         NameNullSpace.construct(self)
 
 class OffsetNullSpace(NameNullSpace):
@@ -1833,7 +1833,7 @@ class ShowAdditivityProperty(LinearTransformationScene):
             Write(initial_sum),
             FadeOut(w_copy)
         )
-        self.add_foreground_mobject(form_rect, initial_sum)
+        self.add(form_rect, initial_sum)
         self.apply_transposed_matrix(
             self.t_matrix,
             added_anims = [Write(transformer)]
@@ -1907,7 +1907,7 @@ class AddJustOneNullSpaceVector(NameNullSpace):
             ShowCreation(form_rect),
             sum_vect.label.replace, initial_sum
         )
-        self.add_foreground_mobject(form_rect, sum_vect.label)
+        self.add(form_rect, sum_vect.label)
         self.remove(x.label, null_vector.label)
         self.apply_transposed_matrix(
             self.t_matrix,

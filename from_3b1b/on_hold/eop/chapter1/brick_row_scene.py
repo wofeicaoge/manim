@@ -11,7 +11,7 @@ class BrickRowScene(PiCreatureScene):
         # or diagonally into the bricks
 
         self.tallies_copy = self.tallies.copy()
-        self.add_foreground_mobject(self.tallies_copy)
+        self.add(self.tallies_copy)
 
         tally_targets_left = [
             rect.get_center() + 0.25 * rect.get_width() * LEFT 
@@ -69,7 +69,7 @@ class BrickRowScene(PiCreatureScene):
         # Returns two lists: first all those going left, then those to the right
 
         self.tallies_copy = self.tallies.copy()
-        self.add_foreground_mobject(self.tallies_copy)
+        self.add(self.tallies_copy)
 
         tally_targets_left = [
             rect.get_center() + 0.25 * rect.get_width() * LEFT 
@@ -313,10 +313,10 @@ class BrickRowScene(PiCreatureScene):
             new_tails[i].shift(COIN_SEQUENCE_SPACING * DOWN)
         self.play(FadeIn(new_tails))
 
-        self.add_foreground_mobject(single_flip_labels)
-        self.add_foreground_mobject(new_heads)
-        self.add_foreground_mobject(single_flip_labels_copy)
-        self.add_foreground_mobject(new_tails)
+        self.add(single_flip_labels)
+        self.add(new_heads)
+        self.add(single_flip_labels_copy)
+        self.add(new_tails)
 
         # get individual outcomes
         outcomes = self.row.get_outcome_rects_for_level(2, with_labels = False,
@@ -401,7 +401,7 @@ class BrickRowScene(PiCreatureScene):
             tally_stack.position_decimal_tally(tally_stack.decimal_tally)
             tally_stack.add(tally_stack.decimal_tally)
         
-        self.add_foreground_mobject(self.tallies)
+        self.add(self.tallies)
         self.row = self.merge_rects_by_subdiv(self.row)
         self.wait()
         self.row = self.merge_rects_by_coloring(self.row)
@@ -525,8 +525,8 @@ class BrickRowScene(PiCreatureScene):
         self.split_tallies_in_two_steps(self.row)
         self.wait()
 
-        self.add_foreground_mobject(self.tallies)
-        self.add_foreground_mobject(self.tallies_copy)
+        self.add(self.tallies)
+        self.add(self.tallies_copy)
 
 
         
@@ -538,8 +538,8 @@ class BrickRowScene(PiCreatureScene):
 
         self.clear()
         self.add(randy, self.row, old_row)
-        self.add_foreground_mobject(self.tallies)
-        self.add_foreground_mobject(self.tallies_copy)
+        self.add(self.tallies)
+        self.add(self.tallies_copy)
         
 
         self.play(
@@ -607,7 +607,7 @@ class BrickRowScene(PiCreatureScene):
         # self.wait()
 
         # self.merge_tallies(self.row, target_pos = DOWN)
-        # self.add_foreground_mobject(self.tallies)
+        # self.add(self.tallies)
         # self.row = self.merge_rects_by_coloring(self.row)
         # self.wait()
 
@@ -698,7 +698,7 @@ class BrickRowScene(PiCreatureScene):
         self.wait()
 
         self.merge_tallies(self.row, target_pos = DOWN)
-        self.add_foreground_mobject(self.tallies)
+        self.add(self.tallies)
         self.row = self.merge_rects_by_coloring(self.row)
         self.wait()
 
@@ -782,7 +782,7 @@ class BrickRowScene(PiCreatureScene):
             previous_row.shift, v,
             self.tallies.shift, v,
         )
-        self.add_foreground_mobject(self.tallies)
+        self.add(self.tallies)
 
         self.play(
             SplitRectsInBrickWall(self.row)
@@ -864,7 +864,7 @@ class BrickRowScene(PiCreatureScene):
             TallyStack(n + 1 - i, i).move_to(rect) for (i, rect) in enumerate(new_rects)
         ])
         self.play(FadeIn(new_tallies))
-        self.add_foreground_mobject(new_tallies[1])
+        self.add(new_tallies[1])
         # remove outcomes and sizes except for one tally
         anims = []
         for i in range(n + 1):
@@ -1116,9 +1116,9 @@ class SplitTalliesIntoBrickRow4(BrickRowScene):
         moving_tallies_right = tallies.copy()
 
         self.add(self.row, previous_row)
-        self.add_foreground_mobject(tallies)
-        self.add_foreground_mobject(moving_tallies_left)
-        self.add_foreground_mobject(moving_tallies_right)
+        self.add(tallies)
+        self.add(moving_tallies_left)
+        self.add(moving_tallies_right)
 
 
         self.play(SplitRectsInBrickWall(self.row))

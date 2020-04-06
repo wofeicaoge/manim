@@ -389,7 +389,7 @@ class TwoDCase(Scene):
             ApplyMethod, push_pins,
             lambda mob : (mob.restore,)
         ))
-        self.add_foreground_mobjects(push_pins)
+        self.add(push_pins)
         d_thetas = 2*np.pi*np.random.random(self.n_p3_random_moves)
         for d_theta in d_thetas:
             self.change_point_mobs([0, 0, d_theta])
@@ -431,7 +431,7 @@ class TwoDCase(Scene):
 
         lines = self.get_center_lines()
 
-        self.add_foreground_mobjects(self.center_dot)
+        self.add(self.center_dot)
         for line in lines:
             self.play(ShowCreation(line))
         self.play(FadeIn(all_arcs), Animation(point_mobs))
@@ -847,7 +847,7 @@ class RevisitTwoDCase(TwoDCase):
             center_dot, circle, triangle, 
             point_mobs, point_labels
         )
-        self.add_foreground_mobjects(center_dot)
+        self.add(center_dot)
         self.set_variables_as_attrs(circle, center_dot)
 
     def show_probability(self):

@@ -1174,7 +1174,7 @@ class AskAboutBrightness(TeacherStudentsScene):
         light_source.lighthouse.scale(0.5, about_edge = UP)
         light_source.move_source_to(5*LEFT + 2*UP)
 
-        self.add_foreground_mobjects(self.pi_creatures)
+        self.add(self.pi_creatures)
         self.student_says(
             "What do you mean \\\\ by ``brightness''?",
             added_anims = [
@@ -1277,7 +1277,7 @@ class IntroduceScreen(Scene):
         screen_tracker.update(0)
 
         ## Ask about proportion
-        self.add_foreground_mobjects(light_source.shadow, screen)
+        self.add(light_source.shadow, screen)
         self.shoot_rays()
 
         ##
@@ -1436,7 +1436,7 @@ class EarthScene(IntroduceScreen):
         )
         black_rect.move_to(earth.get_center(), LEFT)
 
-        self.add_foreground_mobjects(black_rect, earth)
+        self.add(black_rect, earth)
 
         # screen
         screen = self.screen = Line(
@@ -1499,7 +1499,7 @@ class EarthScene(IntroduceScreen):
             Write(equator_words),
             GrowArrow(equator_arrow)
         )
-        self.add_foreground_mobjects(equator_words, equator_arrow)
+        self.add(equator_words, equator_arrow)
         self.shoot_rays(show_creation_kwargs = {
             "rate_func" : lambda t : interpolate(0.98, 1, smooth(t))
         })
@@ -1673,7 +1673,7 @@ class InverseSquareLaw(ThreeDScene):
 
         # Animations
 
-        self.add_foreground_mobjects(lighthouse, screen, morty)
+        self.add(lighthouse, screen, morty)
         self.add(shadow_update)
 
         self.play(
@@ -1690,10 +1690,10 @@ class InverseSquareLaw(ThreeDScene):
         for distance in -0.5, 0.5:
             self.shift_by_distance(distance)
             self.wait()
-        self.add_foreground_mobjects(one_arrow, one)
+        self.add(one_arrow, one)
         self.play(GrowFromCenter(one_arrow), Write(one))
         self.wait()
-        self.add_foreground_mobjects(two_arrow, two)
+        self.add(two_arrow, two)
         self.shift_by_distance(1,
             GrowFromPoint(two_arrow, two_arrow.get_left()),
             Write(two, rate_func = squish_rate_func(smooth, 0.5, 1))
@@ -1971,7 +1971,7 @@ class ManipulateLightsourceSetups(PiCreatureScene):
             lsc.move_to(observer_point + np.sqrt(2)*unit_distance*vect)
 
         self.add(light_source)
-        self.add_foreground_mobjects(morty, bubble, light_indicator)
+        self.add(morty, bubble, light_indicator)
         self.add(Mobject.add_updater(light_indicator, update_light_indicator))
         self.play(
             ApplyMethod(
@@ -2001,7 +2001,7 @@ class ManipulateLightsourceSetups(PiCreatureScene):
         point = light_indicator.get_center()
         plus.move_to(point)
         light_indicator_copy = light_indicator.copy()
-        self.add_foreground_mobjects(plus, light_indicator_copy)
+        self.add(plus, light_indicator_copy)
         self.play(
             ReplacementTransform(
                 light_source, light_source_copies[0]
@@ -2239,7 +2239,7 @@ class TwoLightSourcesScene(ManipulateLightsourceSetups):
             ShowCreation(perp_mark)
         )
         self.wait()
-        self.add_foreground_mobjects(line_c, line_h)
+        self.add(line_c, line_h)
 
         #Add alternate light_sources
         for ls in lsA, lsB:
@@ -2631,7 +2631,7 @@ class IPTScene(TwoLightSourcesScene, ZoomedScene):
             lsC.ambient_light,
             line_c,
         )
-        self.add_foreground_mobjects(
+        self.add(
             lsA.lighthouse, A_label,
             lsB.lighthouse, B_label,
             lsC.lighthouse,  line_h,
@@ -2644,7 +2644,7 @@ class IPTScene(TwoLightSourcesScene, ZoomedScene):
             MoveToTarget(mini_triangle),
             run_time = 2,
         )
-        self.add_foreground_mobject(mini_triangle)
+        self.add(mini_triangle)
 
         # Show beams of light
         self.play(
@@ -2753,7 +2753,7 @@ class DiameterTheorem(TeacherStudentsScene):
         self.add(circle)
 
         center = Dot(circle.get_center(), color = WHITE)
-        self.add_foreground_mobject(center)
+        self.add(center)
 
         diameter_word = TextMobject("Diameter")
         diameter_word.next_to(center, DOWN, SMALL_BUFF)
@@ -2788,7 +2788,7 @@ class DiameterTheorem(TeacherStudentsScene):
             ShowCreation(perp_mark),
             self.get_student_changes(*["pondering"]*3)
         )
-        self.add_foreground_mobjects(perp_mark)
+        self.add(perp_mark)
         self.add(triangle_update_anim)
         for angle in 0.2*TAU, -0.4*TAU, 0.3*TAU:
             point.generate_target()
@@ -2819,7 +2819,7 @@ class InscribedeAngleThreorem(TeacherStudentsScene):
         self.add(title)
 
         center = Dot(circle.get_center(), color = WHITE)
-        self.add_foreground_mobject(center)
+        self.add(center)
 
         point = VectorizedPoint(circle.get_left())
         shape = Polygon(UP+LEFT, ORIGIN, DOWN+LEFT, RIGHT)
@@ -2870,7 +2870,7 @@ class InscribedeAngleThreorem(TeacherStudentsScene):
             Write(theta_halves),
             self.get_student_changes(*["pondering"]*3)
         )
-        self.add_foreground_mobjects(half_angle_mark, theta_halves)
+        self.add(half_angle_mark, theta_halves)
         self.add(shape_update_anim)
         for angle in 0.25*TAU, -0.4*TAU, 0.3*TAU, -0.35*TAU:
             point.generate_target()
@@ -2971,7 +2971,7 @@ class PondScene(ThreeDScene):
             #self.ls0_dot.move_to(self.outer_lake.get_center())
             self.ls0_dot.scale(2, about_point = ORIGIN)
                 
-            #self.add_foreground_mobject(self.ls0_dot)
+            #self.add(self.ls0_dot)
 
         def shift_scene(v):
             self.play(
@@ -3072,7 +3072,7 @@ class PondScene(ThreeDScene):
             GrowFromCenter(ls0_dot),
             FadeIn(ls0.lighthouse)
         )
-        self.add_foreground_mobjects(ls0.lighthouse, obs_dot, ls0_dot)
+        self.add(ls0.lighthouse, obs_dot, ls0_dot)
         self.play(
             SwitchOn(ls0.ambient_light),
             Animation(ls0.lighthouse),
@@ -3100,7 +3100,7 @@ class PondScene(ThreeDScene):
             },
         )
         self.wait()
-        self.add_foreground_mobjects(morty)
+        self.add(morty)
 
 
         # Show indicator
@@ -3174,7 +3174,7 @@ class PondScene(ThreeDScene):
             FadeOut(arc_left),
             FadeOut(arc_right)
         )
-        self.add_foreground_mobjects(indicator, indicator_reading)
+        self.add(indicator, indicator_reading)
         self.unzoomable_mobs.add(indicator_reading)
 
         def indicator_wiggle():
@@ -3701,7 +3701,7 @@ class PondScene(ThreeDScene):
             self.remove(nl_sources.submobjects[i].ambient_light)
         
         for i in range(MAX_N, MAX_N + 5):
-            self.add_foreground_mobject(nl_sources.submobjects[i].ambient_light)
+            self.add(nl_sources.submobjects[i].ambient_light)
 
         self.wait()        
 
@@ -3714,10 +3714,10 @@ class PondScene(ThreeDScene):
         )
         covering_rectangle.next_to(ORIGIN,LEFT,buff = 0)
         for i in range(10):
-            self.add_foreground_mobject(nl_sources.submobjects[i])
+            self.add(nl_sources.submobjects[i])
 
-        self.add_foreground_mobject(indicator)
-        self.add_foreground_mobject(indicator_reading)
+        self.add(indicator)
+        self.add(indicator_reading)
 
 
         half_indicator_reading = TexMobject("{\pi^2 \over 8}").scale(TEX_SCALE)
@@ -4562,7 +4562,7 @@ class BaselPatreonThanks(PatreonEndScreen):
         next_video.to_edge(RIGHT, buff = 1.5)
         next_video.shift(MED_SMALL_BUFF*UP)
         next_video.set_color(YELLOW)
-        self.add_foreground_mobject(next_video)
+        self.add(next_video)
         PatreonEndScreen.construct(self)
 
 class Thumbnail(Scene):

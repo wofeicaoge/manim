@@ -313,7 +313,7 @@ class LinearTransformationScene(VectorScene):
             return
         self.has_already_setup = True
         self.background_mobjects = []
-        self.foreground_mobjects = []
+        self.mobjects = []
         self.transformable_mobjects = []
         self.moving_vectors = []
         self.transformable_labels = []
@@ -350,8 +350,8 @@ class LinearTransformationScene(VectorScene):
         self.add_special_mobjects(self.background_mobjects, *mobjects)
 
     # TODO, this conflicts with Scene.add_fore
-    def add_foreground_mobject(self, *mobjects):
-        self.add_special_mobjects(self.foreground_mobjects, *mobjects)
+    def add(self, *mobjects):
+        self.add_special_mobjects(self.mobjects, *mobjects)
 
     def add_transformable_mobject(self, *mobjects):
         self.add_special_mobjects(self.transformable_mobjects, *mobjects)
@@ -394,7 +394,7 @@ class LinearTransformationScene(VectorScene):
 
     def write_vector_coordinates(self, vector, **kwargs):
         coords = VectorScene.write_vector_coordinates(self, vector, **kwargs)
-        self.add_foreground_mobject(coords)
+        self.add(coords)
         return coords
 
     def add_transformable_label(
@@ -424,7 +424,7 @@ class LinearTransformationScene(VectorScene):
         title.add_background_rectangle()
         if animate:
             self.play(Write(title))
-        self.add_foreground_mobject(title)
+        self.add(title)
         self.title = title
         return self
 
@@ -507,6 +507,6 @@ class LinearTransformationScene(VectorScene):
             self.get_moving_mobject_movement(function),
         ] + [
             Animation(f_mob)
-            for f_mob in self.foreground_mobjects
+            for f_mob in self.mobjects
         ] + added_anims
         self.play(*anims, **kwargs)

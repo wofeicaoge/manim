@@ -545,7 +545,7 @@ class ShowPlan(PiCreatureScene):
         checkmark = self.get_checkmark(word)
 
         self.add(wave)
-        self.add_foreground_mobjects(rect, word)
+        self.add(rect, word)
         self.play(
             Animation(word),
             wave_fader,
@@ -553,13 +553,13 @@ class ShowPlan(PiCreatureScene):
         )
         self.wait(2)
         wave_fader.rate_func = lambda a : 1-smooth(a)
-        self.add_foreground_mobjects(checkmark)
+        self.add(checkmark)
         self.play(
             Write(checkmark),
             morty.change, "happy",
             wave_fader, 
         )
-        self.remove_foreground_mobjects(rect, word)
+        self.remove_mobjects(rect, word)
         self.add(word)
         self.wait()
 
@@ -1224,7 +1224,7 @@ class FourierRecapScene(DrawFrequencyPlot):
         winding_freq_label.add_to_back(BackgroundRectangle(winding_freq_label))
         winding_freq_label.move_to(circle_plane.get_top(), DOWN)
 
-        self.add_foreground_mobjects(winding_freq_label)
+        self.add(winding_freq_label)
         self.play(
             Write(circle_plane, run_time = 1),
             ReplacementTransform(
@@ -4090,7 +4090,7 @@ class ProbabalisticDetection(FourierTransformOfWaveFunction):
         self.wait()
         self.add(answer_anim)
         self.wait(4)
-        self.add_foreground_mobjects(answer, particle.mobject)
+        self.add(answer, particle.mobject)
 
         self.question_group = VGroup(question, brace)
         self.particle = particle

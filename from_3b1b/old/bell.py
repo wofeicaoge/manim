@@ -153,7 +153,7 @@ class PhotonsThroughPerpendicularFilters(PhotonPassesCompletelyOrNotAtAll):
         self.remove(*self.pol_filters)
 
         self.play(DrawBorderThenFill(zero_filter), run_time = 1)
-        self.add_foreground_mobject(zero_filter)
+        self.add(zero_filter)
         self.move_camera(
             theta = self.target_theta,
             added_anims = [ApplyFunction(
@@ -164,7 +164,7 @@ class PhotonsThroughPerpendicularFilters(PhotonPassesCompletelyOrNotAtAll):
         self.reposition_filter_label(ninety_filter)
         self.play(self.get_photons()[2])
         self.play(FadeIn(ninety_filter))
-        self.add_foreground_mobject(ninety_filter)
+        self.add(ninety_filter)
         self.shoot_photon()
         self.shoot_photon()
         self.play(FadeIn(prob_text))
@@ -633,7 +633,7 @@ class ShowVariousFilterPairsWithPhotonsOverTime(PhotonsThroughPerpendicularFilte
             pf.arrow_label.next_to(pf.arrow, RIGHT)
 
         self.second_filter = self.pol_filters[1]
-        self.add_foreground_mobject(self.second_filter)
+        self.add(self.second_filter)
 
     def add_probability_text(self):
         prob_text = self.get_probability_text(self.get_prob())
@@ -1104,7 +1104,7 @@ class IntroduceLabeledFilters(ShowVariousFilterPairs):
 
         line_group = VGroup(lines_from_C, C, lines_to_C, A, lines_to_A)
         self.remove(*line_group)
-        self.add_foreground_mobject(line_group)
+        self.add(line_group)
 
         self.bottom_lines_group = line_group
 
@@ -1170,7 +1170,7 @@ class IntroduceLabeledFilters(ShowVariousFilterPairs):
             lines_from_C, C, lines_to_C, B, lines_to_B, A, lines_to_A
         )
         self.remove(*line_group)
-        self.add_foreground_mobject(line_group)
+        self.add(line_group)
 
         self.top_lines_group = line_group
 
@@ -2050,7 +2050,7 @@ class ReEmphasizeVennDiagram(VennDiagramProofByContradiction):
             group.to_edge, DOWN, MED_SMALL_BUFF,
         )
         self.clear()
-        self.add_foreground_mobjects(*group)
+        self.add(*group)
 
     def setup_faded_circles(self):
         self.circles = self.venn_diagram[:3]
@@ -2405,7 +2405,7 @@ class NoFirstMeasurementPreferenceBasedOnDirection(ShowVariousFilterPairs):
             label.next_to(pf.arrow_label, UP, SMALL_BUFF)
             pf.arrow_label.add(label)
 
-            self.add_foreground_mobject(pf)
+            self.add(pf)
 
     def construct(self):
         self.reposition_camera()
@@ -2448,5 +2448,5 @@ class NoFirstMeasurementPreferenceBasedOnDirection(ShowVariousFilterPairs):
             Animation(self.pol_filters),
             Animation(all_pre_lines),
         )
-        self.add_foreground_mobject(all_pre_lines)
+        self.add(all_pre_lines)
         self.wait(7)

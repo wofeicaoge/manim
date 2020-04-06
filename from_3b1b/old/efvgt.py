@@ -273,7 +273,7 @@ class QuickExplanation(ComplexTransformationScene):
         brace_text.to_corner(UP+LEFT, buff = MED_SMALL_BUFF)
         equation.next_to(brace_text, DOWN)
 
-        self.add_foreground_mobjects(brace_text, equation)
+        self.add(brace_text, equation)
         self.brace_text = brace_text
 
     def add_explanation(self):
@@ -1480,24 +1480,24 @@ class AdditiveGroupOfComplexNumbers(ComplexTransformationScene):
                 Indicate(label),
                 ShowCreation(dot)
             )
-        self.add_foreground_mobjects(dots)
+        self.add(dots)
         self.wait()
         Scene.play(self, ShowCreation(arrow))
-        self.add_foreground_mobjects(arrow)
+        self.add(arrow)
         self.play(
             self.plane.shift, dots[-1].get_center(),
             run_time = 2
         )
         self.wait()
         self.play(FadeOut(arrow))
-        self.foreground_mobjects.remove(arrow)
+        self.mobjects.remove(arrow)
         self.play(
             self.plane.shift, 6*DOWN,
             run_time = 3,
         )
         self.wait()
         self.play(self.plane.restore, run_time = 2)
-        self.foreground_mobjects.remove(dots)
+        self.mobjects.remove(dots)
         self.play(FadeOut(dots))
 
     def show_example_point(self):
@@ -1521,7 +1521,7 @@ class AdditiveGroupOfComplexNumbers(ComplexTransformationScene):
         )
         self.wait()
         self.play(ShowCreation(arrow))
-        self.add_foreground_mobjects(label, dot, arrow)
+        self.add(label, dot, arrow)
         self.wait()
         self.slide(z)
         self.wait()
@@ -1530,18 +1530,18 @@ class AdditiveGroupOfComplexNumbers(ComplexTransformationScene):
         self.plane.set_stroke(width = 0)
         self.play(self.plane.restore)
         self.play(ShowCreation(real_arrow))
-        self.add_foreground_mobjects(real_arrow)
+        self.add(real_arrow)
         self.slide(z.real)
         self.wait()
         self.play(ShowCreation(imag_arrow))
         self.wait()
         self.play(imag_arrow.shift, self.z_to_point(z.real))
-        self.add_foreground_mobjects(imag_arrow)
+        self.add(imag_arrow)
         self.slide(z - z.real)
         self.wait()
 
-        self.foreground_mobjects.remove(real_arrow)
-        self.foreground_mobjects.remove(imag_arrow)
+        self.mobjects.remove(real_arrow)
+        self.mobjects.remove(imag_arrow)
         self.play(*list(map(FadeOut, [real_arrow, imag_arrow, self.plane])))
         self.plane.restore()
         self.plane.set_stroke(width = 0)
@@ -1578,16 +1578,16 @@ class AdditiveGroupOfComplexNumbers(ComplexTransformationScene):
             DrawBorderThenFill(dot2),
             Write(label2)
         )
-        self.add_foreground_mobjects(arrow2, dot2, label2)
+        self.add(arrow2, dot2, label2)
         self.wait()
 
         self.slide(z1)
         arrow2_copy = arrow2.copy()
         self.play(arrow2_copy.shift, self.z_to_point(z1))
-        self.add_foreground_mobjects(arrow2_copy)
+        self.add(arrow2_copy)
         self.slide(z2)
         self.play(FadeOut(arrow2_copy))
-        self.foreground_mobjects.remove(arrow2_copy)
+        self.mobjects.remove(arrow2_copy)
         self.wait()
 
         ##Break into components
@@ -1656,8 +1656,8 @@ class AdditiveGroupOfComplexNumbers(ComplexTransformationScene):
             plus,
         ] + label_parts + component_arrows
         for mob in to_remove:
-            if mob in self.foreground_mobjects:
-                self.foreground_mobjects.remove(mob)
+            if mob in self.mobjects:
+                self.mobjects.remove(mob)
         self.play(*list(map(FadeOut, to_remove)))
         self.play(self.plane.restore, run_time = 2)
         self.wait()
@@ -1672,7 +1672,7 @@ class AdditiveGroupOfComplexNumbers(ComplexTransformationScene):
         title.to_edge(UP, buff = MED_SMALL_BUFF)
 
         self.play(Write(title))
-        self.add_foreground_mobjects(title)
+        self.add(title)
         self.wait()
 
     def show_some_random_slides(self):
@@ -1774,7 +1774,7 @@ class MultiplicativeGroupOfReals(AdditiveGroupOfReals):
         "positive_reals_color" : MAROON_B,
     }
     def setup(self):
-        self.foreground_mobjects = VGroup()
+        self.mobjects = VGroup()
 
     def construct(self):
         self.add_title()
@@ -1819,7 +1819,7 @@ class MultiplicativeGroupOfReals(AdditiveGroupOfReals):
             ShowCreation(arrow),
             Write(words)
         )
-        self.foreground_mobjects.add(arrow)
+        self.mobjects.add(arrow)
         self.stretch(4)
         self.stretch(0.1)
         self.wait()
@@ -2021,7 +2021,7 @@ class MultiplicativeGroupOfReals(AdditiveGroupOfReals):
         )
 
     def play(self, *anims, **kwargs):
-        anims = list(anims) + [Animation(self.foreground_mobjects)]
+        anims = list(anims) + [Animation(self.mobjects)]
         Scene.play(self, *anims, **kwargs)
 
 class MultiplicativeGroupOfComplexNumbers(AdditiveGroupOfComplexNumbers):
@@ -2066,7 +2066,7 @@ class MultiplicativeGroupOfComplexNumbers(AdditiveGroupOfComplexNumbers):
 
         self.play(Write(title, run_time = 2))
         self.wait()
-        self.add_foreground_mobjects(title)
+        self.add(title)
 
     def fix_zero_and_move_one(self):
         zero_arrow = Arrow(
@@ -2144,7 +2144,7 @@ class MultiplicativeGroupOfComplexNumbers(AdditiveGroupOfComplexNumbers):
             FadeOut(i_arrow),
             ShowCreation(arc)
         )
-        self.add_foreground_mobjects(arc)
+        self.add(arc)
         self.wait(2)
         self.multiply_by_z(complex(0, 1), run_time = 3)
         self.remove(i_dot)
@@ -2170,7 +2170,7 @@ class MultiplicativeGroupOfComplexNumbers(AdditiveGroupOfComplexNumbers):
         self.wait()        
         self.play(Indicate(neg_one_label, run_time = 2))
         self.wait()
-        self.foreground_mobjects.remove(self.turn_arrow)
+        self.mobjects.remove(self.turn_arrow)
         self.reset_plane(FadeOut(self.turn_arrow))
 
     def show_i_squared_is_negative_one(self):
@@ -2228,7 +2228,7 @@ class MultiplicativeGroupOfComplexNumbers(AdditiveGroupOfComplexNumbers):
             Write(label),
             DrawBorderThenFill(dot)
         )
-        self.add_foreground_mobjects(label, dot)
+        self.add(label, dot)
         self.wait()
         self.multiply_by_z(z, run_time = 3)
         self.wait()
@@ -2240,13 +2240,13 @@ class MultiplicativeGroupOfComplexNumbers(AdditiveGroupOfComplexNumbers):
                 Write(angle_label)
             ]
         )
-        self.add_foreground_mobjects(arc, angle_label)
+        self.add(arc, angle_label)
         self.wait()
         self.play(
             GrowFromCenter(brace),
             Write(brace_text)
         )
-        self.add_foreground_mobjects(brace, brace_text)
+        self.add(brace, brace_text)
         self.multiply_by_z(np.sqrt(5), run_time = 3)
         self.wait(2)
         to_remove = [
@@ -2255,7 +2255,7 @@ class MultiplicativeGroupOfComplexNumbers(AdditiveGroupOfComplexNumbers):
             arc, angle_label,
         ]
         for mob in to_remove:
-            self.foreground_mobjects.remove(mob)
+            self.mobjects.remove(mob)
         self.reset_plane(*list(map(FadeOut, to_remove)))
         self.wait()
 
@@ -2273,12 +2273,12 @@ class MultiplicativeGroupOfComplexNumbers(AdditiveGroupOfComplexNumbers):
         ]
 
         self.play(ShowCreation(positive_reals))
-        self.add_foreground_mobjects(positive_reals)
+        self.add(positive_reals)
         for last_z, z in zip([1]+real_actions, real_actions):
             self.multiply_by_z(z/last_z)
         self.wait()
         self.play(ShowCreation(circle))
-        self.add_foreground_mobjects(circle)
+        self.add(circle)
         for last_z, z in zip([1]+rotation_actions, rotation_actions):
             self.multiply_by_z(z/last_z, run_time = 3)
         self.wait()
@@ -2836,7 +2836,7 @@ class ComplexExponentiationAbstract():
         line.set_stroke(color = self.color, width = 10)
         line.shift(-FRAME_X_RADIUS*self.vect/2)
         self.add(line)
-        self.add_foreground_mobjects(line)
+        self.add(line)
 
     def add_plane_unanimated(self):
         should_skip_animations = self.skip_animations
@@ -2850,7 +2850,7 @@ class ComplexExponentiationAbstract():
         title[0].set_color(self.color)
         title.add_background_rectangle()
         title.to_edge(UP, buff = MED_SMALL_BUFF)
-        self.add_foreground_mobjects(title)
+        self.add(title)
 
     def add_arrow(self):
         arrow = Arrow(LEFT, RIGHT, color = WHITE)
@@ -2860,7 +2860,7 @@ class ComplexExponentiationAbstract():
         func_mob.next_to(arrow, UP, aligned_edge = LEFT)
         func_mob.add_background_rectangle()
 
-        self.add_foreground_mobjects(arrow, func_mob)
+        self.add(arrow, func_mob)
         self.wait()
         self.func_mob = func_mob
 
@@ -2878,7 +2878,7 @@ class ComplexExponentiationAbstract():
         line.set_color(RED)
 
         self.play(*list(map(ShowCreation, line)), run_time = 3)
-        self.add_foreground_mobjects(line)
+        self.add(line)
 
         self.real_line = line
 
@@ -2913,7 +2913,7 @@ class ComplexExponentiationAbstract():
             part.add_to_back(BackgroundRectangle(part))
 
         Scene.play(self, Write(formula))
-        self.add_foreground_mobjects(formula)
+        self.add(formula)
         self.wait(2)
 
 class ComplexExponentiationAdderHalf(
@@ -2949,14 +2949,14 @@ class ComplexExponentiationAdderHalf(
             FadeOut(self.real_line),
             *list(map(ShowCreation, line))
         )
-        self.foreground_mobjects.remove(self.real_line)
+        self.mobjects.remove(self.real_line)
         self.play(
             line.rotate, np.pi/24,
             rate_func = wiggle,
         )
         self.wait()
 
-        self.foreground_mobjects = [line] + self.foreground_mobjects
+        self.mobjects = [line] + self.mobjects
         self.vertical_line = line
 
     def set_color_unit_circle(self):
@@ -2989,19 +2989,19 @@ class ComplexExponentiationAdderHalf(
         brace_text.add_background_rectangle()
 
         Scene.play(self, ShowCreation(arrow))
-        self.add_foreground_mobjects(arrow)
+        self.add(arrow)
         self.play(
             GrowFromCenter(brace),
             Write(brace_text, run_time = 1)
         )
-        self.add_foreground_mobjects(brace, brace_text)        
+        self.add(brace, brace_text)        
         self.wait()
         self.apply_action(complex(0, 1))
         self.wait(7)##Line up with MultiplierHalf
 
         to_remove = arrow, brace, brace_text
         for mob in to_remove:
-            self.foreground_mobjects.remove(mob)
+            self.mobjects.remove(mob)
         self.play(*list(map(FadeOut, to_remove)))
         self.apply_action(complex(0, -1))
 
@@ -3032,7 +3032,7 @@ class ComplexExponentiationAdderHalf(
                     GrowFromCenter(curr_brace),
                     Write(curr_label)
                 )
-                self.add_foreground_mobjects(brace, label)
+                self.add(brace, label)
             else:
                 self.play(
                     Transform(curr_brace, brace),
@@ -3060,7 +3060,7 @@ class ComplexExponentiationMultiplierHalf(
 
     def set_color_vertical_line(self):
         self.play(FadeOut(self.real_line))
-        self.foreground_mobjects.remove(self.real_line)
+        self.mobjects.remove(self.real_line)
         self.wait(2)
 
     def set_color_unit_circle(self):
@@ -3082,7 +3082,7 @@ class ComplexExponentiationMultiplierHalf(
         self.play(ReplacementTransform(
             line, circle, run_time = 3
         ))
-        self.add_foreground_mobjects(circle)
+        self.add(circle)
         self.wait()
 
     def walk_input_up_vertical(self):
@@ -3096,13 +3096,13 @@ class ComplexExponentiationMultiplierHalf(
         self.apply_action(complex(0, 1))
 
         Scene.play(self, ShowCreation(arc))
-        self.add_foreground_mobjects(arc)
+        self.add(arc)
         self.play(GrowFromCenter(brace))
         self.play(Transform(brace, curved_brace))
         self.play(Write(radians_label, run_time = 2))
         self.wait(2)
 
-        self.foreground_mobjects.remove(arc)
+        self.mobjects.remove(arc)
         self.play(*list(map(FadeOut, [arc, brace, radians_label])))
         self.apply_action(complex(0, -1))
 
@@ -3149,16 +3149,16 @@ class ComplexExponentiationMultiplierHalf(
                 curr_arc = arc
                 brace.set_fill(opacity = 0)
                 Scene.play(self, ShowCreation(curr_arc))
-                self.add_foreground_mobjects(curr_arc)
+                self.add(curr_arc)
                 self.play(
                     ReplacementTransform(brace, curr_brace),
                     Write(curr_label)
                 )
-                self.add_foreground_mobjects(curr_brace, curr_label)
+                self.add(curr_brace, curr_label)
             else:
                 Scene.play(self, ShowCreation(arc))
-                self.add_foreground_mobjects(arc)
-                self.foreground_mobjects.remove(curr_arc)
+                self.add(arc)
+                self.mobjects.remove(curr_arc)
                 self.remove(curr_arc)
                 curr_arc = arc
                 self.play(
@@ -3333,7 +3333,7 @@ class ExpTransformation(ComplexTransformationScene):
         title.scale(1.5)
         title.next_to(ORIGIN, RIGHT)
         title.to_edge(UP, buff = MED_SMALL_BUFF)
-        self.add_foreground_mobjects(title)
+        self.add(title)
 
         self.play(Transform(
             self.plane, cylinder, 

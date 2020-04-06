@@ -183,7 +183,7 @@ class PatreonEndScreen(PatreonThanks, PiCreatureScene):
             pi.change_mode("thinking")
             pi.look(DOWN)
             pi.next_to(title, vect, buff=MED_LARGE_BUFF)
-        self.add_foreground_mobjects(title, randy, morty)
+        self.add(title, randy, morty)
         return self.pi_creatures
 
     def scroll_through_patrons(self):

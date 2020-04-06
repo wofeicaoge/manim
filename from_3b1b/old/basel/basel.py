@@ -651,14 +651,14 @@ class FirstLighthouseScene(PiCreatureScene):
 
         self.wait()
         for ls in light_sources:
-            self.add_foreground_mobject(ls.lighthouse)
+            self.add(ls.lighthouse)
 
         light_indicator.set_intensity(0)
 
         intensities = np.cumsum(np.array([1./n**2 for n in range(1,NUM_CONES+1)]))
         opacities = intensities * light_indicator.opacity_for_unit_intensity
 
-        self.remove_foreground_mobjects(light_indicator)
+        self.remove_mobjects(light_indicator)
 
 
         # slowly switch on visible light cones and increment indicator
@@ -789,7 +789,7 @@ class SingleLighthouseScene(PiCreatureScene):
         morty.scale(0.5)
         morty.move_to(observer_point)
         morty.shift(2*OUT)
-        self.add_foreground_mobject(morty)
+        self.add(morty)
 
         self.add(self.light_source.lighthouse)
 
@@ -834,8 +834,8 @@ class SingleLighthouseScene(PiCreatureScene):
         self.play(
             FadeIn(self.light_source.shadow),
         )
-        self.add_foreground_mobject(self.light_source.shadow)
-        self.add_foreground_mobject(morty)
+        self.add(self.light_source.shadow)
+        self.add(morty)
 
         self.play(
             self.light_source.dim_ambient,
@@ -951,7 +951,7 @@ class MorphIntoSunScene(PiCreatureScene):
         morty.scale(0.5)
         morty.move_to(observer_point)
         morty.shift(2*OUT)
-        self.add_foreground_mobject(morty)
+        self.add(morty)
 
         self.add(self.light_source.lighthouse,self.light_source.ambient_light)
         
@@ -972,8 +972,8 @@ class MorphIntoSunScene(PiCreatureScene):
         self.light_source.set_screen(self.screen)
         self.add(self.screen,self.light_source.shadow)
         
-        self.add_foreground_mobject(self.light_source.shadow)
-        self.add_foreground_mobject(morty)
+        self.add(self.light_source.shadow)
+        self.add(morty)
         self.light_source.dim_ambient
         self.add(self.light_source.spotlight)
         self.screen_tracker = ScreenTracker(self.light_source)
@@ -1060,7 +1060,7 @@ class EarthScene(Scene):
         theta1 = theta0 + dtheta
         theta = (theta0 + theta1)/2
 
-        self.add_foreground_mobject(self.screen)
+        self.add(self.screen)
 
         # background Earth
         background_earth = SVGMobject(
@@ -1072,7 +1072,7 @@ class EarthScene(Scene):
         # Morty
 
         morty = Mortimer().scale(0.5).next_to(self.screen, RIGHT, buff = 1.5)
-        self.add_foreground_mobject(morty)
+        self.add(morty)
 
 
         # Light source (far-away Sun)
@@ -1105,8 +1105,8 @@ class EarthScene(Scene):
             FadeIn(earth),
             FadeIn(background_earth)
         )
-        self.add_foreground_mobject(earth)
-        self.add_foreground_mobject(self.screen)
+        self.add(earth)
+        self.add(self.screen)
 
 
         # move screen onto Earth
@@ -1219,7 +1219,7 @@ class ScreenShapingScene(ThreeDScene):
         self.lighthouse = self.light_source.lighthouse
 
         
-        #self.add_foreground_mobject(self.light_source.shadow)
+        #self.add(self.light_source.shadow)
 
         # Morty
         self.morty = Mortimer().scale(0.3).next_to(self.screen, RIGHT, buff = 0.5)
@@ -1231,8 +1231,8 @@ class ScreenShapingScene(ThreeDScene):
         self.play(FadeIn(self.screen))
         self.wait()
 
-        self.add_foreground_mobject(self.screen)
-        self.add_foreground_mobject(self.morty)
+        self.add(self.screen)
+        self.add(self.morty)
 
         self.play(SwitchOn(self.ambient_light))
 
@@ -1268,7 +1268,7 @@ class ScreenShapingScene(ThreeDScene):
         # so we can morph it into the brightness rect above
         brightness_rect0 = Rectangle(width = 0,
             height = self.screen_height).move_to(self.screen.get_center())
-        self.add_foreground_mobject(brightness_rect0)
+        self.add(brightness_rect0)
 
         self.brightness_rect = Rectangle(width = self.brightness_rect_height,
             height = self.brightness_rect_height, fill_color = YELLOW, fill_opacity = 0.5)
@@ -1350,7 +1350,7 @@ class ScreenShapingScene(ThreeDScene):
 
         # Here some digits of the indicator disappear...
 
-        self.add_foreground_mobject(self.indicator.reading)
+        self.add(self.indicator.reading)
 
 
         self.unit_indicator_intensity = 1.0 # intensity at distance 1
@@ -1463,9 +1463,9 @@ class ScreenShapingScene(ThreeDScene):
         new_screen.rotate(TAU/4,axis = DOWN)
         new_screen.move_to(self.screen.get_center())
 
-        self.add_foreground_mobject(self.ambient_light)
-        self.add_foreground_mobject(self.spotlight)
-        self.add_foreground_mobject(self.light_source.shadow)
+        self.add(self.ambient_light)
+        self.add(self.spotlight)
+        self.add(self.light_source.shadow)
 
         self.play(
              ApplyMethod(self.camera.rotation_mobject.move_to, camera_target_point),
@@ -1764,7 +1764,7 @@ class BackToEulerSumScene(PiCreatureScene):
         indicator.set_intensity(intensities[0])
 
         self.play(FadeIn(indicator))
-        self.add_foreground_mobject(indicator)
+        self.add(indicator)
         
         collection_point = np.array([-6.,2.,0.])
         left_shift = 0.2*LEFT
@@ -1807,7 +1807,7 @@ class BackToEulerSumScene(PiCreatureScene):
             bubble_indicator_target.move_to(collection_point)
 
 
-            self.add_foreground_mobject(bubble_indicator)
+            self.add(bubble_indicator)
 
 
             self.wait()
@@ -2085,7 +2085,7 @@ class IPTScene1(PiCreatureScene):
         morty.next_to(C, LEFT, buff = 0, submobject_to_align = right_pupil)
         
         if not show_detail:
-            self.add_foreground_mobject(morty)
+            self.add(morty)
 
         stroke_width = 6
         line_a = Line(B,C,stroke_width = stroke_width)
@@ -2105,16 +2105,16 @@ class IPTScene1(PiCreatureScene):
         label_h = TexMobject("h")
         label_h.next_to(line_h.get_center(), RIGHT, buff = 0.5)
 
-        self.add_foreground_mobject(line_a)
-        self.add_foreground_mobject(line_b)
-        self.add_foreground_mobject(line_c)
-        self.add_foreground_mobject(line_h)
-        self.add_foreground_mobject(label_a)
-        self.add_foreground_mobject(label_b)
-        self.add_foreground_mobject(label_h)
+        self.add(line_a)
+        self.add(line_b)
+        self.add(line_c)
+        self.add(line_h)
+        self.add(label_a)
+        self.add(label_b)
+        self.add(label_h)
         
         if not show_detail:
-            self.add_foreground_mobject(morty)
+            self.add(morty)
 
         ls1 = LightSource(radius = 10)
         ls1.move_source_to(B)
@@ -2146,12 +2146,12 @@ class IPTScene1(PiCreatureScene):
         screen1.move_to(C + screen_width_b/2 * RIGHT + screen_thickness_b/2 * DOWN)
         
         if not show_detail:
-            self.add_foreground_mobject(morty)
+            self.add(morty)
 
         self.play(
             FadeIn(screen1)
         )
-        self.add_foreground_mobject(screen1)
+        self.add(screen1)
 
         ls1.set_screen(screen1)
         screen_tracker = ScreenTracker(ls1)
@@ -2200,10 +2200,10 @@ class IPTScene1(PiCreatureScene):
         self.play(
             FadeIn(screen2)
         )
-        self.add_foreground_mobject(screen2)
+        self.add(screen2)
 
         if not show_detail:
-            self.add_foreground_mobject(morty)
+            self.add(morty)
 
         # the same scene adding sequence as before
         ls2.set_screen(screen2)
@@ -2920,7 +2920,7 @@ class InscribedAngleScene(ThreeDScene):
             self.play(
                 ShowCreation(line),
             )
-        self.add_foreground_mobject(inner_lines)
+        self.add(inner_lines)
         for arc in inner_arcs.submobjects:
             self.play(
                 ShowCreation(arc)
@@ -2954,7 +2954,7 @@ class InscribedAngleScene(ThreeDScene):
             self.play(
                 ShowCreation(line),
             )
-        self.add_foreground_mobject(outer_lines)
+        self.add(outer_lines)
         for arc in outer_arcs.submobjects:
             self.play(
                 ShowCreation(arc)
@@ -2990,7 +2990,7 @@ class InscribedAngleScene(ThreeDScene):
         self.play(
             ShowCreation(outer_lines3),
         )
-        self.add_foreground_mobject(outer_lines3)
+        self.add(outer_lines3)
         for arc in outer_arcs3.submobjects:
             self.play(
                 ShowCreation(arc)
@@ -3119,7 +3119,7 @@ class PondScene(ThreeDScene):
             #self.ls0_dot.move_to(self.outer_lake.get_center())
             self.ls0_dot.scale(2, about_point = ORIGIN)
                 
-            #self.add_foreground_mobject(self.ls0_dot)
+            #self.add(self.ls0_dot)
 
 
         def shift_scene(v):
@@ -3171,9 +3171,9 @@ class PondScene(ThreeDScene):
         self.zoomable_mobs.add(ls0, ls0.lighthouse, ls0.ambient_light)
 
         self.add(lake0,morty,self.obs_dot,self.ls0_dot, ls0.lighthouse)
-        self.add_foreground_mobject(morty)
-        self.add_foreground_mobject(self.obs_dot)
-        self.add_foreground_mobject(self.ls0_dot)
+        self.add(morty)
+        self.add(self.obs_dot)
+        self.add(self.ls0_dot)
         self.wait()
 
 
@@ -3215,7 +3215,7 @@ class PondScene(ThreeDScene):
         )
 
         self.play(FadeIn(indicator))
-        self.add_foreground_mobject(indicator)
+        self.add(indicator)
 
         self.play(
             indicator.set_intensity,0.5
@@ -3247,7 +3247,7 @@ class PondScene(ThreeDScene):
         self.play(
             FadeIn(indicator_reading)
         )
-        self.add_foreground_mobject(indicator_reading)
+        self.add(indicator_reading)
 
         # replace d with its value
         new_diameter_text = TexMobject("{2\over \pi}").scale(TEX_SCALE)
@@ -3855,7 +3855,7 @@ class PondScene(ThreeDScene):
                 self.remove_foreground_mobject(ls.ambient_light)
                 self.remove(ls.ambient_light)
             else:
-                self.add_foreground_mobject(ls.ambient_light)
+                self.add(ls.ambient_light)
 
         for label in self.number_line_labels.submobjects:
             if label.get_center()[0] <= 0:
@@ -3872,10 +3872,10 @@ class PondScene(ThreeDScene):
         )
         covering_rectangle.next_to(ORIGIN, LEFT, buff = 0)
         #for i in range(10):
-        #    self.add_foreground_mobject(nl_sources.submobjects[i])
+        #    self.add(nl_sources.submobjects[i])
 
-        self.add_foreground_mobject(indicator)
-        self.add_foreground_mobject(indicator_reading)
+        self.add(indicator)
+        self.add(indicator_reading)
 
 
         half_indicator_reading = TexMobject("{\pi^2 \over 8}").scale(TEX_SCALE)

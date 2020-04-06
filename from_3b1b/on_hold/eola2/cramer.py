@@ -476,8 +476,8 @@ class SetupSimpleSystemOfEquations(LinearTransformationScene):
             )
             self.play(*list(map(GrowArrow, self.basis_vectors)))
 
-            self.add_foreground_mobject(corner_rect)
-            self.add_foreground_mobject(matrix_system)
+            self.add(corner_rect)
+            self.add(matrix_system)
 
     def show_geometry(self):
         system = self.matrix_system
@@ -527,7 +527,7 @@ class SetupSimpleSystemOfEquations(LinearTransformationScene):
             GrowArrow(output_vect_mob),
             MoveToTarget(output_vect_label),
         )
-        self.add_foreground_mobjects(output_vect_mob, output_vect_label)
+        self.add(output_vect_mob, output_vect_label)
         self.wait()
 
         # Show columns
@@ -544,14 +544,14 @@ class SetupSimpleSystemOfEquations(LinearTransformationScene):
             column_mob[0].scale(0).move_to(matrix_mobject)
             column_mob.elements.become(column)
             column_mob.brackets.become(matrix_mobject.brackets)
-            self.add_foreground_mobject(column_mob)
+            self.add(column_mob)
             self.apply_matrix(m, added_anims=[
                 ApplyMethod(column_mob.restore, path_arc=90 * DEGREES)
             ])
         self.wait()
 
         # Do inverse transformation to reveal input
-        self.remove_foreground_mobjects(column_mobs)
+        self.remove_mobjects(column_mobs)
         self.apply_inverse(self.matrix, run_time=1, added_anims=[
             ReplacementTransform(output_vect_mob.copy(), input_vect_mob),
             ReplacementTransform(output_vect_label.elements.copy(), q_marks),
@@ -650,7 +650,7 @@ class ShowZeroDeterminantCase(LinearTransformationScene):
         equation.add_background_rectangle()
         equation.to_corner(UL)
         self.add(equation)
-        self.add_foreground_mobject(equation)
+        self.add(equation)
 
     def show_det_zero(self):
         matrix = self.matrix
@@ -744,7 +744,7 @@ class ShowZeroDeterminantCase(LinearTransformationScene):
             ),
             Write(det_equation[2:]),
         )
-        self.add_foreground_mobject(det_rect, det_equation)
+        self.add(det_rect, det_equation)
 
 
 class NonZeroDeterminantCase(ShowZeroDeterminantCase, SetupSimpleSystemOfEquations):
@@ -846,7 +846,7 @@ class ThinkOfPuzzleAsLinearCombination(SetupSimpleSystemOfEquations):
             about_edge=LEFT
         )
 
-        self.remove_foreground_mobjects(corner_rect, system)
+        self.remove_mobjects(corner_rect, system)
         self.play(
             MoveToTarget(corner_rect),
             FadeOut(input_vect.brackets),
@@ -863,7 +863,7 @@ class ThinkOfPuzzleAsLinearCombination(SetupSimpleSystemOfEquations):
             path_arc=90 * DEGREES,
             run_time=2
         )
-        self.add_foreground_mobject(corner_rect, new_system)
+        self.add(corner_rect, new_system)
         self.wait()
 
     def show_linear_combination_of_vectors(self):
@@ -873,7 +873,7 @@ class ThinkOfPuzzleAsLinearCombination(SetupSimpleSystemOfEquations):
         for basis, scalar in zip(basis_vectors, input_vect):
             basis.ghost = basis.copy()
             basis.ghost.set_color(average_color(basis.get_color(), BLACK))
-            self.add_foreground_mobjects(basis.ghost, basis)
+            self.add(basis.ghost, basis)
             basis.generate_target()
             basis_coords = np.array(
                 self.plane.point_to_coords(basis.get_end()))
@@ -925,7 +925,7 @@ class LookAtDotProducts(SetupSimpleSystemOfEquations):
 
     def remove_corner_system(self):
         to_remove = [self.corner_rect, self.matrix_system]
-        self.remove_foreground_mobjects(*to_remove)
+        self.remove_mobjects(*to_remove)
         self.remove(*to_remove)
 
         q_marks = self.q_marks
@@ -1171,7 +1171,7 @@ class ShowDotProductChanging(LinearTransformationScene):
             ReplacementTransform(w_label.copy(), start_equation[3]),
         )
         self.wait()
-        self.add_foreground_mobject(start_equation)
+        self.add(start_equation)
         self.apply_matrix(self.matrix)
         self.wait()
 
@@ -1336,9 +1336,9 @@ class SolvingASystemWithOrthonormalMatrix(LinearTransformationScene):
         output_dashed_lines = input_dashed_lines.copy()
         output_dashed_lines.apply_matrix(matrix)
 
-        self.add_foreground_mobjects(system_rect, system)
-        self.add_foreground_mobjects(matrix_brace, orthonomal_label)
-        self.add_foreground_mobjects(output_vect_mob, output_vect_label)
+        self.add(system_rect, system)
+        self.add(matrix_brace, orthonomal_label)
+        self.add(output_vect_mob, output_vect_label)
         self.plane.set_stroke(width=2)
 
         self.apply_matrix(matrix)
@@ -1698,7 +1698,7 @@ class TransformingAreasYCoord(LinearTransformationScene):
             Write(apply_words), FadeIn(matrix_mobject),
             GrowFromCenter(matrix_brace), Write(matrix_label),
         )
-        self.add_foreground_mobjects(apply_group)
+        self.add(apply_group)
         self.play(*list(map(FadeOut, [
             area_words.rect, area_words, area_arrow, input_vect_label,
         ])))
@@ -1712,7 +1712,7 @@ class TransformingAreasYCoord(LinearTransformationScene):
             Write(area_scale_words)
         )
         self.add_transformable_mobject(blobs)
-        self.add_foreground_mobject(area_scale_words)
+        self.add(area_scale_words)
         self.apply_matrix(matrix)
 
         # Ask about parallelogram

@@ -245,11 +245,11 @@ class SuccessiveLinearTransformations(LinearTransformationScene):
             FocusOn(M2, run_time=1),
             FadeIn(VGroup(M2, all_space))
         )
-        self.add_foreground_mobjects(M2, all_space)
+        self.add(M2, all_space)
         self.apply_matrix(self.matrix_2)
         self.wait()
         self.play(M1.restore)
-        self.add_foreground_mobjects(M1)
+        self.add(M1)
         self.apply_matrix(self.matrix_1)
         self.wait()
 

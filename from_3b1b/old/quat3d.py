@@ -314,7 +314,7 @@ class WhoCares(TeacherStudentsScene):
         #         look_at_arg=hn_quote,
         #     )
         # )
-        # self.add_foreground_mobjects(vr_headsets)
+        # self.add(vr_headsets)
         # self.play(
         #     LaggedStartMap(
         #         FadeInFrom, vr_headsets,
@@ -341,7 +341,7 @@ class WhoCares(TeacherStudentsScene):
         #     t_quote.scale, 2,
         #     t_quote.to_corner, UL,
         # )
-        # self.remove_foreground_mobjects(vr_headsets)
+        # self.remove_mobjects(vr_headsets)
         t_quote.fade(1)
         t_quote.to_corner(UL)
         self.play(

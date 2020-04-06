@@ -502,13 +502,13 @@ class CylinderModel(Scene):
         func_label = self.get_func_label()
 
         self.remove(self.plane)
-        self.add_foreground_mobjects(self.unit_circle, self.title)
+        self.add(self.unit_circle, self.title)
         self.play(
             warped_grid.apply_complex_function, inverse_joukowsky_map,
             Animation(h_line, remover=True)
         )
         self.play(Write(func_label))
-        self.add_foreground_mobjects(func_label)
+        self.add(func_label)
         self.wait()
 
     def show_flow(self):
@@ -696,7 +696,7 @@ class ElectricField(CylinderModel, MovingCameraScene):
             fill_opacity=1
         )
 
-        self.add_foreground_mobjects(self.title, func_label, unit_circle)
+        self.add(self.title, func_label, unit_circle)
         self.remove(self.plane)
         self.play(
             warped_grid.apply_complex_function, inverse_joukowsky_map,
@@ -725,7 +725,7 @@ class ElectricField(CylinderModel, MovingCameraScene):
             FadeOut(self.func_label),
             LaggedStartMap(GrowArrow, vector_field)
         )
-        self.remove_foreground_mobjects(self.title, self.func_label)
+        self.remove_mobjects(self.title, self.func_label)
         self.wait()
         for group, vect in (protons, UP), (electrons, DOWN):
             self.play(LaggedStartMap(
@@ -778,7 +778,7 @@ class ElectricField(CylinderModel, MovingCameraScene):
 
         self.play(GrowFromCenter(unit_circle))
         self.add(jiggling_protons, jiggling_electrons)
-        self.add_foreground_mobjects(
+        self.add(
             self.vector_field, unit_circle, protons, electrons
         )
         self.play(
@@ -846,7 +846,7 @@ class ElectricField(CylinderModel, MovingCameraScene):
             lag_ratio=0
         ))
         self.add(voltage_update)
-        self.add_foreground_mobjects(voltage)
+        self.add(voltage)
         self.play(
             UpdateFromAlphaFunc(
                 voltage, lambda m, a: m.set_fill(opacity=a)
@@ -1139,7 +1139,7 @@ class IntroduceVectorField(Scene):
         title.scale(1.5)
         title.to_edge(UP, buff=MED_SMALL_BUFF)
         title.add_background_rectangle(opacity=1, buff=SMALL_BUFF)
-        self.add_foreground_mobjects(title)
+        self.add(title)
 
     def points_to_vectors(self):
         vector_field = self.vector_field = VectorField(
@@ -1195,7 +1195,7 @@ class IntroduceVectorField(Scene):
             **self.vector_field_config
         )
 
-        self.add_foreground_mobjects(earth, moon)
+        self.add(earth, moon)
         self.play(
             GrowFromCenter(earth),
             GrowFromCenter(moon),
@@ -1230,7 +1230,7 @@ class IntroduceVectorField(Scene):
             letter.next_to(edge, -vect, buff=MED_LARGE_BUFF)
             magnet.add(letter)
 
-        self.add_foreground_mobjects(magnet)
+        self.add(magnet)
         self.play(
             self.earth.scale, 0,
             self.moon.scale, 0,
@@ -1239,7 +1239,7 @@ class IntroduceVectorField(Scene):
             run_time=2
         )
         self.vector_field.func = magnetic_field.func
-        self.remove_foreground_mobjects(self.earth, self.moon)
+        self.remove_mobjects(self.earth, self.moon)
 
 
 class QuickNoteOnDrawingThese(TeacherStudentsScene):
@@ -1695,11 +1695,11 @@ class DivergenceAtSlowFastPoint(Scene):
         div_tex.next_to(circle, UP)
 
         self.add(vector_field)
-        self.add_foreground_mobjects(circle, div_tex)
+        self.add(circle, div_tex)
         self.begin_flow()
         self.wait(2)
         for word in words:
-            self.add_foreground_mobjects(word)
+            self.add(word)
             self.play(Write(word))
         self.wait(8)
 
@@ -1926,7 +1926,7 @@ class DivergenceAsNewFunction(Scene):
             )
             for mob in (out_x, out_y)
         ])
-        self.add_foreground_mobjects(div_tex)
+        self.add(div_tex)
         self.play(
             LaggedStartMap(GrowArrow, vector_field),
             LaggedStartMap(GrowArrow, vector_ring),
@@ -1971,7 +1971,7 @@ class DivergenceZeroCondition(Scene):
 
         for mob in title, equation:
             mob.add_background_rectangle(buff=MED_SMALL_BUFF / 2)
-            self.add_foreground_mobjects(mob)
+            self.add(mob)
         self.wait(1)
 
 
@@ -1991,7 +1991,7 @@ class PureCylinderFlow(Scene):
                 vector_field.remove(vector)
         vector_field.set_fill(opacity=0.75)
         self.modify_vector_field(vector_field)
-        self.add_foreground_mobjects(vector_field)
+        self.add(vector_field)
 
     def begin_flow(self):
         stream_lines = StreamLines(
@@ -2023,7 +2023,7 @@ class PureCylinderFlow(Scene):
             fill_opacity=1,
         )
         self.modify_flow(circle)
-        self.add_foreground_mobjects(circle)
+        self.add(circle)
 
     def modify_flow(self, mobject):
         pass
@@ -2083,7 +2083,7 @@ class IntroduceCurl(IntroduceVectorField):
         )
         title.add_background_rectangle()
         title.to_edge(UP, buff=MED_SMALL_BUFF)
-        self.add_foreground_mobjects(title)
+        self.add(title)
 
     def show_vector_field(self):
         vector_field = self.vector_field = VectorField(
@@ -2131,7 +2131,7 @@ class IntroduceCurl(IntroduceVectorField):
                 )
                 label.add_background_rectangle()
                 label.next_to(arrows, DOWN)
-                self.add_foreground_mobjects(label)
+                self.add(label)
                 always_rotate(arrows, rate=u * 30 * DEGREES)
                 self.play(
                     FadeIn(arrows),
@@ -2199,7 +2199,7 @@ class ShearCurl(IntroduceCurl):
         for word, vect in zip(words, [DOWN, UP]):
             word.add_background_rectangle(buff=SMALL_BUFF)
             word.next_to(circle, vect)
-            self.add_foreground_mobjects(word)
+            self.add(word)
             self.play(Write(word))
             self.wait()
 
@@ -2597,8 +2597,8 @@ class IllustrateGaussLaw(DefineDivergence, MovingCameraScene):
         particles = self.get_particles()
         vector_field = self.get_vector_field()
 
-        self.add_foreground_mobjects(vector_field)
-        self.add_foreground_mobjects(particles)
+        self.add(vector_field)
+        self.add(particles)
         self.zoom_in()
         self.show_flow()
 
@@ -2665,7 +2665,7 @@ class IllustrateGaussMagnetic(IllustrateGaussLaw):
         top.move_to(1 * UP)
         bottom.move_to(1 * DOWN)
 
-        self.add_foreground_mobjects(top, bottom)
+        self.add(top, bottom)
 
     def show_vector_field(self):
         vector_field = self.vector_field = VectorField(
@@ -2675,8 +2675,8 @@ class IllustrateGaussMagnetic(IllustrateGaussLaw):
             key=lambda a: -a1.get_length()
         )
         self.play(LaggedStartMap(GrowArrow, vector_field))
-        self.add_foreground_mobjects(
-            vector_field, *self.foreground_mobjects
+        self.add(
+            vector_field, *self.mobjects
         )
 
     def func(self, point):
@@ -3155,7 +3155,7 @@ class PhaseSpaceOfPopulationModel(ShowTwoPopulations, PiCreatureScene, MovingCam
             stream_lines,
         )
         self.add(stream_line_animation)
-        self.add_foreground_mobjects(vector_field)
+        self.add(vector_field)
         self.wait(self.flow_time)
         self.play(
             self.camera_frame.scale, 1.5, {"about_point": self.origin},
@@ -3510,7 +3510,7 @@ class ShowDotProduct(MovingCameraScene):
         self.add(plane)
         self.add(dot_product, dot_product_value_update)
         self.add_additional_continual_animations(v1, v2)
-        self.add_foreground_mobjects(v1, v2)
+        self.add(v1, v2)
         for n in range(5):
             self.play(
                 Rotate(v1, 45 * DEGREES, about_point=ORIGIN),
@@ -3619,7 +3619,7 @@ class DivergenceTinyNudgesView(MovingCameraScene):
             FadeIn(vector),
             run_time=2
         )
-        self.add_foreground_mobjects(input_dot)
+        self.add(input_dot)
         self.play(
             FadeInFrom(input_dot, SMALL_BUFF * DL),
             Write(input_words),
@@ -3695,7 +3695,7 @@ class DivergenceTinyNudgesView(MovingCameraScene):
             Write(step_words),
             ReplacementTransform(input_dot.copy(), new_dot)
         )
-        self.add_foreground_mobjects(new_dot)
+        self.add(new_dot)
         self.play(FadeIn(small_step_words))
         self.play(FadeOut(small_step_words))
         self.play(
@@ -3845,7 +3845,7 @@ class DivergenceTinyNudgesView(MovingCameraScene):
         # Loop around
         n_samples = 12
         angle = TAU / n_samples
-        self.add_foreground_mobjects(self.step_words)
+        self.add(self.step_words)
         for n in range(n_samples):
             self.play(
                 Rotating(
@@ -3868,7 +3868,7 @@ class DivergenceTinyNudgesView(MovingCameraScene):
             self.moving_diff_vector_update,
             self.dot_product_value_update
         )
-        self.remove_foreground_mobjects(self.step_words)
+        self.remove_mobjects(self.step_words)
         self.play(
             FadeOut(self.brace),
             FadeOut(self.dot_product_value),
@@ -4439,7 +4439,7 @@ class PeopleValueGraph(GraphScene):
         self.change_curve()
 
     def tweak_labels(self):
-        self.add_foreground_mobjects(self.x_axis_label_mob)
+        self.add(self.x_axis_label_mob)
         self.y_axis_label_mob.to_edge(LEFT)
 
     def add_curve(self):

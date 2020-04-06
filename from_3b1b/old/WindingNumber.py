@@ -265,25 +265,25 @@ class EquationSolver1d(GraphScene, ZoomedScene):
 
         # All the initial adds and ShowCreations are here now:
         self.play(FadeIn(initialLowerXDot), FadeIn(leftBrace), FadeIn(leftBraceLabel))
-        self.add_foreground_mobjects(initialLowerXDot, leftBrace)
+        self.add(initialLowerXDot, leftBrace)
         self.add(leftBraceLabelAnimation)
         self.play(ShowCreation(lowerXLine))
-        self.add_foreground_mobject(lowerDot)
+        self.add(lowerDot)
         self.play(ShowCreation(lowerYLine))
         self.play(FadeIn(initialLowerYDot), FadeIn(downBrace), FadeIn(downBraceLabel))
-        self.add_foreground_mobjects(initialLowerYDot, downBrace)
+        self.add(initialLowerYDot, downBrace)
         self.add(downBraceLabelAnimation)
 
         self.wait()
 
         self.play(FadeIn(initialUpperXDot), FadeIn(rightBrace), FadeIn(rightBraceLabel))
-        self.add_foreground_mobjects(initialUpperXDot, rightBrace)
+        self.add(initialUpperXDot, rightBrace)
         self.add(rightBraceLabelAnimation)
         self.play(ShowCreation(upperXLine))
-        self.add_foreground_mobject(upperDot)
+        self.add(upperDot)
         self.play(ShowCreation(upperYLine))
         self.play(FadeIn(initialUpperYDot), FadeIn(upBrace), FadeIn(upBraceLabel))
-        self.add_foreground_mobjects(initialUpperYDot, upBrace)
+        self.add(initialUpperYDot, upBrace)
         self.add(upBraceLabelAnimation)
 
         self.wait()
@@ -359,7 +359,7 @@ class EquationSolver1d(GraphScene, ZoomedScene):
                 ReplacementTransform(rightBrace.copy(), midXBrace),
                 FadeIn(x_guess_label))
 
-            self.add_foreground_mobject(midXBrace)
+            self.add(midXBrace)
 
             midXLine = DashedLine(
                 self.coords_to_point(midX, self.base_line_y), 
@@ -1592,7 +1592,7 @@ class HasItsLimitations(Scene):
         DOT_Z = OUT
         # Note: This z-buffer value is needed for our static scenes, but is
         # not sufficient for everything, in that we still need to use 
-        # the foreground_mobjects trick during animations.
+        # the mobjects trick during animations.
         # At some point, we should figure out how to have animations
         # play well with z coordinates.
         
@@ -1600,7 +1600,7 @@ class HasItsLimitations(Scene):
         input_label = TextMobject("Input", fill_color = dot_color)
         input_label.next_to(input_dot, UP + LEFT)
         input_label.add_background_rectangle()
-        self.add_foreground_mobject(input_dot)
+        self.add(input_dot)
         self.add(input_label)
 
         curved_arrow = Arc(0, color = MAROON_E)
@@ -1616,7 +1616,7 @@ class HasItsLimitations(Scene):
         output_label.next_to(output_dot, UP + RIGHT)
         output_label.add_background_rectangle()
 
-        self.add_foreground_mobject(output_dot)
+        self.add(output_dot)
         self.add(output_label)
         self.wait()
 
@@ -1650,7 +1650,7 @@ class HasItsLimitations(Scene):
 
         self.wait()
 
-        self.add_foreground_mobject(new_dot_objects)
+        self.add(new_dot_objects)
 
         complex_plane = ComplexPlane()
         complex_plane.add_coordinates()
@@ -1832,7 +1832,7 @@ class DemonstrateColorMapping(ColorMappedObjectsScene):
         # Doing this in Premiere now instead
         # output_plane_label = TextMobject("Output Plane", color = WHITE)
         # output_plane_label.move_to(3 * UP)
-        # self.add_foreground_mobject(output_plane_label)
+        # self.add(output_plane_label)
 
         if self.show_full_color_map:
             bright_background = Rectangle(width = 2 * FRAME_X_RADIUS + 1, height = 2 * FRAME_Y_RADIUS + 1, fill_opacity = 1)

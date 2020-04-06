@@ -1003,7 +1003,7 @@ class TalkThroughChangeOfBasisMatrix(JenniferScene):
         self.play(Blink(self.you))
         self.wait()
 
-        self.add_foreground_mobject(
+        self.add(
             self.jenny, self.you, self.you.bubble, 
             basis_coords_pair, matrix
         )
@@ -1026,7 +1026,7 @@ class TalkThroughChangeOfBasisMatrix(JenniferScene):
             ]
         )
         self.remove(matrix_copy)
-        self.add_foreground_mobject(b1_coords)
+        self.add(b1_coords)
         matrix_copy = matrix.copy()
         matrix_copy.rect.set_fill(opacity = 0)
         self.apply_transposed_matrix(
@@ -1046,7 +1046,7 @@ class TalkThroughChangeOfBasisMatrix(JenniferScene):
             ]
         )
         self.remove(matrix_copy)
-        self.add_foreground_mobject(b2_coords)
+        self.add(b2_coords)
         basis_coords_pair.target = basis_coords_pair.copy()
         self.jenny.bubble.add_content(basis_coords_pair.target)
         self.wait()
@@ -1095,7 +1095,7 @@ class ChangeOfBasisExample(JenniferScene):
             Write(start_group),
             FadeIn(self.you),
         )
-        self.add_foreground_mobject(start_group, self.you)
+        self.add(start_group, self.you)
 
         self.show_linear_combination(
             numerical_coords = self.v_coords,
@@ -1209,14 +1209,14 @@ class RecallInverse(JenniferScene):
         equals.next_to(matrix, RIGHT, buff = 0.7)
         inv_matrix.next_to(equals, RIGHT, buff = MED_SMALL_BUFF)
 
-        self.add_foreground_mobject(matrix)
+        self.add(matrix)
         self.apply_transposed_matrix(numerical_t_matrix)
         self.play(
             GrowFromCenter(brace),
             Write(inverse_word),
             Write(inverse_exponent)
         )
-        self.add_foreground_mobject(*self.get_mobjects_from_last_animation())
+        self.add(*self.get_mobjects_from_last_animation())
         self.wait()
         self.apply_inverse_transpose(numerical_t_matrix)
         self.wait()
@@ -1225,7 +1225,7 @@ class RecallInverse(JenniferScene):
             Transform(matrix.copy(), inv_matrix)
         )
         self.remove(*self.get_mobjects_from_last_animation())
-        self.add_foreground_mobject(equals, inv_matrix)
+        self.add(equals, inv_matrix)
         self.wait()
         for mob in self.plane, self.i_hat, self.j_hat:
             self.add(mob.copy().fade(0.7))
@@ -1454,7 +1454,7 @@ class RotationExample(LinearTransformationScene):
         matrix.shift(2*RIGHT)
 
         self.play(Write(words))
-        self.add_foreground_mobject(words)
+        self.add(words)
         self.wait()
         self.apply_transposed_matrix(self.t_matrix)
         self.wait()

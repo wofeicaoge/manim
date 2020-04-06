@@ -185,7 +185,7 @@ class IntroduceZeta(ZetaTransformationScene):
         randy = Randolph().flip()
         randy.to_corner(DOWN+RIGHT)
 
-        self.add_foreground_mobjects(title, func_mob)
+        self.add(title, func_mob)
         self.add_transformable_plane()
         self.add_extra_plane_lines_for_zeta()
         self.play(ShowCreation(self.plane, run_time = 2))
@@ -335,7 +335,7 @@ class PreviewZetaAndContinuation(ZetaTransformationScene):
 
         self.remove(self.plane)
         self.play(Write(titles[0], run_time = 2))
-        self.add_foreground_mobjects(titles[0])
+        self.add(titles[0])
         self.play(FadeIn(self.plane))
         self.apply_zeta_function()
         reflected_plane.apply_complex_function(zeta)
@@ -1227,7 +1227,7 @@ class TerritoryOfExponents(ComplexTransformationScene):
         )
         exponent[-1].set_color(YELLOW)
         exponent.next_to(ORIGIN, LEFT, MED_LARGE_BUFF).to_edge(UP)
-        self.add_foreground_mobjects(exponent)
+        self.add(exponent)
 
 class ComplexExponentiation(Scene):
     def construct(self):
@@ -1629,7 +1629,7 @@ class VisualizingSSquared(ComplexTransformationScene):
         title.scale(1.5)
         title.to_corner(UP+LEFT)
         self.play(Write(title))
-        self.add_foreground_mobject(title)
+        self.add(title)
         self.wait()
         self.title = title
 
@@ -1676,7 +1676,7 @@ class VisualizingSSquared(ComplexTransformationScene):
             self.play(ShowCreation(arrow))
             self.play(ShowCreation(output_dot))
             self.wait()
-        self.add_foreground_mobjects(arrows, output_dots, input_dots)
+        self.add(arrows, output_dots, input_dots)
         self.input_dots = input_dots
         self.output_dots = output_dots
 
@@ -1716,7 +1716,7 @@ class VisualizingSSquared(ComplexTransformationScene):
             It all happens
             in two dimensions!
         """)
-        self.foreground_mobjects = []
+        self.mobjects = []
 
         self.play(FadeIn(morty))
         self.play(
@@ -1756,7 +1756,7 @@ class ShowZetaOnHalfPlane(ZetaTransformationScene):
         zeta.add_background_rectangle()
         zeta.scale(0.8)
         zeta.to_corner(UP+LEFT)
-        self.add_foreground_mobjects(zeta)
+        self.add(zeta)
         self.zeta = zeta
 
     def initial_transformation(self):
@@ -2087,7 +2087,7 @@ class SquiggleOnExtensions(ZetaTransformationScene):
         words.add_background_rectangle()
 
         self.play(Write(words))
-        self.add_foreground_mobjects(words)
+        self.add(words)
         self.play(self.left_plane.restore)
         self.wait()
 
@@ -2143,7 +2143,7 @@ class IntroduceAnglePreservation(VisualizingSSquared):
 
         self.add_transformable_plane()
         self.play(Write(title))
-        self.add_foreground_mobjects(title)
+        self.add(title)
         self.wait()
 
     def show_initial_transformation(self):
@@ -2374,7 +2374,7 @@ class AngleAtZeroDerivativePoints(IntroduceAnglePreservation):
         derivative.add_background_rectangle()
         derivative.next_to(title, DOWN)
 
-        self.add_foreground_mobjects(title, derivative)
+        self.add(title, derivative)
 
 
     def put_angle_tex_next_to_arc(self, angle_tex, arc):
@@ -2469,7 +2469,7 @@ class NoteZetaFunctionAnalyticOnRightHalf(ZetaTransformationScene):
         title[-1].set_color(YELLOW)
         title.add_background_rectangle()
         title.to_corner(UP+LEFT)
-        self.add_foreground_mobjects(title)
+        self.add(title)
 
     def note_right_angles(self):
         intersection_inputs = [
@@ -2533,7 +2533,7 @@ class InfiniteContinuousJigsawPuzzle(ZetaTransformationScene):
             word.add_to_back(BackgroundRectangle(word))
             self.play(FadeIn(word))
         self.wait()
-        self.add_foreground_mobjects(title)
+        self.add(title)
         self.title = title
 
     def show_jigsaw(self):
@@ -2617,7 +2617,7 @@ class ManyIntersectingLinesPreZeta(ZetaTransformationScene):
             title = TextMobject("Before \\\\ transformation")
         title.add_background_rectangle()
         title.to_edge(UP)
-        self.add_foreground_mobjects(title)
+        self.add(title)
 
     def get_modified_line_anims(self, lines):
         return []
@@ -3255,7 +3255,7 @@ class FinalAnimation(ZetaTransformationScene):
         title.to_corner(UP+LEFT)
 
         self.play(Write(title))
-        self.add_foreground_mobjects(title)
+        self.add(title)
         self.wait()
         self.apply_complex_function(d_zeta, run_time = 8)
         self.wait()

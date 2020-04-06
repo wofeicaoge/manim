@@ -212,7 +212,7 @@ class PascalNetScene(Scene):
                 line = Line(dev_start,dev_stop,stroke_color = WHITE)
                 self.add(line)
                 dot = Dot(dev_stop, fill_color = WHITE)
-                self.add_foreground_mobject(dot)
+                self.add(dot)
                 dev_start = dev_stop
 
             start_points = np.append(stop_points_left,[stop_points_right[-1]], axis = 0)
@@ -327,7 +327,7 @@ class RescaledPascalNetScene(Scene):
                 line = Line(dev_start,dev_stop,stroke_color = WHITE)
                 self.add(line)
                 dot = Dot(dev_stop, fill_color = WHITE)
-                self.add_foreground_mobject(dot)
+                self.add(dot)
                 dev_start = dev_stop
 
 

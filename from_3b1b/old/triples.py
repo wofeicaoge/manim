@@ -1684,7 +1684,7 @@ class VisualizeZSquared(Scene):
         ])
         dots.sort(lambda p : np.dot(p, UP+RIGHT))
 
-        self.add_foreground_mobject(self.coordinate_labels)
+        self.add(self.coordinate_labels)
         self.play(LaggedStartMap(
             DrawBorderThenFill, dots,
             stroke_width = 3,

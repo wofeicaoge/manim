@@ -115,7 +115,7 @@ class FollowLinearCombination(LinearTransformationScene):
         background_rect = BackgroundRectangle(vect_array)
         vect_array.get_entries().set_color(YELLOW)
         self.play(ShowCreation(background_rect), Write(vect_array))
-        self.add_foreground_mobject(background_rect, vect_array)
+        self.add(background_rect, vect_array)
 
         #Show scaled vectors
         x, y = vect_array.get_entries().split()
@@ -244,11 +244,11 @@ class RotationThenShear(LinearTransformationScene):
             words.add_background_rectangle()
 
         self.play(Write(rot_words, run_time = 1))
-        self.add_foreground_mobject(rot_words)            
+        self.add(rot_words)            
         self.apply_transposed_matrix([[0, 1], [-1, 0]])
 
         self.play(Write(shear_words, run_time = 1))
-        self.add_foreground_mobject(shear_words)
+        self.add(shear_words)
         self.apply_transposed_matrix([[1, 0], [1, 1]])
         self.wait()
 
@@ -460,23 +460,23 @@ class MoreComplicatedExampleVisually(LinearTransformationScene):
         m1_mob, m2_mob, comp_matrix = self.get_matrices()
 
         self.play(Write(m1_mob))
-        self.add_foreground_mobject(m1_mob)
+        self.add(m1_mob)
         self.wait()
         self.apply_transposed_matrix(t_matrix1)
         self.wait()
         self.play(Write(m1_mob.label))
-        self.add_foreground_mobject(m1_mob.label)
+        self.add(m1_mob.label)
         self.wait()
         self.apply_transposed_matrix(t_m1_inv, run_time = 0)
         self.wait()
 
         self.play(Write(m2_mob))
-        self.add_foreground_mobject(m2_mob)
+        self.add(m2_mob)
         self.wait()
         self.apply_transposed_matrix(t_matrix2)
         self.wait()
         self.play(Write(m2_mob.label))
-        self.add_foreground_mobject(m2_mob.label)
+        self.add(m2_mob.label)
         self.wait()
         self.apply_transposed_matrix(t_m2_inv, run_time = 0)
         self.wait()
@@ -484,7 +484,7 @@ class MoreComplicatedExampleVisually(LinearTransformationScene):
         for matrix in t_matrix1, t_matrix2:
             self.apply_transposed_matrix(matrix, run_time = 1)
         self.play(Write(comp_matrix))
-        self.add_foreground_mobject(comp_matrix)
+        self.add(comp_matrix)
         self.wait()
         self.play(*list(map(FadeOut, [
             self.background_plane,
@@ -492,7 +492,7 @@ class MoreComplicatedExampleVisually(LinearTransformationScene):
             self.i_hat,
             self.j_hat,
         ])) + [
-            Animation(m) for m in self.foreground_mobjects
+            Animation(m) for m in self.mobjects
         ])
         self.remove(self.i_hat, self.j_hat)
         self.wait()
@@ -777,7 +777,7 @@ class ShowShear(LinearTransformationScene):
         title.scale(1.5).to_edge(UP)
         title.set_color(self.title_color)
         title.add_background_rectangle()
-        self.add_foreground_mobject(title)
+        self.add(title)
 
         self.wait()
         self.apply_transposed_matrix(self.t_matrix)
@@ -973,7 +973,7 @@ class ThreeSuccessiveTransformations(LinearTransformationScene):
                 c = mob
 
         symbols.add_background_rectangle()
-        self.add_foreground_mobject(symbols)
+        self.add(symbols)
 
         brace = Brace(c, DOWN)
         words = TextMobject("Apply this transformation")
@@ -982,7 +982,7 @@ class ThreeSuccessiveTransformations(LinearTransformationScene):
         brace.add(words)
 
         self.play(Write(brace, run_time = 1))
-        self.add_foreground_mobject(brace)
+        self.add(brace)
 
         last = VectorizedPoint()
         for t_matrix, sym in zip(self.t_matrices, [c, b, a]):

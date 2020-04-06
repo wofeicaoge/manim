@@ -89,8 +89,8 @@ class Thumbnail(GraphScene):
             ShowCreation(graph),
         )
         # Animacion del punto a
-        self.add_foreground_mobject(graph_dot_p1)
-        self.add_foreground_mobject(graph_dot_p2)
+        self.add(graph_dot_p1)
+        self.add(graph_dot_p2)
         self.play(
             DrawBorderThenFill(input_triangle_p1),
             Write(x_label_p1),

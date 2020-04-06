@@ -76,7 +76,7 @@ class VisualCovariance(Scene):
                 np.random.normal(0, 1, n_points)
             )
         ])
-        self.add_foreground_mobject(cloud)
+        self.add(cloud)
 
         x_axis = Vector(8*RIGHT, color = WHITE).move_to(2.5*DOWN)
         y_axis = Vector(5*UP, color = WHITE).move_to(4*LEFT)

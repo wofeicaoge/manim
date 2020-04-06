@@ -252,7 +252,7 @@ class ShowInfinitelyFarLightSource(ShowShadows):
 
     def move_light_around(self):
         light = self.light
-        self.add_foreground_mobjects(self.shadow_area_label)
+        self.add(self.shadow_area_label)
         self.play(
             light.move_to, 5 * OUT + DOWN,
             run_time=3

@@ -468,7 +468,7 @@ class ComputationalNetwork(MovingCameraScene):
         for group in top_lines, bottom_lines:
             group.set_stroke(YELLOW, 6)
 
-        self.add_foreground_mobjects(cr_derivatives)
+        self.add(cr_derivatives)
         rect = dx1.rect.copy()
         rect.save_state()
         rect.scale(3)

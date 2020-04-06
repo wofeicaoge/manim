@@ -250,7 +250,7 @@ class SliderScene(Scene):
             cross = np.cross(self.get_vector(), self.ambient_velocity)
             if cross < 0:
                 self.ambient_velocity *= -1
-        self.add_foreground_mobjects(self.sliders)
+        self.add(self.sliders)
 
     def wind_down_ambient_movement(self, time = 1, wait = True):
         self.ambient_change_end_time = self.ambient_change_time + time
@@ -347,7 +347,7 @@ class MathIsATease(Scene):
             randy.change, "tease",
             randy.look, OUT,
         )
-        self.add_foreground_mobjects(fan)
+        self.add(fan)
         eye_bottom_y = randy.eyes.get_bottom()[1]
         self.play(
             ApplyMethod(
@@ -1089,7 +1089,7 @@ class TwoDimensionalCase(Introduce4DSliders):
         equation.to_corner(UP + RIGHT)
 
         self.add(plane, circle, dot, equation)
-        self.add_foreground_mobjects(dot)
+        self.add(dot)
 
         self.plane = plane
         self.circle = circle
@@ -1152,7 +1152,7 @@ class TwoDimensionalCase(Introduce4DSliders):
         def create_update_func(i):
             return lambda alpha : sliders[i].get_real_estate()
 
-        self.add_foreground_mobjects(decimals)
+        self.add(decimals)
         self.decimals = decimals
         self.decimal_update_anims = [
             ChangingDecimal(decimal, create_update_func(i))
@@ -1250,7 +1250,7 @@ class TwoDimensionalCase(Introduce4DSliders):
         self.play(FadeOut(rect))
 
     def add_tick_marks(self):
-        self.remove_foreground_mobjects(self.sliders)
+        self.remove_mobjects(self.sliders)
         self.add(self.sliders)
         old_ticks = VGroup()
         all_ticks = VGroup()
@@ -1266,7 +1266,7 @@ class TwoDimensionalCase(Introduce4DSliders):
             ShowCreation(all_ticks, run_time = 3),
             Animation(VGroup(*[slider.dial for slider in self.sliders])),
         )
-        self.add_foreground_mobjects(self.sliders)
+        self.add(self.sliders)
         self.wait()
         for x in np.arange(0.95, 0.05, -0.05):
             self.reset_dials(
@@ -1362,7 +1362,7 @@ class ThreeDCase(TwoDimensionalCase):
         sliders = self.sliders
         def create_update_func(i):
             return lambda alpha : sliders[i].get_real_estate()
-        self.add_foreground_mobjects(decimals)
+        self.add(decimals)
         self.decimals = decimals
         self.decimal_update_anims = [
             ChangingDecimal(decimal, create_update_func(i))
@@ -1575,7 +1575,7 @@ class TwoDBoxExample(Scene):
                 Write(coords, run_time = 1)
             )
 
-        self.add_foreground_mobjects(coords_group)
+        self.add(coords_group)
         self.corner_dots = corner_dots
         self.coords_group = coords_group
 
@@ -2110,7 +2110,7 @@ class TwoDBoxWithSliders(TwoDimensionalCase):
         ])
         ghost_dials.set_fill(WHITE, opacity = 0.75)
 
-        self.add_foreground_mobjects(ghost_dials)
+        self.add(ghost_dials)
         self.reset_dials(target_vector)
         self.wait()
 
@@ -2179,7 +2179,7 @@ class TwoDBoxWithSliders(TwoDimensionalCase):
             x_arrow, y_arrow, 
             crosses, new_words, 
         ])))
-        self.remove_foreground_mobjects(ghost_dials)
+        self.remove_mobjects(ghost_dials)
         self.reset_dials(target_vector)
         self.center_point = np.zeros(2)
         for x, slider in zip(self.center_point, self.sliders):
@@ -3311,7 +3311,7 @@ class CoordinateFree(PiCreatureScene):
             color = GREEN
         ).move_to(plane.coords_to_point(0, 0))
 
-        self.add_foreground_mobjects(circles, inner_circle)
+        self.add(circles, inner_circle)
 
         self.play(PiCreatureSays(
             self.pi_creature, "Lose the \\\\ coordinates!",

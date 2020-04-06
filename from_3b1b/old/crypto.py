@@ -1831,7 +1831,7 @@ class RenameToLedgerDollars(LedgerScene):
         self.bubble = bubble
 
         self.add(randy, bubble)
-        self.add_foreground_mobject(bubble)
+        self.add(bubble)
 
     def jump_in_to_middle(self):
         h_line = self.ledger.content[0]
@@ -4177,7 +4177,7 @@ class AliceRacesOtherMiners(DoubleSpendingAttack):
 
         miner_blocks = VGroup()
         self.proofs_of_work = VGroup()
-        self.add_foreground_mobject(self.proofs_of_work)
+        self.add(self.proofs_of_work)
         for miner in miners:
             block = self.get_block()
             block.set_width(1.5*miner.get_width())
@@ -4339,7 +4339,7 @@ class AliceRacesOtherMiners(DoubleSpendingAttack):
 
     def wait(self, time = 1):
         self.play(
-            Animation(VGroup(*self.foreground_mobjects)),
+            Animation(VGroup(*self.mobjects)),
             run_time = time
         )
 

@@ -919,10 +919,10 @@ class ChangeOfBasisPreview(LinearTransformationScene):
         pinky.to_corner(DOWN+RIGHT)
         self.plane.fade()
 
-        self.add_foreground_mobject(randy, pinky)
+        self.add(randy, pinky)
         coords = Matrix(self.vector)
         coords.add_to_back(BackgroundRectangle(coords))
-        self.add_foreground_mobject(coords)
+        self.add(coords)
         coords.move_to(
             randy.get_corner(UP+RIGHT),
             aligned_edge = DOWN+LEFT

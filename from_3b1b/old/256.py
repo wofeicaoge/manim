@@ -41,7 +41,7 @@ class BreakUp2To256(PiCreatureScene):
         one = TexMobject("1")[0]
         one.replace(bits[0], dim_to_match = 1)
         self.add(bits)
-        self.add_foreground_mobject(VGroup(*bits[-15:]))
+        self.add(VGroup(*bits[-15:]))
         self.number = 0
         self.bits = bits
         self.one = one

@@ -804,7 +804,7 @@ class Define2dCrossProduct(LinearTransformationScene):
         self.add_vector(i_hat, animate = False)
         self.add_vector(j_hat, animate = False)
         self.play(*list(map(FadeOut, [side_brace, transform_words])))
-        self.add_foreground_mobject(matrix)
+        self.add(matrix)
         self.apply_transposed_matrix([self.v_coords, self.w_coords])
         self.wait()
         self.play(
@@ -1087,7 +1087,7 @@ class TwoDCrossProductExample(Define2dCrossProduct):
         self.wait()
         self.play(Write(equals_result))
 
-        self.add_foreground_mobject(equation_start, equation_end)
+        self.add(equation_start, equation_end)
         self.show_transformation(v, w)
         det_sym = TexMobject(str(int(abs(det))))
         det_sym.scale(1.5)

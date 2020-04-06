@@ -329,10 +329,10 @@ class ManyCoordinateSystems(LinearTransformationScene):
         self.title = TextMobject("Many possible coordinate systems")
         self.title.add_background_rectangle()
         self.title.to_edge(UP)
-        self.add_foreground_mobject(self.title)
+        self.add(self.title)
         self.v = Vector(self.v_coords)
         self.play(ShowCreation(self.v))
-        self.add_foreground_mobject(self.v)
+        self.add(self.v)
 
         t_matrices = [
             [[0.5, 0.5], [-0.5, 0.5]],
@@ -346,14 +346,14 @@ class ManyCoordinateSystems(LinearTransformationScene):
             self.animate_coordinates()
             self.play(*it.chain(
                 list(map(FadeOut, movers)),
-                list(map(Animation, self.foreground_mobjects))
+                list(map(Animation, self.mobjects))
             ))
             for mover in movers:
                 mover.restore()
             self.apply_transposed_matrix(t_matrix, run_time = 0)
             self.play(*it.chain(
                 list(map(FadeIn, movers)),
-                list(map(Animation, self.foreground_mobjects))
+                list(map(Animation, self.mobjects))
             ))
         self.animate_coordinates()
 
@@ -440,7 +440,7 @@ class DeterminantAndEigenvectorDontCare(LinearTransformationScene):
 
         eigenvectors = VGroup(*self.get_eigenvectors())
 
-        self.add_foreground_mobject(words)
+        self.add(words)
         self.wait()
         self.play(
             FadeIn(blob),
@@ -1120,7 +1120,7 @@ class FormalDefinitionOfLinear(LinearTransformationScene):
         for words in properties:
             self.play(Write(words))
         self.wait()
-        self.add_foreground_mobject(title, h_line, *properties)
+        self.add(title, h_line, *properties)
         self.additivity, self.scaling = properties
 
     def show_additive_property(self):
@@ -1196,16 +1196,16 @@ class FormalDefinitionOfLinear(LinearTransformationScene):
         self.wait()
         self.play(*it.chain(
             list(map(FadeOut, to_fade)),
-            list(map(Animation, self.foreground_mobjects))
+            list(map(Animation, self.mobjects))
         ))
         self.plane.restore()
-        self.play(FadeIn(self.plane), *list(map(Animation, self.foreground_mobjects)))
+        self.play(FadeIn(self.plane), *list(map(Animation, self.mobjects)))
         self.transformable_mobjects = []
         self.moving_vectors = []        
         self.transformable_labels = []
         self.moving_mobjects = []
         self.add_transformable_mobject(self.plane)
-        self.add(*self.foreground_mobjects)
+        self.add(*self.mobjects)
 
     def show_scaling_property(self):
         v = self.add_vector([1, -1])

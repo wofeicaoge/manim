@@ -662,7 +662,7 @@ class TrackBasisVectorsExample(LinearTransformationScene):
             lag_ratio = 0
         ))
         self.remove(pre_def)
-        self.add_foreground_mobject(v_def)
+        self.add(v_def)
         self.wait()
         self.show_linear_combination()
         self.remove(coords)
@@ -1085,7 +1085,7 @@ class ColumnsToBasisVectors(LinearTransformationScene):
         col2.set_color(Y_COLOR)
         matrix_brackets = matrix_mob.get_brackets()
         matrix_background = BackgroundRectangle(matrix_mob)
-        self.add_foreground_mobject(matrix_background, matrix_mob)
+        self.add(matrix_background, matrix_mob)
 
         if vector_coords is not None:
             vector = Matrix(vector_coords)
@@ -1093,7 +1093,7 @@ class ColumnsToBasisVectors(LinearTransformationScene):
             vector.set_height(matrix_mob.get_height())
             vector.next_to(matrix_mob, RIGHT)
             vector_background = BackgroundRectangle(vector)
-            self.add_foreground_mobject(vector_background, vector)
+            self.add(vector_background, vector)
 
         new_i = Vector(matrix[:,0])
         new_j = Vector(matrix[:,1])
@@ -1139,13 +1139,13 @@ class ColumnsToBasisVectors(LinearTransformationScene):
             added_anims = [Transform(i_coords_start, i_coords_end)],
             path_arc = np.pi/2,
         )
-        self.add_foreground_mobject(i_coords_start)
+        self.add(i_coords_start)
         self.apply_transposed_matrix(
             transform_matrix2.transpose(),
             added_anims = [Transform(j_coords_start, j_coords_end) ],
             path_arc = np.pi/2,
         )
-        self.add_foreground_mobject(j_coords_start)
+        self.add(j_coords_start)
         self.wait()
 
         self.matrix = VGroup(matrix_background, matrix_mob)
@@ -1195,13 +1195,13 @@ class Describe90DegreeRotation(LinearTransformationScene):
         col2 = VMobject(*matrix.get_mob_matrix()[:,1])
         col1.set_color(X_COLOR)
         col2.set_color(Y_COLOR)
-        self.add_foreground_mobject(matrix_background, matrix.get_brackets())
+        self.add(matrix_background, matrix.get_brackets())
 
         self.wait()
         self.apply_transposed_matrix(self.transposed_matrix)
         self.wait()
         self.play(Write(title))
-        self.add_foreground_mobject(title)
+        self.add(title)
 
         for vect, color, col in [(self.i_hat, X_COLOR, col1), (self.j_hat, Y_COLOR, col2)]:
             label = vector_coordinate_label(vect)
@@ -1218,7 +1218,7 @@ class Describe90DegreeRotation(LinearTransformationScene):
                 FadeOut(brackets),
             )
             self.remove(label)
-            self.add_foreground_mobject(coords)
+            self.add(coords)
             self.wait()
         self.show_vector(matrix)
 
@@ -1265,7 +1265,7 @@ class LinearlyDependentColumns(ColumnsToBasisVectors):
         title.add(subtitle)
         title.shift(UP).to_edge(LEFT)
         title.set_color(YELLOW)
-        self.add_foreground_mobject(title)
+        self.add(title)
         self.move_matrix_columns([[2, 1], [-2, -1]])
 
 class NextVideo(Scene):

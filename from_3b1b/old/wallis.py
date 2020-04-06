@@ -1972,7 +1972,7 @@ class PlugObserverIntoPolynomial(DistanceProductScene):
 
         self.add(self.circle, lights)
         if self.add_lights_in_foreground:
-            self.add_foreground_mobject(lights)
+            self.add(lights)
 
     def label_roots(self):
         origin = self.origin
@@ -2073,7 +2073,7 @@ class PlugObserverIntoPolynomial(DistanceProductScene):
             ReplacementTransform(observer, dot),
             FadeIn(equals_decimal)
         )
-        self.add_foreground_mobject(dot)
+        self.add(dot)
 
         # Substitute
         self.wait()
@@ -2227,7 +2227,7 @@ class PlugObserverIntoPolynomial(DistanceProductScene):
             ReplacementTransform(arc, O_to_N_arc),
             path_arc=O_to_N_arc.angle - arc.angle,
         )
-        self.add_foreground_mobject(O_to_N_dot)
+        self.add(O_to_N_dot)
         self.play(
             FadeIn(O_to_N_label),
             GrowArrow(O_to_N_arrow),
@@ -2319,7 +2319,7 @@ class PlugObserverIntoPolynomial(DistanceProductScene):
 
         chord_group = VGroup(chord, numeric_chord_label[1])
         chord_group.set_color(YELLOW)
-        self.add_foreground_mobjects(*chord_group)
+        self.add(*chord_group)
         self.play(
             FadeIn(chord),
             FadeIn(numeric_chord_label),
@@ -2576,7 +2576,7 @@ class DistanceProductIsChordF(PlugObserverIntoPolynomial):
                           submobject_to_align=O_part)
             dot.arrow = arrow
             dot.label = label
-            self.add_foreground_mobject(dot)
+            self.add(dot)
             self.add(arrow, label)
             # For the transition to f = 1 / 2
             dot.generate_target()
@@ -2670,7 +2670,7 @@ class DistanceProductIsChordF(PlugObserverIntoPolynomial):
             Write(times),
         )
         self.wait(2)
-        self.add_foreground_mobjects(
+        self.add(
             chord_f[1], chord, O_dot, O_to_N_dot
         )
         self.play(
@@ -2705,7 +2705,7 @@ class DistanceProductIsChordF(PlugObserverIntoPolynomial):
         self.wait()
         for term in equals_two_terms:
             term.add_background_rectangle()
-            self.add_foreground_mobject(term[1])
+            self.add(term[1])
         self.play(
             Write(equals_two_terms)
         )
@@ -2742,7 +2742,7 @@ class ProveLemma2(PlugObserverIntoPolynomial):
         O_label.next_to(arrow, UR, SMALL_BUFF)
 
         # First, move the lighthouse
-        self.add_foreground_mobject(dot)
+        self.add(dot)
         self.play(
             dot.move_to, light_to_remove,
             MaintainPositionRelativeTo(arrow, dot),
@@ -2786,7 +2786,7 @@ class ProveLemma2(PlugObserverIntoPolynomial):
             VGroup(product_decimal)
         ))
         self.wait()
-        self.add_foreground_mobject(zero_rects)
+        self.add(zero_rects)
         self.play(*list(map(ShowCreation, zero_rects)))
         self.wait(2)
         self.play(
@@ -2801,7 +2801,7 @@ class ProveLemma2(PlugObserverIntoPolynomial):
             rate_func=running_start,
             remover=True,
         )
-        self.remove_foreground_mobjects(zero_rects)
+        self.remove_mobjects(zero_rects)
         self.play(
             FadeOut(product_decimal),
             FadeIn(q_marks)
@@ -2839,7 +2839,7 @@ class ProveLemma2(PlugObserverIntoPolynomial):
             circle.fade(1)
 
         self.play(ShowCreation(lhs_rect))
-        self.add_foreground_mobject(roots_of_unity_circle)
+        self.add(roots_of_unity_circle)
         self.play(LaggedStartMap(
             ApplyMethod, roots_of_unity_circle,
             lambda m: (m.restore,)
@@ -3125,14 +3125,14 @@ class KeeperAndSailor(DistanceProductScene, PiCreatureScene):
 
         self.add(circle)
         if self.add_lights_in_foreground:
-            self.add_foreground_mobject(lights)
-        self.add_foreground_mobject(words)
+            self.add(lights)
+        self.add(words)
         self.play(
             LaggedStartMap(FadeIn, VGroup(*it.chain(lights))),
             LaggedStartMap(FadeIn, lighthouses),
             LaggedStartMap(GrowArrow, arrows),
         )
-        self.remove_foreground_mobjects(words)
+        self.remove_mobjects(words)
         self.play(FadeOut(words), FadeOut(arrows))
         self.wait()
 
@@ -3160,7 +3160,7 @@ class KeeperAndSailor(DistanceProductScene, PiCreatureScene):
             )
         self.wait()
         if self.add_lights_in_foreground:
-            self.add_foreground_mobjects(keeper, keeper.dot, keeper.title)
+            self.add(keeper, keeper.dot, keeper.title)
         for pi in observers:
             self.play(
                 pi.set_height, 0.5,
@@ -3492,9 +3492,9 @@ class KeeperAndSailor(DistanceProductScene, PiCreatureScene):
 
         self.play(*anims, run_time=2)
         if self.add_lights_in_foreground:
-            self.remove_foreground_mobjects(*self.lights)
-            self.remove_foreground_mobjects(*self.lighthouse_labels)
-            self.add_foreground_mobjects(new_lights, new_labels)
+            self.remove_mobjects(*self.lights)
+            self.remove_mobjects(*self.lighthouse_labels)
+            self.add(new_lights, new_labels)
         self.wait()
         self.lights = new_lights
         self.lighthouse_labels = new_labels

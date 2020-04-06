@@ -106,7 +106,7 @@ class UtilitiesPuzzleScene(Scene):
             stroke_width = 0
         )
         objects.add(bounding_box)
-        self.add_foreground_mobjects(objects)
+        self.add(objects)
         self.set_variables_as_attrs(
             houses, utilities, objects, bounding_box
         )
@@ -370,7 +370,7 @@ class ThisPuzzleIsHard(UtilitiesPuzzleScene, PiCreatureScene):
         )
         self.play(LaggedStartMap(FadeIn, puzzle_words))
 
-        self.add_foreground_mobjects(self.objects)
+        self.add(self.objects)
         self.set_variables_as_attrs(puzzle_words)
 
     def failed_attempts(self):
@@ -549,7 +549,7 @@ class IntroduceGraph(PiCreatureScene):
             run_time = 2,
             lag_ratio = 0.5
         ))
-        self.add_foreground_mobjects(dots)
+        self.add(dots)
         self.play(
             FadeIn(vertex_arrows),
             FadeIn(vertices_word),
@@ -718,7 +718,7 @@ class IntroduceRegions(UtilitiesPuzzleScene):
             ShowCreation, lines,
             run_time = 3,
         ))
-        self.add_foreground_mobjects(lines, objects)
+        self.add(lines, objects)
         self.wait()
         for region in front_regions:
             self.play(FadeIn(region))
@@ -759,9 +759,9 @@ class IntroduceRegions(UtilitiesPuzzleScene):
         self.play(paint_bucket.next_to, houses[1], RIGHT)
         click(regions[3])
         self.play(paint_bucket.move_to, 4*LEFT + 2*UP)
-        self.add_foreground_mobjects(front_regions, lines, objects)
+        self.add(front_regions, lines, objects)
         click(back_region)
-        self.remove_foreground_mobjects(front_regions)
+        self.remove_mobjects(front_regions)
         self.wait()
         self.play(
             FadeOut(back_region),
@@ -866,7 +866,7 @@ class AskAboutRegions(IntroduceRegions):
         front_regions.target.to_edge(UP)
 
         self.add(front_regions)
-        self.add_foreground_mobjects(lines, objects)
+        self.add(lines, objects)
         self.wait()
         self.play(MoveToTarget(front_regions))
         self.play(LaggedStartMap(
@@ -920,7 +920,7 @@ class AskAboutRegions(IntroduceRegions):
         fade_rect = FullScreenFadeRectangle(opacity = 0.8)
         line_group = line_groups[0].copy()
         region = front_regions[0].copy()
-        self.foreground_mobjects = []
+        self.mobjects = []
         def show_lines(line_group):
             lg_copy = line_group.copy()
             lg_copy.set_stroke(WHITE, 6)
@@ -1134,8 +1134,8 @@ class LightUpNodes(IntroduceRegions):
             ShowCreation(lines[3], run_time = 2),
             *self.get_count_change_animations(0, 1, 0)
         )
-        self.add_foreground_mobjects(line_groups[0])
-        self.add_foreground_mobjects(objects)
+        self.add(line_groups[0])
+        self.add(objects)
         self.play(
             FadeIn(region),
             *self.get_count_change_animations(0, 0, 1)
@@ -1160,8 +1160,8 @@ class LightUpNodes(IntroduceRegions):
             ShowCreation(lines[7]),
             *self.get_count_change_animations(0, 1, 1)
         )
-        self.add_foreground_mobjects(line_groups[2])
-        self.add_foreground_mobjects(objects)
+        self.add(line_groups[2])
+        self.add(objects)
         self.play(FadeIn(region))
         self.wait()
 
@@ -1546,7 +1546,7 @@ class FiveRegionsFourEdgesEachGraph(Scene):
         )
         self.wait()
 
-        self.add_foreground_mobjects(words)
+        self.add(words)
         self.set_variables_as_attrs(words, squares)
 
     def transition_to_graph(self):
@@ -1663,7 +1663,7 @@ class FiveRegionsFourEdgesEachGraph(Scene):
                 count = new_count
             last_region = VGroup(region, region.edges)
         self.wait()
-        self.add_foreground_mobjects(count)
+        self.add(count)
         self.play(
             FadeOut(last_region),
             Animation(ghost_edges),
@@ -1675,7 +1675,7 @@ class FiveRegionsFourEdgesEachGraph(Scene):
     def each_edges_has_two_regions(self):
         regions = list(self.regions[:-1]) + [self.back_region]
         back_region = self.back_region
-        self.add_foreground_mobjects(self.ghost_edges, self.all_vertices)
+        self.add(self.ghost_edges, self.all_vertices)
 
         edge_region_pair_groups = []
         for r1, r2 in it.combinations(regions, 2):
@@ -1693,12 +1693,12 @@ class FiveRegionsFourEdgesEachGraph(Scene):
                 #Flip again, maybe you're still unlucky, maybe not
                 edge, r1, r2 = random.choice(edge_region_pair_groups)
             self.play(ShowCreation(edge))
-            self.add_foreground_mobjects(edge)
+            self.add(edge)
             self.play(FadeIn(r1), run_time = 0.5)
             self.play(FadeIn(r2), Animation(r1), run_time = 0.5)
             self.wait(0.5)
             self.play(*list(map(FadeOut, [r2, r1, edge])), run_time = 0.5)
-            self.remove_foreground_mobjects(edge)
+            self.remove_mobjects(edge)
 
     def ten_total_edges(self):
         double_count = self.count
@@ -1788,7 +1788,7 @@ class EulersFormulaForGeneralPlanarGraph(LightUpNodes, ThreeDScene):
             (edges[7][6], regions[3]),
         ]
 
-        self.add_foreground_mobjects(vertices[0])
+        self.add(vertices[0])
         self.wait()
         for edge, obj in pairs:
             anims = [ShowCreation(edge)]
@@ -1797,12 +1797,12 @@ class EulersFormulaForGeneralPlanarGraph(LightUpNodes, ThreeDScene):
                 obj.move_to(edge.get_start())
                 anims.append(ApplyMethod(obj.restore))
                 anims += self.get_count_change_animations(1, 1, 0)
-                self.add_foreground_mobjects(obj)
+                self.add(obj)
             else:
                 anims = [FadeIn(obj)] + anims
                 anims += self.get_count_change_animations(0, 1, 1)
             self.play(*anims)
-            self.add_foreground_mobjects(edge)
+            self.add(edge)
         self.wait()
 
         self.set_variables_as_attrs(edges, vertices, regions)

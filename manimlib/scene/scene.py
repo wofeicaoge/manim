@@ -39,8 +39,6 @@ class Scene(Container):
         )
 
         self.mobjects = []
-        # TODO, remove need for foreground mobjects
-        self.foreground_mobjects = []
         self.num_plays = 0
         self.time = 0
         self.original_skipping_status = self.skip_animations
@@ -127,10 +125,7 @@ class Scene(Container):
         if self.skip_animations and not ignore_skipping:
             return
         if mobjects is None:
-            mobjects = list_update(
-                self.mobjects,
-                self.foreground_mobjects,
-            )
+            mobjects = self.mobjects
         if background is not None:
             self.set_camera_pixel_array(background)
         else:
@@ -187,7 +182,6 @@ class Scene(Container):
         Mobjects will be displayed, from background to
         foreground in the order with which they are added.
         """
-        mobjects = [*mobjects, *self.foreground_mobjects]
         self.restructure_mobjects(to_remove=mobjects)
         self.mobjects += mobjects
         return self
@@ -205,8 +199,7 @@ class Scene(Container):
         return self
 
     def remove(self, *mobjects):
-        for list_name in "mobjects", "foreground_mobjects":
-            self.restructure_mobjects(mobjects, list_name, False)
+        self.restructure_mobjects(mobjects, "mobjects", False)
         return self
 
     def restructure_mobjects(self, to_remove,
@@ -240,25 +233,6 @@ class Scene(Container):
         add_safe_mobjects_from_list(mobjects, set(to_remove))
         return new_mobjects
 
-    # TODO, remove this, and calls to this
-    def add_foreground_mobjects(self, *mobjects):
-        self.foreground_mobjects = list_update(
-            self.foreground_mobjects,
-            mobjects
-        )
-        self.add(*mobjects)
-        return self
-
-    def add_foreground_mobject(self, mobject):
-        return self.add_foreground_mobjects(mobject)
-
-    def remove_foreground_mobjects(self, *to_remove):
-        self.restructure_mobjects(to_remove, "foreground_mobjects")
-        return self
-
-    def remove_foreground_mobject(self, mobject):
-        return self.remove_foreground_mobjects(mobject)
-
     def bring_to_front(self, *mobjects):
         self.add(*mobjects)
         return self
@@ -270,7 +244,6 @@ class Scene(Container):
 
     def clear(self):
         self.mobjects = []
-        self.foreground_mobjects = []
         return self
 
     def get_mobjects(self):
@@ -289,8 +262,7 @@ class Scene(Container):
         for i, mob in enumerate(mobjects):
             update_possibilities = [
                 mob in animation_mobjects,
-                len(mob.get_family_updaters()) > 0,
-                mob in self.foreground_mobjects
+                len(mob.get_family_updaters()) > 0
             ]
             if any(update_possibilities):
                 return mobjects[i:]

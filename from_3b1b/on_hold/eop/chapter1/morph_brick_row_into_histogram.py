@@ -144,7 +144,7 @@ class MorphBrickRowIntoHistogram3(GenericMorphBrickRowIntoHistogram):
             FadeIn(nb_tails_label)
         )
 
-        self.add_foreground_mobject(nb_tails_label)
+        self.add(nb_tails_label)
         area_color = YELLOW
 
         total_area_text = TextMobject("total area =", color = area_color)

@@ -1501,7 +1501,7 @@ class AreaIsDerivative(PlotVelocity, ReconfigurableScene):
         self.add(*self.get_v_graph_and_label())
         self.x_axis_label_mob.shift(MED_LARGE_BUFF*DOWN)
         self.v_graph_label.shift(MED_LARGE_BUFF*DOWN)
-        self.foreground_mobjects = []
+        self.mobjects = []
 
     def construct(self):
         self.introduce_variable_area()
@@ -1547,7 +1547,7 @@ class AreaIsDerivative(PlotVelocity, ReconfigurableScene):
 
         self.play(Write(integral))
         self.play(ShowCreation(int_arrow))
-        self.foreground_mobjects.append(int_arrow)
+        self.mobjects.append(int_arrow)
         self.wait()
         self.change_area_bounds(
             new_t_max = 8,
@@ -1616,7 +1616,7 @@ class AreaIsDerivative(PlotVelocity, ReconfigurableScene):
         self.change_area_bounds(new_t_max = new_T)
         self.play(
             FadeIn(dark_area),
-            *list(map(Animation, self.foreground_mobjects))
+            *list(map(Animation, self.mobjects))
         )
         self.play(
             FadeOut(self.T_label_group),
@@ -1750,7 +1750,7 @@ class AreaIsDerivative(PlotVelocity, ReconfigurableScene):
 
         self.play(
             UpdateFromAlphaFunc(group, update_group),
-            *list(map(Animation, self.foreground_mobjects)),
+            *list(map(Animation, self.mobjects)),
             **kwargs
         )
 

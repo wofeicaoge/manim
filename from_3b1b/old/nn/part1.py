@@ -1699,7 +1699,7 @@ class BreakUpMacroPatterns(IntroduceEachLayer):
             ShowCreation(rect),
             Write(words)
         )
-        self.add_foreground_mobject(self.patterns)
+        self.add(self.patterns)
         self.feed_forward(np.random.random(784))
         self.wait(2)
 
@@ -4215,7 +4215,7 @@ class NextVideo(MoreHonestMNistNetworkPreview, PiCreatureScene):
             FadeIn(rect),
             FadeIn(video),
         )
-        self.add_foreground_mobjects(rect, video)
+        self.add(rect, video)
         self.wait(2)
         self.play(Write(words))
         self.wait(2)
