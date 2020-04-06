@@ -1,5 +1,6 @@
 import os
 from manimlib.utils.file_ops import seek_full_path_from_defaults
+from manimlib.constants import ASSETS_DIR
 
 
 def play_chord(*nums):
