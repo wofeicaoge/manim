@@ -4339,7 +4339,7 @@ class AliceRacesOtherMiners(DoubleSpendingAttack):
 
     def wait(self, time = 1):
         self.play(
-            Animation(VGroup(*self.mobjects)),
+            Animation(VGroup(*self.submobjects)),
             run_time = time
         )
 

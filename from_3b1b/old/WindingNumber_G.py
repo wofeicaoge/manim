@@ -428,7 +428,7 @@ class Introduce1DFunctionCase(Scene):
                 word = [leftovers0, leftovers1][index_to_fade].sign_word
                 if x < n_iterations_with_sign_mention:
                     added_anims = [word.next_to, leftovers_mid[0].get_end(), -edge]
-                elif word in self.camera.extract_mobject_family_members(self.mobjects):
+                elif word in self.camera.extract_mobject_family_members(self.submobjects):
                     added_anims = [FadeOut(word)]
 
             rect.generate_target()
@@ -444,7 +444,7 @@ class Introduce1DFunctionCase(Scene):
             )
             if zoom:
                 factor = 2.0/rect.get_width()
-                everything = VGroup(*self.mobjects)
+                everything = VGroup(*self.submobjects)
                 decimal_index = everything.submobjects.index(decimal)
                 midpoint_line_index = everything.submobjects.index(midpoint_line)
                 everything.generate_target()
@@ -1136,7 +1136,7 @@ class TwoDScreenInOurThreeDWorld(AltTeacherStudentsScene, ThreeDScene):
         laptop.shift(-laptop.screen_plate.get_center() + 0.1*IN)
         should_shade_in_3d(laptop)
 
-        everything = VGroup(laptop, *self.mobjects)
+        everything = VGroup(laptop, *self.submobjects)
         everything.generate_target()
         # for mob in everything.target.get_family():
         #     if isinstance(mob, PiCreature):

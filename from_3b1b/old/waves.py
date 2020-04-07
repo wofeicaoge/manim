@@ -421,7 +421,7 @@ class DirectionOfPolarizationScene(FilterScene):
                             )
 
     def update_rectangles(self):
-        if not hasattr(self, "rectangles") or self.rectangles not in self.mobjects:
+        if not hasattr(self, "rectangles") or self.rectangles not in self.submobjects:
             return
 
         r1, r2 = self.rectangles

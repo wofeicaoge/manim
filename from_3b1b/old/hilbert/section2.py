@@ -219,7 +219,7 @@ class HistoryOfDiscover(Scene):
         self.play(ShowCreation(squares))
         self.wait()
         self.play(ApplyMethod(
-            Mobject(*self.mobjects).shift, 20*(DOWN+RIGHT)
+            Mobject(*self.submobjects).shift, 20*(DOWN+RIGHT)
         ))
 
 

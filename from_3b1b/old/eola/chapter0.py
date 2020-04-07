@@ -125,7 +125,7 @@ class AboutLinearAlgebra(Scene):
 
     def to_thought_bubble(self):
         linalg = self.linalg
-        all_else = list(self.mobjects)
+        all_else = list(self.submobjects)
         all_else.remove(linalg)
         randy = Randolph()
         randy.to_corner()

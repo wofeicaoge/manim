@@ -1218,7 +1218,7 @@ class QuickGeometryProof(Scene):
             ticks.copy().rotate(-angle).move_to(O_p2),
         )
 
-        everything = VGroup(*self.mobjects)
+        everything = VGroup(*self.submobjects)
 
         self.play(LaggedStartMap(
             GrowFromCenter, everything,

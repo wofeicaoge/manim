@@ -920,7 +920,7 @@ class AskAboutRegions(IntroduceRegions):
         fade_rect = FullScreenFadeRectangle(opacity = 0.8)
         line_group = line_groups[0].copy()
         region = front_regions[0].copy()
-        self.mobjects = []
+        self.submobjects = []
         def show_lines(line_group):
             lg_copy = line_group.copy()
             lg_copy.set_stroke(WHITE, 6)
@@ -1319,7 +1319,7 @@ class ConcludeFiveRegions(LightUpNodes):
                 remover = True,
             ),
             Indicate(self.f_count),
-            *list(map(Animation, self.mobjects))
+            *list(map(Animation, self.submobjects))
         )
         self.wait()
 
@@ -1368,7 +1368,7 @@ class ConcludeFiveRegions(LightUpNodes):
         f_rect = SurroundingRectangle(
             VGroup(self.count_titles[-1], self.f_count)
         )
-        on_screen_side_lines = VGroup(*[m for m in self.side_lines if m in self.mobjects])
+        on_screen_side_lines = VGroup(*[m for m in self.side_lines if m in self.submobjects])
         side_lines_rect = SurroundingRectangle(on_screen_side_lines)
         side_lines_rect.set_color(WHITE)
 

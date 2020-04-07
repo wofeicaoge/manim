@@ -2767,7 +2767,7 @@ class InscribedAngleScene(ThreeDScene):
         ANGLE_COLOR2 = GREEN_D
 
         
-        for mob in self.mobjects:
+        for mob in self.submobjects:
             mob.fade(1.0)
 
         for hyp in self.hypotenuses:

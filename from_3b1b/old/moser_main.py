@@ -216,14 +216,14 @@ class HardProblemsSimplerQuestions(Scene):
             Transform(deepcopy(fermat["n"]), f_copy)
             for f_copy in copies
         ])
-        self.remove(*self.mobjects)
+        self.remove(*self.submobjects)
         self.add(fermat["n"])
         self.play(*[
             CounterclockwiseTransform(mobs[0], mobs[1])
             for f_copy, sym in zip(copies, ["3", "2"])            
             for mobs in zip(f_copy.split(), fermat[sym].split())
         ])
-        self.remove(*self.mobjects)
+        self.remove(*self.submobjects)
         self.add(fermat["n"], fermat2, fermat3)
         self.wait()
 
@@ -257,8 +257,8 @@ class HardProblemsSimplerQuestions(Scene):
             ShowCreation(dots)
         )
         self.wait()
-        all_mobjects = Mobject(*self.mobjects)
-        self.remove(*self.mobjects)
+        all_mobjects = Mobject(*self.submobjects)
+        self.remove(*self.submobjects)
         self.play(
             Transform(
                 all_mobjects,
@@ -266,7 +266,7 @@ class HardProblemsSimplerQuestions(Scene):
             ),
             Transform(
                 Point((-FRAME_X_RADIUS, 0, 0)), 
-                Mobject(*CircleScene(RADIANS).mobjects)
+                Mobject(*CircleScene(RADIANS).submobjects)
             )
         )
 
@@ -302,7 +302,7 @@ class CountLines(CircleScene):
         self.remove(text)
         self.count(new_lines)
         anims = [FadeIn(formula)]
-        for mob in self.mobjects:
+        for mob in self.submobjects:
             if mob == self.number:
                 anims.append(Transform(mob, answer))
             else:
@@ -334,7 +334,7 @@ class CountIntersectionPoints(CircleScene):
         self.count(intersection_dots, mode="show", num_offset = ORIGIN)
         self.wait()
         anims = []
-        for mob in self.mobjects:
+        for mob in self.submobjects:
             if mob == self.number: #put in during count
                 anims.append(Transform(mob, answer))
             else:
@@ -378,7 +378,7 @@ class NonGeneralPosition(CircleScene):
         self.reset_background()
         self.play(*[
             Transform(mob1, mob2, run_time = DEFAULT_ANIMATION_RUN_TIME)
-            for mob1, mob2 in zip(self.mobjects, new_self.mobjects)
+            for mob1, mob2 in zip(self.submobjects, new_self.submobjects)
         ])
 
 class GeneralPositionRule(Scene):
@@ -409,7 +409,7 @@ class GeneralPositionRule(Scene):
         first_time = True
         for radians, words, pairs in tuples:
             cs = CircleScene(radians)
-            self.add(*cs.mobjects)
+            self.add(*cs.submobjects)
             words_mob = TextMobject(words).scale(2).shift((5, 3, 0))
             if not first_time:
                 self.add(words_mob)
@@ -434,7 +434,7 @@ class GeneralPositionRule(Scene):
                     ))
                     first_time = False
                 self.wait()
-            self.remove(*self.mobjects)
+            self.remove(*self.submobjects)
 
 
 class LineCorrespondsWithPair(CircleScene):
@@ -585,7 +585,7 @@ class IntersectionPointCorrespondances(CircleScene):
         line_highlights = []
         dot_highlights = []
         dot_pointers = []
-        for mob in self.mobjects:
+        for mob in self.submobjects:
             if mob in lines_to_save:
                 line_highlights.append(Highlight(mob))
             elif mob in dots_to_save:
@@ -632,7 +632,7 @@ class LinesIntersectOutside(CircleScene):
         ]
         self.play(*[
             FadeOut(mob, rate_func = not_quite_there)
-            for mob in self.mobjects if mob not in lines_to_save
+            for mob in self.submobjects if mob not in lines_to_save
         ])
         self.play(*[
             Transform(
@@ -683,7 +683,7 @@ class GraphsAndEulersFormulaJoke(Scene):
             deepcopy(graph), eulers
         ))
         self.wait()
-        self.remove(*self.mobjects)
+        self.remove(*self.submobjects)
         self.add(eulers)
         self.play(CounterclockwiseTransform(
             Mobject(axes, graph),
@@ -723,7 +723,7 @@ class DefiningGraph(GraphScene):
         # new_graph_scene = GraphScene(new_graph)
         # self.play(*[
         #     Transform(m[0], m[1])
-        #     for m in zip(self.mobjects, new_graph_scene.mobjects)
+        #     for m in zip(self.submobjects, new_graph_scene.submobjects)
         # ], run_time = 7.0)
 
 class IntersectCubeGraphEdges(GraphScene):
@@ -853,12 +853,12 @@ class CannotDirectlyApplyEulerToMoser(CircleScene):
             """
         )
         cannot_intersect.center()
-        for mob in self.mobjects:
+        for mob in self.submobjects:
             mob.fade(0.3)
         self.add(cannot_intersect)
         self.wait()
         self.remove(cannot_intersect)
-        for mob in self.mobjects:
+        for mob in self.submobjects:
             mob.fade(1/0.3)
         self.generate_intersection_dots()
         self.play(FadeIn(intersection_count), *[
@@ -956,7 +956,7 @@ class HowIntersectionChopsLine(CircleScene):
         self.add(*lines)
         self.play(*[
             FadeOut(mob)
-            for mob in self.mobjects
+            for mob in self.submobjects
             if mob not in lines
         ])
         new_lines = [
@@ -999,7 +999,7 @@ class ApplyEulerToMoser(CircleScene):
         self.generate_regions()
         for dot in self.dots + self.intersection_dots:
             dot.scale_in_place(radius / RADIUS)
-        self.remove(*self.mobjects)
+        self.remove(*self.submobjects)
 
         V      = {}
         minus  = {}
@@ -1095,7 +1095,7 @@ class ApplyEulerToMoser(CircleScene):
             for line in self.lines + self.circle_pieces
         ])
         self.wait()
-        all_mobs = [mob for mob in self.mobjects]
+        all_mobs = [mob for mob in self.submobjects]
         self.remove(*all_mobs)
         self.add(*[d[1] for d in [V, minus, E, plus, F, equals, two]])
         V[1].set_color("white")
@@ -1111,7 +1111,7 @@ class ApplyEulerToMoser(CircleScene):
             ]
         )
         self.wait()
-        self.remove(*self.mobjects)
+        self.remove(*self.submobjects)
         self.play(
             Transform(E[3], Mobject(
                 nc2[4], plus1[4], two1[4], nc41[4], plus2[4], n1[4]
@@ -1132,7 +1132,7 @@ class ApplyEulerToMoser(CircleScene):
             run_time = 2.0
         )
         self.wait()
-        self.remove(*self.mobjects)
+        self.remove(*self.submobjects)
         self.play(
             Transform(
                 Mobject(plus2[4], n1[4], minus[4], n[4]),
@@ -1145,7 +1145,7 @@ class ApplyEulerToMoser(CircleScene):
             ]
         )
         self.wait()
-        self.remove(*self.mobjects)
+        self.remove(*self.submobjects)
         self.play(
             Transform(nc41[5], nc4[6]),
             Transform(two1[5],  Point(nc4[6].get_center())),
@@ -1155,7 +1155,7 @@ class ApplyEulerToMoser(CircleScene):
             ]
         )
         self.wait()
-        self.remove(*self.mobjects)
+        self.remove(*self.submobjects)
         self.play(
             CounterclockwiseTransform(two[6], two[7]),
             CounterclockwiseTransform(plus[6], plus[7]),
@@ -1216,7 +1216,7 @@ class FormulaRelatesToPowersOfTwo(Scene):
             for i, result in zip(pof2_range, results)
         ]
         self.wait()
-        self.remove(*self.mobjects)
+        self.remove(*self.submobjects)
         self.add(*forms + sums + results)
         self.play(*[
             CounterclockwiseTransform(result, pof2)
@@ -1226,7 +1226,7 @@ class FormulaRelatesToPowersOfTwo(Scene):
 class DrawPascalsTriangle(PascalsTriangleScene):
     def __init__(self, *args, **kwargs):
         PascalsTriangleScene.__init__(self, *args, **kwargs)
-        self.remove(*self.mobjects)
+        self.remove(*self.submobjects)
         self.add(self.coords_to_mobs[0][0])
         for n in range(1, nrows):
             starts  = [deepcopy(self.coords_to_mobs[n-1][0])]
@@ -1268,7 +1268,7 @@ class PascalsTriangleWithNChooseK(PascalsTriangleScene):
         mob_dicts = (self.coords_to_mobs, self.coords_to_n_choose_k)
         for i in [0, 1]:
             self.wait()
-            self.remove(*self.mobjects)
+            self.remove(*self.submobjects)
             self.play(*[
                 CounterclockwiseTransform(
                     deepcopy(mob_dicts[i][n][k]), 
@@ -1276,7 +1276,7 @@ class PascalsTriangleWithNChooseK(PascalsTriangleScene):
                 )
                 for n, k in self.coords
             ])
-            self.remove(*self.mobjects)
+            self.remove(*self.submobjects)
             self.add(*[mob_dicts[1-i][n][k] for n, k in self.coords])
 
 class PascalsTriangleNChooseKExample(PascalsTriangleScene):
@@ -1635,7 +1635,7 @@ class ExplainNChoose4Formula(Scene):
                     for mob in nums
                 ])
             curr_num = quad[i]
-        self.remove(*self.mobjects)
+        self.remove(*self.submobjects)
         num_perms_explain = TextMobject(
             r"There are $(4 \cdot 3 \cdot 2 \cdot 1)$ total permutations"
         ).shift((0, -2, 0))
@@ -1687,7 +1687,7 @@ class IntersectionChoppingExamples(Scene):
             ])
             self.count(lines, run_time = 3.0, num_offset = ORIGIN)
             self.wait()
-            self.remove(*self.mobjects)
+            self.remove(*self.submobjects)
 
 
 

@@ -167,7 +167,7 @@ class VectorScene(Scene):
         return y_coord
 
     def coords_to_vector(self, vector, coords_start=2 * RIGHT + 2 * UP, clean_up=True):
-        starting_mobjects = list(self.mobjects)
+        starting_mobjects = list(self.submobjects)
         array = Matrix(vector)
         array.shift(coords_start)
         arrow = Vector(vector)
@@ -200,7 +200,7 @@ class VectorScene(Scene):
             self.add(*starting_mobjects)
 
     def vector_to_coords(self, vector, integer_labels=True, clean_up=True):
-        starting_mobjects = list(self.mobjects)
+        starting_mobjects = list(self.submobjects)
         show_creation = False
         if isinstance(vector, Arrow):
             arrow = vector
@@ -313,7 +313,7 @@ class LinearTransformationScene(VectorScene):
             return
         self.has_already_setup = True
         self.background_mobjects = []
-        self.mobjects = []
+        self.submobjects = []
         self.transformable_mobjects = []
         self.moving_vectors = []
         self.transformable_labels = []
@@ -351,7 +351,7 @@ class LinearTransformationScene(VectorScene):
 
     # TODO, this conflicts with Scene.add_fore
     def add(self, *mobjects):
-        self.add_special_mobjects(self.mobjects, *mobjects)
+        self.add_special_mobjects(self.submobjects, *mobjects)
 
     def add_transformable_mobject(self, *mobjects):
         self.add_special_mobjects(self.transformable_mobjects, *mobjects)
@@ -507,6 +507,6 @@ class LinearTransformationScene(VectorScene):
             self.get_moving_mobject_movement(function),
         ] + [
             Animation(f_mob)
-            for f_mob in self.mobjects
+            for f_mob in self.submobjects
         ] + added_anims
         self.play(*anims, **kwargs)

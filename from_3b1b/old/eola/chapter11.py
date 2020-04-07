@@ -346,14 +346,14 @@ class ManyCoordinateSystems(LinearTransformationScene):
             self.animate_coordinates()
             self.play(*it.chain(
                 list(map(FadeOut, movers)),
-                list(map(Animation, self.mobjects))
+                list(map(Animation, self.submobjects))
             ))
             for mover in movers:
                 mover.restore()
             self.apply_transposed_matrix(t_matrix, run_time = 0)
             self.play(*it.chain(
                 list(map(FadeIn, movers)),
-                list(map(Animation, self.mobjects))
+                list(map(Animation, self.submobjects))
             ))
         self.animate_coordinates()
 
@@ -1196,16 +1196,16 @@ class FormalDefinitionOfLinear(LinearTransformationScene):
         self.wait()
         self.play(*it.chain(
             list(map(FadeOut, to_fade)),
-            list(map(Animation, self.mobjects))
+            list(map(Animation, self.submobjects))
         ))
         self.plane.restore()
-        self.play(FadeIn(self.plane), *list(map(Animation, self.mobjects)))
+        self.play(FadeIn(self.plane), *list(map(Animation, self.submobjects)))
         self.transformable_mobjects = []
         self.moving_vectors = []        
         self.transformable_labels = []
         self.moving_mobjects = []
         self.add_transformable_mobject(self.plane)
-        self.add(*self.mobjects)
+        self.add(*self.submobjects)
 
     def show_scaling_property(self):
         v = self.add_vector([1, -1])

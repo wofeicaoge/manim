@@ -134,7 +134,7 @@ class AddParallelLines(DrawAllThreeSquares):
             line2.shift(vert_shift)
             self.add(line1, line2)
         if trim:
-            for mob in self.mobjects:
+            for mob in self.submobjects:
                 mob.filter_out(lambda p : p[0] > 4)
                 mob.filter_out(lambda p : p[0] < -3)
                 mob.filter_out(lambda p : p[1] > 3)
@@ -279,7 +279,7 @@ class AddTriangleCopyToABSquares(DrawOnlyABSquares):
         self.set_color_triangles()
 
     def set_color_triangles(self):
-        for mob in self.mobjects:
+        for mob in self.submobjects:
             if isinstance(mob, Triangle):
                 vertices = list(mob.get_vertices())
                 for x in range(2):
@@ -391,7 +391,7 @@ class ZoomInOnTroublePoint(Scene):
         self.add_mobjects_among(list(locals().values()))
         self.add_elbow()        
         if rotate:
-            for mob in self.mobjects:
+            for mob in self.submobjects:
                 mob.rotate(np.pi/2)
         if with_labels:
             alpha = TexMobject("\\alpha").scale(TEX_MOB_SCALE_FACTOR)
@@ -441,7 +441,7 @@ class LabelLargeSquare(DrawCSquareWithAllTraingles):
     args_list = []
     def construct(self):
         DrawCSquareWithAllTraingles.construct(self)
-        everything = Mobject(*self.mobjects)
+        everything = Mobject(*self.submobjects)
         u_brace = Underbrace(2*(DOWN+LEFT), 2*(DOWN+RIGHT))
         u_brace.shift(0.2*DOWN)
         side_brace = deepcopy(u_brace).rotate(np.pi/2)

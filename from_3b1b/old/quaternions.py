@@ -6379,7 +6379,7 @@ class ThumbnailP1(RuleOfQuaternionMultiplication):
         self.add(proj_sphere)
         # self.add(unit_sphere)
 
-        for mobject in self.mobjects:
+        for mobject in self.submobjects:
             try:
                 mobject.shift(IN)
             except ValueError:

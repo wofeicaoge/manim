@@ -492,7 +492,7 @@ class MoreComplicatedExampleVisually(LinearTransformationScene):
             self.i_hat,
             self.j_hat,
         ])) + [
-            Animation(m) for m in self.mobjects
+            Animation(m) for m in self.submobjects
         ])
         self.remove(self.i_hat, self.j_hat)
         self.wait()

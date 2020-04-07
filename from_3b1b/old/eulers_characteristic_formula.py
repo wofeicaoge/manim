@@ -186,7 +186,7 @@ class PlanarGraphDefinition(Scene):
         shift_val = Mobject(Not, planar).to_corner().get_center()
         Not.set_color("red").shift(shift_val)
         graphs = [
-            Mobject(*GraphScene(g).mobjects)
+            Mobject(*GraphScene(g).submobjects)
             for g in [
                 CubeGraph(), 
                 CompleteGraph(5),
@@ -303,7 +303,7 @@ class ThreePiecesOfTerminology(GraphScene):
 
         self.add(accent(dual_graphs, "red"))
         self.generate_dual_graph()
-        for mob in self.mobjects:
+        for mob in self.submobjects:
             mob.fade
         self.play(*[
             ShowCreation(mob, run_time = 1.0)

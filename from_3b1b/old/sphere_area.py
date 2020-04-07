@@ -886,7 +886,7 @@ class ShowProjection(SphereCylinderScene):
         )
         for x in range(3):
             anims = []
-            if lines[1] in self.mobjects:
+            if lines[1] in self.submobjects:
                 anims.append(FadeOut(lines[1]))
             self.play(
                 TransformFromCopy(lines[0], lines[1]),
@@ -1529,7 +1529,7 @@ class JustifyHeightSquish(MovingCameraScene):
         leg_word.next_to(leg, RIGHT, buff=0.02)
 
         stroke_width_changers = VGroup()
-        for mob in self.mobjects:
+        for mob in self.submobjects:
             if mob in [self.d_label, frame]:
                 continue
             mob.generate_target()
@@ -1771,7 +1771,7 @@ class JustifyHeightSquish(MovingCameraScene):
         # Zoom in
         self.remove(self.tangent_elbow)
         stroke_width_changers = VGroup(*[
-            mob for mob in self.mobjects
+            mob for mob in self.submobjects
             if mob not in [
                 beta_arc, beta_label, frame, equation,
             ]

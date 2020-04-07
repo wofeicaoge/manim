@@ -486,7 +486,7 @@ class FourierTradeoff(Scene):
                 fourier_graph_update,
                 run_time = 3
             )
-            if sub_words not in self.mobjects and self.show_text:
+            if sub_words not in self.submobjects and self.show_text:
                 self.play(FadeIn(sub_words))
             else:
                 self.wait()

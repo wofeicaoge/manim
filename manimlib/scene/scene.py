@@ -38,7 +38,7 @@ class Scene(Container):
             self, **self.file_writer_config,
         )
 
-        self.mobjects = []
+        self.submobjects = []
         self.num_plays = 0
         self.time = 0
         self.original_skipping_status = self.skip_animations
@@ -125,7 +125,7 @@ class Scene(Container):
         if self.skip_animations and not ignore_skipping:
             return
         if mobjects is None:
-            mobjects = self.mobjects
+            mobjects = self.submobjects
         if background is not None:
             self.set_camera_pixel_array(background)
         else:
@@ -141,7 +141,7 @@ class Scene(Container):
     ###
 
     def update_mobjects(self, dt):
-        for mobject in self.mobjects:
+        for mobject in self.submobjects:
             mobject.update(dt)
 
     def should_update_mobjects(self):
@@ -175,7 +175,7 @@ class Scene(Container):
         return list(filter(is_top_level, mobjects))
 
     def get_mobject_family_members(self):
-        return self.camera.extract_mobject_family_members(self.mobjects)
+        return self.camera.extract_mobject_family_members(self.submobjects)
 
     def add(self, *mobjects):
         """
@@ -183,7 +183,7 @@ class Scene(Container):
         foreground in the order with which they are added.
         """
         self.restructure_mobjects(to_remove=mobjects)
-        self.mobjects += mobjects
+        self.submobjects += mobjects
         return self
 
     def add_mobjects_among(self, values):
@@ -199,11 +199,11 @@ class Scene(Container):
         return self
 
     def remove(self, *mobjects):
-        self.restructure_mobjects(mobjects, "mobjects", False)
+        self.restructure_mobjects(mobjects, "submobjects", False)
         return self
 
     def restructure_mobjects(self, to_remove,
-                             mobject_list_name="mobjects",
+                             mobject_list_name="submobjects",
                              extract_families=True):
         """
         In cases where the scene contains a group, e.g. Group(m1, m2, m3), but one
@@ -239,18 +239,18 @@ class Scene(Container):
 
     def bring_to_back(self, *mobjects):
         self.remove(*mobjects)
-        self.mobjects = list(mobjects) + self.mobjects
+        self.submobjects = list(mobjects) + self.submobjects
         return self
 
     def clear(self):
-        self.mobjects = []
+        self.submobjects = []
         return self
 
     def get_mobjects(self):
-        return list(self.mobjects)
+        return list(self.submobjects)
 
     def get_mobject_copies(self):
-        return [m.copy() for m in self.mobjects]
+        return [m.copy() for m in self.submobjects]
 
     def get_moving_mobjects(self, *animations):
         # Go through mobjects from start to end, and
@@ -531,7 +531,7 @@ class Scene(Container):
         eq = TextMobject(latex)
         anims = []
         anims.append(Write(eq))
-        for mobject in self.mobjects:
+        for mobject in self.submobjects:
             anims.append(ApplyMethod(mobject.shift, 2 * UP))
         self.play(*anims)
 

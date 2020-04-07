@@ -2021,7 +2021,7 @@ class AreaUnderParabola(GraphScene):
 
         self.rects = rects
         self.dx = dx_list[-1]
-        self.mobjects = mobjects
+        self.submobjects = mobjects
 
     def ask_about_area(self):
         rects = self.rects
@@ -2046,7 +2046,7 @@ class AreaUnderParabola(GraphScene):
         self.play(ShowCreation(v_lines, run_time = 2))
         self.wait()
 
-        self.mobjects += [question, arrow]
+        self.submobjects += [question, arrow]
         self.question = question
         self.question_arrow = arrow
         self.v_lines = v_lines
@@ -2086,7 +2086,7 @@ class AreaUnderParabola(GraphScene):
 
         self.play(FadeOut(self.x_axis.numbers))
         self.x_axis.remove(*self.x_axis.numbers)
-        self.mobjects.remove(self.axes)
+        self.submobjects.remove(self.axes)
         self.play(DrawBorderThenFill(self.right_point_slider))
         self.move_right_point_to(2)
         self.wait()
@@ -2144,7 +2144,7 @@ class AreaUnderParabola(GraphScene):
                 group, update_group,
                 **kwargs
             ),
-            *list(map(Animation, self.mobjects))
+            *list(map(Animation, self.submobjects))
         )
 
 class WhoCaresAboutArea(TeacherStudentsScene):
@@ -2219,11 +2219,11 @@ class PlayingTowardsDADX(AreaUnderParabola, ReconfigurableScene):
         curr_x = self.x_axis.point_to_number(original_v_line.get_bottom())
 
         self.add(original_v_line)
-        self.mobjects.append(original_v_line)
+        self.submobjects.append(original_v_line)
         self.move_right_point_to(curr_x + self.deriv_dx)
         self.play(
             FadeIn(shadow_rects), 
-            *list(map(Animation, self.mobjects))
+            *list(map(Animation, self.submobjects))
         )
 
         self.shadow_rects = shadow_rects

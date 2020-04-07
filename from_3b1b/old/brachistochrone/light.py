@@ -133,7 +133,7 @@ class TransitionToOptics(PhotonThroughLens):
     def play(self, *args, **kwargs):
         if not self.has_started:
             self.has_started = True
-            everything = Mobject(*self.mobjects)
+            everything = Mobject(*self.submobjects)
             vect = FRAME_WIDTH*RIGHT
             everything.shift(vect)
             self.play(ApplyMethod(

@@ -1084,7 +1084,7 @@ class NudgeSideLengthOfCube(Scene):
         if restore:
             self.play(*[m.restore for m in movers])
             self.remove(*movers)
-            self.mobjects = mobjects
+            self.submobjects = mobjects
 
     def get_cube(self):
         cube = self.get_prism(self.x, self.x, self.x)

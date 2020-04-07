@@ -2025,14 +2025,14 @@ class CloserLookAtStraightLine(SimulateLinearGraph):
 
         self.initialize_updaters()
         self.run_clock(0.1)
-        for mob in self.mobjects:
+        for mob in self.submobjects:
             mob.suspend_updating()
         self.wait()
 
         self.add(slope_lines)
         self.add(self.clock, self.time_label, t_ineq)
         self.play(ShowCreation(slope_lines))
-        for mob in self.mobjects:
+        for mob in self.submobjects:
             mob.resume_updating()
 
         self.run_clock(self.wait_time)

@@ -2676,7 +2676,7 @@ class IllustrateGaussMagnetic(IllustrateGaussLaw):
         )
         self.play(LaggedStartMap(GrowArrow, vector_field))
         self.add(
-            vector_field, *self.mobjects
+            vector_field, *self.submobjects
         )
 
     def func(self, point):

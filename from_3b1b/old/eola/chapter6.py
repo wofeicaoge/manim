@@ -678,7 +678,7 @@ class ShowBijectivity(LinearTransformationScene):
             "lag_ratio" : 0.5,
             "run_time" : 2
         }
-        anims = list(map(Animation, self.mobjects))
+        anims = list(map(Animation, self.submobjects))
         self.play(ShowCreation(vectors, **kwargs), *anims)
         self.play(Transform(vectors, dots, **kwargs), *anims)
         self.wait()
@@ -1092,7 +1092,7 @@ class InvertNonInvertable(LinearTransformationScene):
         self.add(no_func)
         self.play(
             grid.restore,
-            *list(map(Animation, self.mobjects)),
+            *list(map(Animation, self.submobjects)),
             run_time = 3
         )
         self.wait()
@@ -1122,7 +1122,7 @@ class OneInputMultipleOutputs(InvertNonInvertable):
             *[
                 Transform(output_vector.copy(), input_vector)
                 for input_vector in input_vectors.split()
-            ] + list(map(Animation, self.mobjects)),
+            ] + list(map(Animation, self.submobjects)),
             run_time = 3
         )
         multiple_outputs = TextMobject(
@@ -1674,7 +1674,7 @@ class NameNullSpace(LinearTransformationScene):
         self.play(
             vectors.restore, 
             self.plane.restore, 
-            *list(map(Animation, self.mobjects)),
+            *list(map(Animation, self.submobjects)),
             run_time = 2
         )
         self.play(Transform(

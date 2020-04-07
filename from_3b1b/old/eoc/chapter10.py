@@ -2666,7 +2666,7 @@ class SecondTermIntuition(AreaIsDerivative):
     def setup(self):
         GraphScene.setup(self)
         ReconfigurableScene.setup(self)
-        self.mobjects = []
+        self.submobjects = []
 
     def construct(self):
         self.setup_axes()
@@ -2682,12 +2682,12 @@ class SecondTermIntuition(AreaIsDerivative):
         graph = self.v_graph = self.get_graph(
             self.func, color = WHITE,
         )
-        self.mobjects.append(graph)
+        self.submobjects.append(graph)
         area = self.area = self.get_area(0, self.t_max)
 
         func_name = TexMobject("f_{\\text{area}}(x)")
         func_name.move_to(self.coords_to_point(0.6, 1))
-        self.mobjects.append(func_name)
+        self.submobjects.append(func_name)
 
         self.add(graph, area, func_name)
         self.add_T_label(self.t_max)
@@ -2742,7 +2742,7 @@ class SecondTermIntuition(AreaIsDerivative):
         self.change_area_bounds(new_t_max = new_x)
         self.play(
             FadeIn(dark_area),
-            *list(map(Animation, self.mobjects))
+            *list(map(Animation, self.submobjects))
         )
         self.play(
             FadeOut(self.T_label_group),
@@ -3392,7 +3392,7 @@ class RadiusOfConvergenceForLnX(ExpGraphConvergence):
         ))
         self.wait()
         self.series = series
-        self.mobjects = [series]
+        self.submobjects = [series]
 
     def show_bounds(self):
         dot = Dot(fill_opacity = 0)
@@ -3423,7 +3423,7 @@ class RadiusOfConvergenceForLnX(ExpGraphConvergence):
         )
         self.play(Transform(center_v_line, outer_v_lines))
 
-        self.mobjects.append(dot)
+        self.submobjects.append(dot)
 
     def show_converging_point(self):
         approx_graphs = [
@@ -3454,7 +3454,7 @@ class RadiusOfConvergenceForLnX(ExpGraphConvergence):
 
         self.play(*it.chain(
             list(map(FadeIn, [approx_graph, brace])),
-            list(map(Animation, self.mobjects))
+            list(map(Animation, self.submobjects))
         ))
         self.wait()
         new_graphs = approx_graphs[1:self.initial_n_iterations]
@@ -3462,7 +3462,7 @@ class RadiusOfConvergenceForLnX(ExpGraphConvergence):
             self.play(
                 Transform(approx_graph, new_graph),
                 Transform(brace, new_brace),
-                *list(map(Animation, self.mobjects))
+                *list(map(Animation, self.submobjects))
             )
             self.wait()
         approx_graph.remove(approx_dot)
@@ -3470,7 +3470,7 @@ class RadiusOfConvergenceForLnX(ExpGraphConvergence):
             approx_dot.move_to, self.coords_to_point(self.divergent_example, 0),
             *it.chain(
                 list(map(FadeOut, [approx_graph, brace])),
-                list(map(Animation, self.mobjects))
+                list(map(Animation, self.submobjects))
             )
         )
         self.wait()
@@ -3493,7 +3493,7 @@ class RadiusOfConvergenceForLnX(ExpGraphConvergence):
             ),
             FadeIn(approx_graph[0]),
             FadeIn(brace),
-            *list(map(Animation, self.mobjects))
+            *list(map(Animation, self.submobjects))
         )
 
         new_graphs = self.approx_graphs[1:self.initial_n_iterations]
@@ -3501,7 +3501,7 @@ class RadiusOfConvergenceForLnX(ExpGraphConvergence):
             self.play(
                 Transform(approx_graph, new_graph),
                 Transform(brace, new_brace),
-                *list(map(Animation, self.mobjects))
+                *list(map(Animation, self.submobjects))
             )
             self.wait()
 
@@ -3528,7 +3528,7 @@ class RadiusOfConvergenceForLnX(ExpGraphConvergence):
         for new_graph in new_graphs:
             self.play(
                 Transform(self.approx_graph, new_graph),
-                *list(map(Animation, self.mobjects))
+                *list(map(Animation, self.submobjects))
             )
             self.wait()
 

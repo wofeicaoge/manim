@@ -1716,7 +1716,7 @@ class VisualizingSSquared(ComplexTransformationScene):
             It all happens
             in two dimensions!
         """)
-        self.mobjects = []
+        self.submobjects = []
 
         self.play(FadeIn(morty))
         self.play(

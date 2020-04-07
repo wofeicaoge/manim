@@ -360,7 +360,7 @@ class TransitionAwayFromSlide(PathSlidingScene):
 
         self.add(self.cycloid)
         self.slide(randy, self.cycloid)
-        everything = Mobject(*self.mobjects)
+        everything = Mobject(*self.submobjects)
         self.play(ApplyMethod(
             everything.shift, 4*FRAME_X_RADIUS*LEFT,
             run_time = 2,

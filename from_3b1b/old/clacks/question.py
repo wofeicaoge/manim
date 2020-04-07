@@ -1583,7 +1583,7 @@ class Thumbnail(BlocksAndWallExample, MovingCameraScene):
 
     def construct(self):
         self.camera_frame.shift(0.9 * UP)
-        # self.mobjects.insert(
+        # self.submobjects.insert(
         #     0,
         #     FullScreenFadeRectangle(
         #         color=DARK_GREY,

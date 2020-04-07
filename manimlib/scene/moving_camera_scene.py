@@ -26,5 +26,5 @@ class MovingCameraScene(Scene):
             if movement_indicator in all_moving_mobjects:
                 # When one of these is moving, the camera should
                 # consider all mobjects to be moving
-                return list_update(self.mobjects, moving_mobjects)
+                return list_update(self.submobjects, moving_mobjects)
         return moving_mobjects

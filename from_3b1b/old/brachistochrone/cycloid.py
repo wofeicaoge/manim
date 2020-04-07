@@ -272,7 +272,7 @@ class LeviSolution(CycloidScene):
             self.pc_line,
             self.right_angle_symbol
         ]
-        everything = set(self.mobjects).difference(exceptions)
+        everything = set(self.submobjects).difference(exceptions)
         everything_copy = Mobject(*everything).copy()
         light_everything = everything_copy.copy()
         dark_everything = everything_copy.copy()

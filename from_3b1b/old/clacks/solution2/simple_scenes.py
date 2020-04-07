@@ -797,11 +797,11 @@ class ClacksSolution2Thumbnail(Scene):
                 },
             }
         )
-        group = Group(*scene1.mobjects)
+        group = Group(*scene1.submobjects)
         group.scale(0.75, about_point=ORIGIN)
         group.shift(1.5 * DOWN + 3 * LEFT)
         scene1.remove(scene1.question)
-        self.add(*scene1.mobjects)
+        self.add(*scene1.submobjects)
 
         black_rect = FullScreenFadeRectangle(fill_opacity=1)
         black_rect.shift(3.5 * UP)

@@ -189,7 +189,7 @@ class Notation(Scene):
 
 
     def swipe_left(self):
-        everyone = VMobject(*self.mobjects)
+        everyone = VMobject(*self.submobjects)
         self.play(ApplyMethod(everyone.shift, 20*LEFT))
 
 

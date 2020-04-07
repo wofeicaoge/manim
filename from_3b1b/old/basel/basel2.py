@@ -1877,7 +1877,7 @@ class InverseSquareLaw(ThreeDScene):
         anims = [
             self.screen.shift, self.unit_distance*distance*RIGHT,
         ]
-        if self.morty in self.mobjects:
+        if self.morty in self.submobjects:
             anims.append(MaintainPositionRelativeTo(self.morty, self.screen))
         anims += added_anims
         self.play(*anims, run_time = 2)
@@ -2164,7 +2164,7 @@ class TwoLightSourcesScene(ManipulateLightsourceSetups):
         def update_indicator(indicator):
             intensity = 0
             for ls in lsA, lsB, lsC:
-                if ls in self.mobjects:
+                if ls in self.submobjects:
                     distance = get_norm(ls.get_source_point() - origin_point)
                     d_indensity = fdiv(
                         3./(distance**2),
@@ -3890,7 +3890,7 @@ class ThinkBackToHowAmazingThisIs(ThreeDScene):
 
     def show_giant_circle(self):
         self.number_line.insert_n_curves(10000)
-        everything = VGroup(*self.mobjects)
+        everything = VGroup(*self.submobjects)
         circle = everything.copy()
         circle.move_to(ORIGIN)
         circle.apply_function(

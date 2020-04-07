@@ -501,7 +501,7 @@ class HowIWantYouToThinkAboutVectors(Scene):
         x_label = axis_labels.split()[0]
         x_axis = x_axis.copy()
         x_label = x_label.copy()
-        everything = VMobject(*self.mobjects)
+        everything = VMobject(*self.submobjects)
         self.play(
             FadeOut(everything),
             Animation(x_axis), Animation(x_label)
@@ -583,7 +583,7 @@ class CoordinateSystemWalkthrough(VectorScene):
         self.add(tick_marks)
 
     def show_vector_coordinates(self):
-        starting_mobjects = list(self.mobjects)
+        starting_mobjects = list(self.submobjects)
 
         vector = Vector([-2, 3])
         x_line = Line(ORIGIN, -2*RIGHT)
@@ -921,7 +921,7 @@ class ShowScalarMultiplication(VectorScene):
 
     def scale_vector(self, v, factor, v_label, 
                      v_name = "v", factor_tex = None):
-        starting_mobjects = list(self.mobjects)
+        starting_mobjects = list(self.submobjects)
 
         if factor_tex is None:
             factor_tex = str(factor)
@@ -1067,10 +1067,10 @@ class FollowingVideos(UpcomingSeriesOfVidoes):
         self.add(both)
 
         UpcomingSeriesOfVidoes.construct(self)
-        last_video = self.mobjects[-1]
+        last_video = self.submobjects[-1]
         self.play(ApplyMethod(last_video.set_color, YELLOW))
         self.wait()
-        everything = VMobject(*self.mobjects)
+        everything = VMobject(*self.submobjects)
         everything.remove(last_video)
         big_last_video = last_video.copy()
         big_last_video.center()

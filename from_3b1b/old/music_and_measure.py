@@ -290,7 +290,7 @@ class MeasureTheoryToHarmony(IntervalScene):
         IntervalScene.construct(self)
         self.cover_fractions()
         self.wait()
-        all_mobs = Mobject(*self.mobjects)
+        all_mobs = Mobject(*self.submobjects)
         all_mobs.sort_points()
         self.clear()
         radius = self.interval.radius
@@ -950,7 +950,7 @@ class ShowAllFractions(IntervalScene):
         self.wait()
         self.play(*[
             CounterclockwiseTransform(mob, Point(mob.get_center()))
-            for mob in self.mobjects
+            for mob in self.submobjects
             if isinstance(mob, ImageMobject)
         ])
         self.wait()
@@ -1513,7 +1513,7 @@ class FinalEquivalence(IntervalScene):
                 intervals
             )
         )
-        everything = Mobject(*self.mobjects)
+        everything = Mobject(*self.submobjects)
         self.clear()
         self.play(Transform(
             everything,

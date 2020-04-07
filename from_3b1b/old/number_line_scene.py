@@ -33,7 +33,7 @@ class NumberLineScene(Scene):
             point = Point(self.number_line.number_to_point(num))
             point.shift(new_number_line.get_vertical_number_offset())
             transforms.append(Transform(point, mob))
-        for mob in self.mobjects:
+        for mob in self.submobjects:
             if mob == self.number_line:
                 new_mob = mob.copy()
                 new_mob.shift(-self.number_line.number_to_point(number))

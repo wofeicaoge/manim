@@ -317,9 +317,9 @@ class HyperdartScene(MovingCameraScene):
             shadow = circle.copy()
             shadow.set_opacity(shadow_opacity)
             to_fade.add_to_back(shadow)
-            if circle in self.mobjects:
-                index = self.mobjects.index(circle)
-                self.mobjects.insert(index, shadow)
+            if circle in self.submobjects:
+                index = self.submobjects.index(circle)
+                self.submobjects.insert(index, shadow)
             else:
                 self.add(shadow, self.circle_center_dot)
 
@@ -1519,7 +1519,7 @@ class OverlayToPointIn3d(Scene):
 
 class TwoDPlusTwoDEqualsFourD(HyperdartScene):
     def construct(self):
-        board = VGroup(*self.mobjects)
+        board = VGroup(*self.submobjects)
 
         unit_size = 1.5
         axes = Axes(

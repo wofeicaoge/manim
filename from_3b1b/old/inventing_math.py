@@ -382,7 +382,7 @@ class YouAsMathematician(Scene):
         self.play(*[ShowCreation(a) for a in two_arrows])
         self.play(BlinkPiCreature(you))
         self.remove(*dot_pair+two_arrows)
-        everything = Mobject(*self.mobjects)
+        everything = Mobject(*self.submobjects)
         self.clear()
         self.play(
             ApplyPointwiseFunction(

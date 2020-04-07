@@ -155,7 +155,7 @@ class ExampleTranformationScene(LinearTransformationScene):
 
     def remove_matrix(self):
         self.remove(self.matrix)
-        self.mobjects.remove(self.matrix)
+        self.submobjects.remove(self.matrix)
 
 class IntroduceExampleTransformation(ExampleTranformationScene):
     def construct(self):
@@ -387,7 +387,7 @@ class NameEigenvectorsAndEigenvalues(ExampleTranformationScene):
     }
     def construct(self):
         self.remove(self.matrix)
-        self.mobjects.remove(self.matrix)
+        self.submobjects.remove(self.matrix)
         x_vectors = VGroup(*[
             self.add_vector(u*x*RIGHT, animate = False)
             for x in range(int(FRAME_X_RADIUS)+1, 0, -1)
@@ -1423,7 +1423,7 @@ class RevisitExampleTransformation(ExampleTranformationScene):
             self.play(Transform(lamb, two))
         self.play(*it.chain(
             [mob.restore for mob in (self.plane, self.i_hat, self.j_hat)],
-            list(map(Animation, self.mobjects)),            
+            list(map(Animation, self.submobjects)),
         ))
 
         xy_array = Matrix(["x", "y"])
@@ -1452,7 +1452,7 @@ class RevisitExampleTransformation(ExampleTranformationScene):
                 lag_ratio = 0.5,
                 run_time = 2
             ),
-            *list(map(Animation, self.mobjects))
+            *list(map(Animation, self.submobjects))
         )
         self.wait()
         self.apply_transposed_matrix(
@@ -1462,7 +1462,7 @@ class RevisitExampleTransformation(ExampleTranformationScene):
         self.play(*it.chain(
             [mob.restore for mob in (self.plane, self.i_hat, self.j_hat, vectors)],
             list(map(FadeOut, [xy_array, equals, zero_array])),
-            list(map(Animation, self.mobjects))
+            list(map(Animation, self.submobjects))
         ))
 
     def show_unaltered_transform(self):
@@ -2225,7 +2225,7 @@ class ChangeToEigenBasis(ExampleTranformationScene):
         self.plane.axes.set_color(WHITE)
         self.play(
             FadeIn(self.plane),
-            *list(map(Animation, self.mobjects+self.moving_vectors))
+            *list(map(Animation, self.submobjects+self.moving_vectors))
         )
         self.add(self.plane.copy().set_color(GREY).set_stroke(width = 2))
         self.apply_transposed_matrix(self.t_matrix)

@@ -2322,7 +2322,7 @@ class ShowFunctionDiagram(TotalLengthOfEachJewelEquals, ReconfigurableScene):
         self.play(ShowCreation(arrow))
         self.play(Write(t1_plane), Animation(arrow))
         self.wait()
-        clean_state = VGroup(*self.mobjects).family_members_with_points()
+        clean_state = VGroup(*self.submobjects).family_members_with_points()
         self.clear()
         self.add(*clean_state)
         self.transition_to_alt_config(

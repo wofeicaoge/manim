@@ -773,7 +773,7 @@ class StartingCalc101(PiCreatureScene):
             dx=0.25
         )
         gs.add(graph, rects, gs.axes)
-        group = VGroup(*gs.mobjects)
+        group = VGroup(*gs.submobjects)
         self.adjust_size(group)
         group.next_to(self.title, DOWN, MED_LARGE_BUFF)
         group.rects = rects
