@@ -201,6 +201,30 @@ class TipableVMobject(VMobject):
         start, end = self.get_start_and_end()
         return get_norm(start - end)
 
+    def put_start_and_end_on(self, start, end):
+        curr_start, curr_end = self.get_start_and_end()
+        if np.all(curr_start == curr_end):
+            # TODO, any problems with resetting
+            # these attrs?
+            self.start = start
+            self.end = end
+            self.generate_points()
+        curr_vect = curr_end - curr_start
+        if np.all(curr_vect == 0):
+            raise Exception("Cannot position endpoints of closed loop")
+        target_vect = end - start
+        self.scale(
+            get_norm(target_vect) / get_norm(curr_vect),
+            about_point=curr_start,
+        )
+        self.rotate(
+            angle_of_vector(target_vect) -
+            angle_of_vector(curr_vect),
+            about_point=curr_start
+        )
+        self.shift(start - curr_start)
+        return self
+
 
 class Arc(TipableVMobject):
     CONFIG = {
@@ -483,30 +507,6 @@ class Line(TipableVMobject):
             else:
                 return mob.get_boundary_point(direction)
         return np.array(mob_or_point)
-
-    def put_start_and_end_on(self, start, end):
-        curr_start, curr_end = self.get_start_and_end()
-        if np.all(curr_start == curr_end):
-            # TODO, any problems with resetting
-            # these attrs?
-            self.start = start
-            self.end = end
-            self.generate_points()
-        curr_vect = curr_end - curr_start
-        if np.all(curr_vect == 0):
-            raise Exception("Cannot position endpoints of closed loop")
-        target_vect = end - start
-        self.scale(
-            get_norm(target_vect) / get_norm(curr_vect),
-            about_point=curr_start,
-        )
-        self.rotate(
-            angle_of_vector(target_vect) -
-            angle_of_vector(curr_vect),
-            about_point=curr_start
-        )
-        self.shift(start - curr_start)
-        return self
 
     def get_vector(self):
         return self.get_end() - self.get_start()
