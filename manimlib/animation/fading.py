@@ -61,17 +61,6 @@ class FadeInFrom(Transform):
         self.starting_mobject.fade(1)
 
 
-class FadeInFromDown(FadeInFrom):
-    """
-    Identical to FadeInFrom, just with a name that
-    communicates the default
-    """
-    CONFIG = {
-        "direction": DOWN,
-        "lag_ratio": DEFAULT_ANIMATION_LAG_RATIO,
-    }
-
-
 class FadeOutAndShift(FadeOut):
     CONFIG = {
         "direction": DOWN,
@@ -86,16 +75,6 @@ class FadeOutAndShift(FadeOut):
         target = super().create_target()
         target.shift(self.direction)
         return target
-
-
-class FadeOutAndShiftDown(FadeOutAndShift):
-    """
-    Identical to FadeOutAndShift, just with a name that
-    communicates the default
-    """
-    CONFIG = {
-        "direction": DOWN,
-    }
 
 
 class FadeInFromPoint(FadeIn):

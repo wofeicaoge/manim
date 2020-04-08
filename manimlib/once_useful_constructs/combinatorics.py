@@ -1,3 +1,4 @@
+from manimlib.animation.creation import ShowCreation
 from manimlib.constants import *
 from manimlib.mobject.numbers import Integer
 from manimlib.mobject.svg.tex_mobject import TexMobject
