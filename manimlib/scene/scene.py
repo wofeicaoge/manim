@@ -38,7 +38,6 @@ class Scene(Container):
             self, **self.file_writer_config,
         )
 
-        self.submobjects = []
         self.num_plays = 0
         self.time = 0
         self.original_skipping_status = self.skip_animations

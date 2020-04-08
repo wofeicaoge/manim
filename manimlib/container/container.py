@@ -1,4 +1,5 @@
 from manimlib.utils.config_ops import digest_config
+from manimlib.utils.iterables import list_update
 
 # Currently, this is only used by both Scene and Mobject.
 # Still, we abstract its functionality here, albeit purely nominally.
@@ -10,11 +11,21 @@ from manimlib.utils.config_ops import digest_config
 class Container(object):
     def __init__(self, **kwargs):
         digest_config(self, kwargs)
+        self.submobjects = [] # Is it really better to name it submobjects?
 
-    def add(self, *items):
-        raise Exception(
-            "Container.add is not implemented; it is up to derived classes to implement")
+    def add(self, *mobjects):
+        if self in mobjects:
+            raise Exception("Mobject cannot contain self")
+        self.submobjects = list_update(self.submobjects, mobjects)
+        return self
 
-    def remove(self, *items):
-        raise Exception(
-            "Container.remove is not implemented; it is up to derived classes to implement")
+    def add_to_back(self, *mobjects):
+        self.remove(*mobjects)
+        self.submobjects = list(mobjects) + self.submobjects
+        return self
+
+    def remove(self, *mobjects, ):
+        for mobject in mobjects:
+            if mobject in self.submobjects:
+                self.submobjects.remove(mobject)
+        return self

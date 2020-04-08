@@ -38,7 +38,6 @@ class Mobject(Container):
 
     def __init__(self, **kwargs):
         Container.__init__(self, **kwargs)
-        self.submobjects = []
         self.color = Color(self.color)
         if self.name is None:
             self.name = self.__class__.__name__
@@ -61,23 +60,6 @@ class Mobject(Container):
     def generate_points(self):
         # Typically implemented in subclass, unless purposefully left blank
         pass
-
-    def add(self, *mobjects):
-        if self in mobjects:
-            raise Exception("Mobject cannot contain self")
-        self.submobjects = list_update(self.submobjects, mobjects)
-        return self
-
-    def add_to_back(self, *mobjects):
-        self.remove(*mobjects)
-        self.submobjects = list(mobjects) + self.submobjects
-        return self
-
-    def remove(self, *mobjects):
-        for mobject in mobjects:
-            if mobject in self.submobjects:
-                self.submobjects.remove(mobject)
-        return self
 
     def get_array_attrs(self):
         return ["points"]
