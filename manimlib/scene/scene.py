@@ -174,7 +174,7 @@ class Scene(Container):
         return list(filter(is_top_level, mobjects))
 
     def get_mobject_family_members(self):
-        return self.camera.extract_mobject_family_members(self.submobjects)
+        return Mobject.extract_mobject_family_members(self.submobjects)
 
     def add(self, *mobjects):
         """
@@ -211,7 +211,7 @@ class Scene(Container):
         insert m2 and m3 to where the group once was.
         """
         if extract_families:
-            to_remove = self.camera.extract_mobject_family_members(to_remove)
+            to_remove = Mobject.extract_mobject_family_members(to_remove)
         _list = getattr(self, mobject_list_name)
         new_list = self.get_restructured_mobject_list(_list, to_remove)
         setattr(self, mobject_list_name, new_list)

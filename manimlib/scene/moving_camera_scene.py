@@ -18,7 +18,7 @@ class MovingCameraScene(Scene):
 
     def get_moving_mobjects(self, *animations):
         moving_mobjects = Scene.get_moving_mobjects(self, *animations)
-        all_moving_mobjects = self.camera.extract_mobject_family_members(
+        all_moving_mobjects = Mobject.extract_mobject_family_members(
             moving_mobjects
         )
         movement_indicators = self.camera.get_mobjects_indicating_movement()

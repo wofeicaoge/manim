@@ -5050,7 +5050,7 @@ class ShowManyExchanges(Scene):
                     exchange.animation = Exchange(exchange)
                 exchange.animation.update(sub_t/3.0)
             self.update_frame(
-                self.extract_mobject_family_members(exchanges)
+                Mobject.extract_mobject_family_members(exchanges)
             )
             self.add_frames(self.get_frame())
 

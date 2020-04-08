@@ -198,29 +198,16 @@ class Camera(object):
 
     ####
 
-    # TODO, it's weird that this is part of camera.
-    # Clearly it should live elsewhere.
-    def extract_mobject_family_members(
-            self, mobjects,
-            only_those_with_points=False):
-        if only_those_with_points:
-            method = Mobject.family_members_with_points
-        else:
-            method = Mobject.get_family
-        return remove_list_redundancies(list(
-            it.chain(*[method(m) for m in mobjects])
-        ))
-
     def get_mobjects_to_display(
             self, mobjects,
             include_submobjects=True,
             excluded_mobjects=None):
         if include_submobjects:
-            mobjects = self.extract_mobject_family_members(
+            mobjects = Mobject.extract_mobject_family_members(
                 mobjects, only_those_with_points=True,
             )
             if excluded_mobjects:
-                all_excluded = self.extract_mobject_family_members(
+                all_excluded = Mobject.extract_mobject_family_members(
                     excluded_mobjects
                 )
                 mobjects = list_difference_update(mobjects, all_excluded)

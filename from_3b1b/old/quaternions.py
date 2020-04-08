@@ -4146,7 +4146,7 @@ class ReferernceSpheresFelixView(ShowRotationsJustWithReferenceCircles):
     def capture_mobjects_in_camera(self, mobjects, **kwargs):
         mobs_on_xy = [
             sm
-            for sm in self.camera.extract_mobject_family_members(
+            for sm in Mobject.extract_mobject_family_members(
                 mobjects, only_those_with_points=True
             )
             if abs(sm.get_center()[2]) < 0.001

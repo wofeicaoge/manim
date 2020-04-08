@@ -428,7 +428,7 @@ class Introduce1DFunctionCase(Scene):
                 word = [leftovers0, leftovers1][index_to_fade].sign_word
                 if x < n_iterations_with_sign_mention:
                     added_anims = [word.next_to, leftovers_mid[0].get_end(), -edge]
-                elif word in self.camera.extract_mobject_family_members(self.submobjects):
+                elif word in Mobject.extract_mobject_family_members(self.submobjects):
                     added_anims = [FadeOut(word)]
 
             rect.generate_target()

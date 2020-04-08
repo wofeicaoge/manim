@@ -250,6 +250,7 @@ class Mobject(Container):
         def func(points):
             points[:, dim] *= factor
             return points
+
         self.apply_points_function_about_point(func, **kwargs)
         return self
 
@@ -294,6 +295,7 @@ class Mobject(Container):
                 xy_complex.imag,
                 z
             ]
+
         return self.apply_function(R3_func)
 
     def wag(self, direction=RIGHT, axis=DOWN, wag_factor=1.0):
@@ -301,7 +303,7 @@ class Mobject(Container):
             alphas = np.dot(mob.points, np.transpose(axis))
             alphas -= min(alphas)
             alphas /= max(alphas)
-            alphas = alphas**wag_factor
+            alphas = alphas ** wag_factor
             mob.points += np.dot(
                 alphas.reshape((len(alphas), 1)),
                 np.array(direction).reshape((1, mob.dim))
@@ -319,11 +321,13 @@ class Mobject(Container):
         """
         This can make transition animations nicer
         """
+
         def repeat_array(array):
             return reduce(
                 lambda a1, a2: np.append(a1, a2, axis=0),
                 [array] * count
             )
+
         for mob in self.family_members_with_points():
             mob.apply_over_attr_arrays(repeat_array)
         return self
@@ -743,8 +747,8 @@ class Mobject(Container):
 
     def length_over_dim(self, dim):
         return (
-            self.reduce_across_dimension(np.max, np.max, dim) -
-            self.reduce_across_dimension(np.min, np.min, dim)
+                self.reduce_across_dimension(np.max, np.max, dim) -
+                self.reduce_across_dimension(np.min, np.min, dim)
         )
 
     def get_width(self):
@@ -894,6 +898,18 @@ class Mobject(Container):
 
     def family_members_with_points(self):
         return [m for m in self.get_family() if m.get_num_points() > 0]
+
+    @staticmethod
+    def extract_mobject_family_members(
+            mobjects,
+            only_those_with_points=False):
+        if only_those_with_points:
+            method = Mobject.family_members_with_points
+        else:
+            method = Mobject.get_family
+        return remove_list_redundancies(list(
+            it.chain(*[method(m) for m in mobjects])
+        ))
 
     def arrange(self, direction=RIGHT, center=True, **kwargs):
         for m1, m2 in zip(self.submobjects, self.submobjects[1:]):
@@ -1067,7 +1083,7 @@ class Mobject(Container):
     # Errors
     def throw_error_if_no_points(self):
         if self.has_no_points():
-            message = "Cannot call Mobject.{} " +\
+            message = "Cannot call Mobject.{} " + \
                       "for a Mobject with no points"
             caller_name = sys._getframe(1).f_code.co_name
             raise Exception(message.format(caller_name))

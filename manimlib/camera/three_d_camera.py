@@ -218,15 +218,15 @@ class ThreeDCamera(Camera):
                 self.fixed_orientation_mobjects[submob] = func
 
     def add_fixed_in_frame_mobjects(self, *mobjects):
-        for mobject in self.extract_mobject_family_members(mobjects):
+        for mobject in Mobject.extract_mobject_family_members(mobjects):
             self.fixed_in_frame_mobjects.add(mobject)
 
     def remove_fixed_orientation_mobjects(self, *mobjects):
-        for mobject in self.extract_mobject_family_members(mobjects):
+        for mobject in Mobject.extract_mobject_family_members(mobjects):
             if mobject in self.fixed_orientation_mobjects:
                 self.fixed_orientation_mobjects.remove(mobject)
 
     def remove_fixed_in_frame_mobjects(self, *mobjects):
-        for mobject in self.extract_mobject_family_members(mobjects):
+        for mobject in Mobject.extract_mobject_family_members(mobjects):
             if mobject in self.fixed_in_frame_mobjects:
                 self.fixed_in_frame_mobjects.remove(mobject)

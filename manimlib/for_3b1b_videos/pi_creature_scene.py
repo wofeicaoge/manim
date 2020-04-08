@@ -86,7 +86,7 @@ class PiCreatureScene(Scene):
         added_anims = kwargs.pop("added_anims", [])
 
         anims = []
-        on_screen_mobjects = self.camera.extract_mobject_family_members(
+        on_screen_mobjects = Mobject.extract_mobject_family_members(
             self.get_mobjects()
         )
 
