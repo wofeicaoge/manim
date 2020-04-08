@@ -1,5 +1,5 @@
 from manimlib.constants import *
-from manimlib.mobject.mobject import Mobject
+from manimlib.mobject.mobject import Mobject, GroupContainer
 from manimlib.utils.bezier import interpolate
 from manimlib.utils.color import color_gradient
 from manimlib.utils.color import color_to_rgba
@@ -221,12 +221,12 @@ class Mobject2D(PMobject):
         Mobject.__init__(self, **kwargs)
 
 
-class PGroup(PMobject):
+class PGroup(PMobject, GroupContainer):
     def __init__(self, *pmobs, **kwargs):
         if not all([isinstance(m, PMobject) for m in pmobs]):
             raise Exception("All submobjects must be of type PMobject")
-        super().__init__(**kwargs)
-        self.add(*pmobs)
+        PMobject.__init__(self, **kwargs)
+        GroupContainer.add(self, *pmobs)
 
 
 class PointCloudDot(Mobject1D):

@@ -4,7 +4,7 @@ import sys
 from colour import Color
 
 from manimlib.constants import *
-from manimlib.mobject.mobject import Mobject
+from manimlib.mobject.mobject import Mobject, GroupContainer
 from manimlib.mobject.three_d_utils import get_3d_vmob_gradient_start_and_end_points
 from manimlib.utils.bezier import bezier
 from manimlib.utils.bezier import get_smooth_handle_points
@@ -18,6 +18,7 @@ from manimlib.utils.iterables import tuplify
 from manimlib.utils.simple_functions import clip_in_place
 from manimlib.utils.space_ops import rotate_vector
 from manimlib.utils.space_ops import get_norm
+
 
 # TODO
 # - Change cubic curve groups to have 4 points instead of 3
@@ -403,7 +404,7 @@ class VMobject(Mobject):
         return np.array(self.points)
 
     def set_anchors_and_handles(self, anchors1, handles1, handles2, anchors2):
-        assert(len(anchors1) == len(handles1) == len(handles2) == len(anchors2))
+        assert (len(anchors1) == len(handles1) == len(handles2) == len(anchors2))
         nppcc = self.n_points_per_cubic_curve  # 4
         total_len = nppcc * len(anchors1)
         self.points = np.zeros((total_len, self.dim))
@@ -514,7 +515,7 @@ class VMobject(Mobject):
         return self
 
     def change_anchor_mode(self, mode):
-        assert(mode in ["jagged", "smooth"])
+        assert (mode in ["jagged", "smooth"])
         nppcc = self.n_points_per_cubic_curve
         for submob in self.family_members_with_points():
             subpaths = submob.get_subpaths()
@@ -545,7 +546,7 @@ class VMobject(Mobject):
         return self.change_anchor_mode("jagged")
 
     def add_subpath(self, points):
-        assert(len(points) % 4 == 0)
+        assert (len(points) % 4 == 0)
         self.points = np.append(self.points, points, axis=0)
         return self
 
@@ -629,7 +630,7 @@ class VMobject(Mobject):
         return self.get_subpaths_from_points(self.get_points())
 
     def get_nth_curve_points(self, n):
-        assert(n < self.get_num_curves())
+        assert (n < self.get_num_curves())
         nppcc = self.n_points_per_cubic_curve
         return self.points[nppcc * n:nppcc * (n + 1)]
 
@@ -826,7 +827,7 @@ class VMobject(Mobject):
                 setattr(self, attr, getattr(mobject2, attr))
 
     def pointwise_become_partial(self, vmobject, a, b):
-        assert(isinstance(vmobject, VMobject))
+        assert (isinstance(vmobject, VMobject))
         # Partial curve includes three portions:
         # - A middle section, which matches the curve exactly
         # - A start, which is some ending portion of an inner cubic
@@ -865,12 +866,12 @@ class VMobject(Mobject):
         return vmob
 
 
-class VGroup(VMobject):
+class VGroup(VMobject, GroupContainer):
     def __init__(self, *vmobjects, **kwargs):
         if not all([isinstance(m, VMobject) for m in vmobjects]):
             raise Exception("All submobjects must be of type VMobject")
         VMobject.__init__(self, **kwargs)
-        self.add(*vmobjects)
+        GroupContainer.add(self, *vmobjects)
 
 
 class VectorizedPoint(VMobject):

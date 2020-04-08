@@ -176,14 +176,6 @@ class Scene(Container):
     def get_mobject_family_members(self):
         return Mobject.extract_mobject_family_members(self.submobjects)
 
-    def add(self, *mobjects):
-        """
-        Mobjects will be displayed, from background to
-        foreground in the order with which they are added.
-        """
-        self.restructure_mobjects(to_remove=mobjects)
-        self.submobjects += mobjects
-        return self
 
     def add_mobjects_among(self, values):
         """
@@ -196,41 +188,6 @@ class Scene(Container):
             values
         ))
         return self
-
-    def remove(self, *mobjects):
-        self.restructure_mobjects(mobjects, "submobjects", False)
-        return self
-
-    def restructure_mobjects(self, to_remove,
-                             mobject_list_name="submobjects",
-                             extract_families=True):
-        """
-        In cases where the scene contains a group, e.g. Group(m1, m2, m3), but one
-        of its submobjects is removed, e.g. scene.remove(m1), the list of mobjects
-        will be editing to contain other submobjects, but not m1, e.g. it will now
-        insert m2 and m3 to where the group once was.
-        """
-        if extract_families:
-            to_remove = Mobject.extract_mobject_family_members(to_remove)
-        _list = getattr(self, mobject_list_name)
-        new_list = self.get_restructured_mobject_list(_list, to_remove)
-        setattr(self, mobject_list_name, new_list)
-        return self
-
-    def get_restructured_mobject_list(self, mobjects, to_remove):
-        new_mobjects = []
-
-        def add_safe_mobjects_from_list(list_to_examine, set_to_remove):
-            for mob in list_to_examine:
-                if mob in set_to_remove:
-                    continue
-                intersect = set_to_remove.intersection(mob.get_family())
-                if intersect:
-                    add_safe_mobjects_from_list(mob.submobjects, intersect)
-                else:
-                    new_mobjects.append(mob)
-        add_safe_mobjects_from_list(mobjects, set(to_remove))
-        return new_mobjects
 
     def bring_to_front(self, *mobjects):
         self.add(*mobjects)

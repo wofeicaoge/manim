@@ -11,7 +11,7 @@ import numpy as np
 
 import manimlib.constants as consts
 from manimlib.constants import *
-from manimlib.container.container import Container
+from manimlib.container.container import *
 from manimlib.utils.color import color_gradient
 from manimlib.utils.color import interpolate_color
 from manimlib.utils.iterables import list_update
@@ -1089,9 +1089,9 @@ class Mobject(Container):
             raise Exception(message.format(caller_name))
 
 
-class Group(Mobject):
+class Group(Mobject, GroupContainer):
     def __init__(self, *mobjects, **kwargs):
         if not all([isinstance(m, Mobject) for m in mobjects]):
             raise Exception("All submobjects must be of type Mobject")
         Mobject.__init__(self, **kwargs)
-        self.add(*mobjects)
+        GroupContainer.add(self, *mobjects)
