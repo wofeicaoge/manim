@@ -182,7 +182,6 @@ def get_module(file_name):
 
 
 def get_configuration(args):
-    module = get_module(args.file)
     file_writer_config = {
         # By default, write to file
         "write_to_movie": args.write_to_movie or not args.save_last_frame,
@@ -192,13 +191,11 @@ def get_configuration(args):
         # If -t is passed in (for transparent), this will be RGBA
         "png_mode": "RGBA" if args.transparent else "RGB",
         "movie_file_extension": ".mov" if args.transparent else ".mp4",
-        "file_name": args.file_name,
-        "input_file_path": args.file,
+        "file_name": args.file_name
     }
-    if hasattr(module, "OUTPUT_DIRECTORY"):
-        file_writer_config["output_directory"] = module.OUTPUT_DIRECTORY
+    if args.file is not None:
+        file_writer_config["input_file_path"] = args.file
     config = {
-        "module": module,
         "scene_names": args.scene_names,
         "open_video_upon_completion": args.preview,
         "show_file_in_finder": args.show_file_in_finder,
@@ -215,6 +212,11 @@ def get_configuration(args):
         "video_output_dir": args.video_output_dir,
         "tex_dir": args.tex_dir,
     }
+    if args.file is not None:
+        module = get_module(args.file)
+        if hasattr(module, "OUTPUT_DIRECTORY"):
+            file_writer_config["output_directory"] = module.OUTPUT_DIRECTORY
+        config["module"] = module
 
     # Camera configuration
     config["camera_config"] = get_camera_configuration(args)
