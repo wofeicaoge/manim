@@ -379,6 +379,10 @@ class Scene(Container):
         else:
             self.update_mobjects(0)
 
+    def end_stream(self):
+        allow_write = not self.skip_animations
+        self.file_writer.end_stream(allow_write)
+
     @handle_play_like_call
     def play(self, *args, **kwargs):
         if len(args) == 0:

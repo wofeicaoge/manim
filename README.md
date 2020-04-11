@@ -136,7 +136,7 @@ them to manim.play(), e.g.
 >>> c = Circle()
 >>> manim.play(ShowCreation(c))
 
->>>
+>>> manim.end_stream()
 ```
 
 It is also possible to stream directly to Twitch. To do that simply pass

@@ -195,6 +195,8 @@ def get_configuration(args):
     }
     if args.file is not None:
         file_writer_config["input_file_path"] = args.file
+    if args.livestream:
+        file_writer_config["livestreaming"] = True
     config = {
         "scene_names": args.scene_names,
         "open_video_upon_completion": args.preview,
@@ -244,7 +246,7 @@ def get_camera_configuration(args):
         camera_config.update(manimlib.constants.LOW_QUALITY_CAMERA_CONFIG)
     elif args.medium_quality:
         camera_config.update(manimlib.constants.MEDIUM_QUALITY_CAMERA_CONFIG)
-    elif args.high_quality:
+    elif args.high_quality or args.livestream:
         camera_config.update(manimlib.constants.HIGH_QUALITY_CAMERA_CONFIG)
     else:
         camera_config.update(manimlib.constants.PRODUCTION_QUALITY_CAMERA_CONFIG)

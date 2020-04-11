@@ -11,13 +11,6 @@ from manimlib.scene.scene import Scene
 import manimlib.constants
 
 
-class LiveStream(Scene):
-    def __init__(self, **kwargs):
-        kwargs["camera_config"] = manimlib.constants.HIGH_QUALITY_CAMERA_CONFIG
-        kwargs["livestreaming"] = True
-        super().__init__(**kwargs)
-
-
 def main():
     args = manimlib.config.parse_cli()
     conf = manimlib.config.get_configuration(args)
@@ -36,6 +29,6 @@ def main():
         variables = globals().copy()
         variables.update(locals())
         shell = code.InteractiveConsole(variables)
-        shell.push(f"manim = LiveStream(**conf)")
+        shell.push(f"manim = Scene(**conf)")
         shell.push("from manimlib.imports import *")
         shell.interact(banner=manimlib.constants.STREAMING_CONSOLE_BANNER)
